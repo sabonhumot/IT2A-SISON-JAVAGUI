@@ -10,6 +10,7 @@ import gfx.RoundedTextField;
 import gfx.RoundedPanel;
 import gfx.GradientPanel;
 import java.awt.Color;
+import javax.swing.JFrame;
 
 /**
  *
@@ -33,41 +34,144 @@ public class register extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        signupSuccess = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        signupError = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         register = new GradientPanel(new Color(31, 63, 195), new Color(37, 171, 241), 1);
         jPanel2 = new GradientPanel(new Color(250,249, 246), new Color(227, 249, 246), 1);
         jLabel1 = new javax.swing.JLabel();
         firstname = new RoundedTextField(35);
         lastname = new RoundedTextField(35);
         phonennum = new RoundedTextField(35);
-        pass = new RoundedPasswordField(35);
+        showCPass = new javax.swing.JLabel();
+        hideCPass = new javax.swing.JLabel();
         cpass = new RoundedPasswordField(35);
-        jButton1 = new javax.swing.JButton();
+        showPass = new javax.swing.JLabel();
+        hidePass = new javax.swing.JLabel();
+        pass = new RoundedPasswordField(35);
         jButton2 = new javax.swing.JButton();
-        email1 = new RoundedTextField(35);
+        email = new RoundedTextField(35);
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        errorLabelCPass = new javax.swing.JLabel();
+        errorLabelFName = new javax.swing.JLabel();
+        errorLabelLName = new javax.swing.JLabel();
+        errorLabelPnum = new javax.swing.JLabel();
+        errorLabelEmail = new javax.swing.JLabel();
+        errorLabelPass = new javax.swing.JLabel();
+        login = new javax.swing.JLabel();
+        username = new RoundedTextField(35);
+        user = new javax.swing.JLabel();
+        errorLabelUser = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+
+        this.pack();
+        this.setLocationRelativeTo(null);
+        signupSuccess.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        signupSuccess.setPreferredSize(new java.awt.Dimension(400, 400));
+        signupSuccess.setSize(new java.awt.Dimension(362, 246));
+
+        jPanel1.setMinimumSize(new java.awt.Dimension(360, 246));
+        jPanel1.setRequestFocusEnabled(false);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setText("Signed up successfully.");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, 30));
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setText("OK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 90, 30));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/success.png"))); // NOI18N
+        jLabel9.setText("jLabel9");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 50, 50));
+
+        javax.swing.GroupLayout signupSuccessLayout = new javax.swing.GroupLayout(signupSuccess.getContentPane());
+        signupSuccess.getContentPane().setLayout(signupSuccessLayout);
+        signupSuccessLayout.setHorizontalGroup(
+            signupSuccessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+        );
+        signupSuccessLayout.setVerticalGroup(
+            signupSuccessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+        );
+
+        this.pack();
+        this.setLocationRelativeTo(null);
+        signupError.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        signupError.setMinimumSize(new java.awt.Dimension(378, 238));
+        signupError.setSize(new java.awt.Dimension(378, 238));
+
+        jPanel3.setMinimumSize(new java.awt.Dimension(378, 238));
+        jPanel3.setPreferredSize(new java.awt.Dimension(378, 238));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel10.setText("Sign up error. Please fill all required fields");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 330, 30));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/error.png"))); // NOI18N
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 50, 40));
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton3.setText("OK");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 90, 30));
+
+        javax.swing.GroupLayout signupErrorLayout = new javax.swing.GroupLayout(signupError.getContentPane());
+        signupError.getContentPane().setLayout(signupErrorLayout);
+        signupErrorLayout.setHorizontalGroup(
+            signupErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        signupErrorLayout.setVerticalGroup(
+            signupErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(700, 700));
+        setPreferredSize(new java.awt.Dimension(700, 700));
 
         register.setBackground(new java.awt.Color(31, 63, 195));
         register.setMinimumSize(new java.awt.Dimension(797, 479));
+        register.setPreferredSize(new java.awt.Dimension(700, 700));
         register.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2 = new RoundedPanel(15);
+        jPanel2 = new RoundedPanel(25);
         jPanel2.setBackground(new java.awt.Color(250, 249, 246));
         jPanel2.setForeground(new java.awt.Color(50, 49, 204));
         jPanel2.setMinimumSize(new java.awt.Dimension(326, 344));
         jPanel2.setPreferredSize(new java.awt.Dimension(460, 480));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 26)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Sign Up");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 100, 40));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 100, 40));
 
         firstname.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         firstname.setOpaque(false);
@@ -81,7 +185,7 @@ public class register extends javax.swing.JFrame {
                 firstnameActionPerformed(evt);
             }
         });
-        jPanel2.add(firstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 200, 40));
+        jPanel2.add(firstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 200, 40));
 
         lastname.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         lastname.setOpaque(false);
@@ -95,7 +199,7 @@ public class register extends javax.swing.JFrame {
                 lastnameActionPerformed(evt);
             }
         });
-        jPanel2.add(lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 210, 40));
+        jPanel2.add(lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 210, 40));
 
         phonennum.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         phonennum.setOpaque(false);
@@ -109,32 +213,66 @@ public class register extends javax.swing.JFrame {
                 phonennumActionPerformed(evt);
             }
         });
-        jPanel2.add(phonennum, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 200, 40));
+        jPanel2.add(phonennum, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 200, 40));
 
-        pass.setOpaque(false);
-        jPanel2.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 430, 40));
+        showCPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/blind-gray.png"))); // NOI18N
+        showCPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        showCPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showCPassMouseClicked(evt);
+            }
+        });
+        jPanel2.add(showCPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 390, 40, 40));
+
+        hideCPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eye-gray.png"))); // NOI18N
+        hideCPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        hideCPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hideCPassMouseClicked(evt);
+            }
+        });
+        jPanel2.add(hideCPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 390, 40, 40));
 
         cpass.setOpaque(false);
-        cpass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpassActionPerformed(evt);
+        cpass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cpassFocusLost(evt);
             }
         });
-        jPanel2.add(cpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 430, 40));
+        jPanel2.add(cpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, 200, 40));
 
-        jButton1.setText("Cancel");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        showPass.setForeground(new java.awt.Color(102, 102, 102));
+        showPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eye-gray.png"))); // NOI18N
+        showPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        showPass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                showPassMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.add(showPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, 40, 40));
+
+        hidePass.setForeground(new java.awt.Color(102, 102, 102));
+        hidePass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/blind-gray.png"))); // NOI18N
+        hidePass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        hidePass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hidePassMouseClicked(evt);
+            }
+        });
+        jPanel2.add(hidePass, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, 40, 40));
+
+        pass.setOpaque(false);
+        pass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                passFocusLost(evt);
+            }
+        });
+        pass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                passActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, 90, 30));
+        jPanel2.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 200, 40));
 
         jButton2.setText("Sign up");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -143,57 +281,106 @@ public class register extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, 90, 30));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, 430, 40));
 
-        email1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        email1.setOpaque(false);
-        email1.addFocusListener(new java.awt.event.FocusAdapter() {
+        email.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        email.setOpaque(false);
+        email.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                email1FocusLost(evt);
+                emailFocusLost(evt);
             }
         });
-        email1.addActionListener(new java.awt.event.ActionListener() {
+        email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                email1ActionPerformed(evt);
+                emailActionPerformed(evt);
             }
         });
-        jPanel2.add(email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 210, 40));
+        jPanel2.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 210, 40));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Email Address");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 100, 20));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 100, 20));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setText("First Name");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 70, 20));
+        jLabel3.setText("Username");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 70, 20));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Last Name");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 70, 20));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 70, 20));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("Confirm Password");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 120, 20));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, 120, 20));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Phone Number");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 100, 20));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 100, 20));
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setText("Password");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 100, 20));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 100, 20));
 
-        register.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 550, 430));
+        errorLabelCPass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                errorLabelCPassFocusLost(evt);
+            }
+        });
+        jPanel2.add(errorLabelCPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, 200, 20));
+        jPanel2.add(errorLabelFName, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 190, 20));
+        jPanel2.add(errorLabelLName, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 210, 20));
+        jPanel2.add(errorLabelPnum, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 200, 20));
+        jPanel2.add(errorLabelEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 200, 20));
+        jPanel2.add(errorLabelPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 430, 200, 20));
+
+        login.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        login.setText("Already have an account? Login here");
+        login.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        login.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginMouseClicked(evt);
+            }
+        });
+        jPanel2.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 530, -1, -1));
+
+        username.setToolTipText("Username");
+        username.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        username.setOpaque(false);
+        username.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                usernameFocusLost(evt);
+            }
+        });
+        username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameActionPerformed(evt);
+            }
+        });
+        jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 430, 40));
+
+        user.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        user.setText("First Name");
+        jPanel2.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 70, 20));
+        jPanel2.add(errorLabelUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 210, 20));
+
+        jSeparator1.setForeground(new java.awt.Color(31, 63, 195));
+        jSeparator1.setAutoscrolls(true);
+        jSeparator1.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 100, 10));
+
+        register.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 550, 580));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(register, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE)
+            .addComponent(register, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(register, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(register, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -212,23 +399,24 @@ public class register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_phonennumActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        
+        signupSuccess.pack();
+        signupError.pack();
+        
+        if (signUpValidation()) {
+
+            signupSuccess.setVisible(true);
+            signupSuccess.setLocationRelativeTo(null);
+
+        } else {
+
+            signupError.setVisible(true);
+            signupError.setLocationRelativeTo(null);
+
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-
-        logIn lg = new logIn();
-
-        lg.setVisible(true);
-
-        this.dispose();
-
-    }//GEN-LAST:event_jButton1MouseClicked
 
     private void firstnameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstnameFocusLost
 
@@ -237,8 +425,13 @@ public class register extends javax.swing.JFrame {
         if (fname.isEmpty()) {
 
             firstname.setForeground(Color.RED);
+            errorLabelFName.setText("This field is required");
+            errorLabelFName.setForeground(Color.RED);
+
         } else {
             firstname.setForeground(Color.BLACK);
+            errorLabelFName.setText("");
+            errorLabelFName.setForeground(Color.RED);
         }
 
         firstname.repaint();
@@ -248,49 +441,339 @@ public class register extends javax.swing.JFrame {
     private void lastnameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastnameFocusLost
 
         String lname = lastname.getText();
-        
+
         if (lname.isEmpty()) {
             lastname.setForeground(Color.RED);
+            errorLabelLName.setText("This field is required");
+            errorLabelLName.setForeground(Color.RED);
         } else {
             lastname.setForeground(Color.BLACK);
+            errorLabelLName.setText("");
+            errorLabelLName.setForeground(Color.RED);
         }
-        
+
         lastname.repaint();
     }//GEN-LAST:event_lastnameFocusLost
 
     private void phonennumFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phonennumFocusLost
 
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        String emailInput = phonennum.getText();
+        String phoneRegex = "^[0-9]{11}$";
+        String phoneInput = phonennum.getText();
 
-        if (!emailInput.isEmpty() || !emailInput.matches(emailRegex)) {
+        if (phoneInput.isEmpty()) {
 
             phonennum.setForeground(Color.RED);
+            errorLabelPnum.setText("Phone number is required");
+            errorLabelPnum.setForeground(Color.RED);
 
+        } else if (!phoneInput.matches(phoneRegex)) {
+
+            phonennum.setForeground(Color.RED);
+            errorLabelPnum.setText("Phone number is invalid");
+            errorLabelPnum.setForeground(Color.RED);
         } else {
 
             phonennum.setForeground(Color.BLACK);
+            errorLabelPnum.setText("");
+
         }
-        
+
         phonennum.repaint();
-        
+
     }//GEN-LAST:event_phonennumFocusLost
 
-    private void email1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_email1FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_email1FocusLost
+    private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
 
-    private void email1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_email1ActionPerformed
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        String emailInput = email.getText();
 
-    private void cpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cpassActionPerformed
+        if (emailInput.isEmpty()) {
 
-    /**
-     * @param args the command line arguments
-     */
+            email.setForeground(Color.RED);
+            errorLabelEmail.setText("Email is required");
+            errorLabelEmail.setForeground(Color.RED);
+
+        } else if (!emailInput.matches(emailRegex)) {
+
+            email.setForeground(Color.RED);
+            errorLabelEmail.setText("Email is invalid");
+            errorLabelEmail.setForeground(Color.RED);
+        } else {
+
+            email.setForeground(Color.BLACK);
+            errorLabelEmail.setText("");
+        }
+
+        email.repaint();
+    }//GEN-LAST:event_emailFocusLost
+
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailActionPerformed
+
+    private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passActionPerformed
+
+    private void errorLabelCPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_errorLabelCPassFocusLost
+
+    }//GEN-LAST:event_errorLabelCPassFocusLost
+
+    private void passFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passFocusLost
+
+        String passInput = pass.getText();
+
+        if (passInput.isEmpty()) {
+            pass.setForeground(Color.RED);
+            errorLabelPass.setText("Password is required");
+            errorLabelPass.setForeground(Color.RED);
+        } else if (passInput.length() < 8) {
+
+            pass.setForeground(Color.RED);
+            errorLabelPass.setText("Password too short. Must be 8 characters or more");
+            errorLabelPass.setForeground(Color.RED);
+        } else {
+            pass.setForeground(Color.BLACK);
+            errorLabelPass.setText("");
+        }
+        pass.repaint();
+
+    }//GEN-LAST:event_passFocusLost
+
+    private void cpassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cpassFocusLost
+
+        String passInput = new String(pass.getPassword());
+        String cPassInput = cpass.getText();
+
+        if (cPassInput.isEmpty()) {
+            cpass.setForeground(Color.RED);
+            errorLabelCPass.setText("This field is required");
+            errorLabelCPass.setForeground(Color.RED);
+        } else if (!passInput.equals(cPassInput)) {
+            cpass.setForeground(Color.RED);
+            errorLabelCPass.setText("Password does not match");
+            errorLabelCPass.setForeground(Color.RED);
+        } else {
+            cpass.setForeground(Color.BLACK);
+            errorLabelCPass.setText("");
+        }
+
+        cpass.repaint();
+
+    }//GEN-LAST:event_cpassFocusLost
+
+    private void showPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showPassMouseClicked
+
+        pass.setEchoChar((char) 0);
+        showPass.setVisible(false);
+        hidePass.setVisible(true);
+
+    }//GEN-LAST:event_showPassMouseClicked
+
+    private void hidePassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hidePassMouseClicked
+
+        pass.setEchoChar('*');
+        hidePass.setVisible(false);
+        showPass.setVisible(true);
+
+    }//GEN-LAST:event_hidePassMouseClicked
+
+    private void loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMouseClicked
+
+        logIn lg = new logIn();
+
+        lg.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_loginMouseClicked
+
+    private void showCPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showCPassMouseClicked
+
+        cpass.setEchoChar((char) 0);
+        showCPass.setVisible(false);
+        hideCPass.setVisible(true);
+
+    }//GEN-LAST:event_showCPassMouseClicked
+
+    private void hideCPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideCPassMouseClicked
+
+        cpass.setEchoChar((char) 0);
+        hideCPass.setVisible(false);
+        showCPass.setVisible(true);
+    }//GEN-LAST:event_hideCPassMouseClicked
+
+    private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
+
+        String user = username.getText();
+
+        if (user.isEmpty()) {
+            username.setForeground(Color.RED);
+            errorLabelUser.setText("Username is required");
+            errorLabelUser.setForeground(Color.RED);
+        } else {
+            username.setForeground(Color.BLACK);
+            errorLabelUser.setText("");
+        }
+
+        username.repaint();
+
+
+    }//GEN-LAST:event_usernameFocusLost
+
+    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
+
+    }//GEN-LAST:event_usernameActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        logIn lg = new logIn();
+
+        this.dispose();
+        lg.setVisible(true);
+
+        signupSuccess.dispose();
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        signupError.setVisible(false);
+
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private boolean signUpValidation() {
+        boolean valid = true;
+
+        String fname = firstname.getText();
+
+        if (fname.isEmpty()) {
+
+            firstname.setForeground(Color.RED);
+            errorLabelFName.setText("This field is required");
+            errorLabelFName.setForeground(Color.RED);
+            valid = false;
+        } else {
+            firstname.setForeground(Color.BLACK);
+            errorLabelFName.setText("");
+            errorLabelFName.setForeground(Color.RED);
+        }
+
+        firstname.repaint();
+
+        String lname = lastname.getText();
+
+        if (lname.isEmpty()) {
+            lastname.setForeground(Color.RED);
+            errorLabelLName.setText("This field is required");
+            errorLabelLName.setForeground(Color.RED);
+            valid = false;
+        } else {
+            lastname.setForeground(Color.BLACK);
+            errorLabelLName.setText("");
+            errorLabelLName.setForeground(Color.RED);
+        }
+
+        lastname.repaint();
+
+        String phoneRegex = "^[0-9]{11}$";
+        String phoneInput = phonennum.getText();
+
+        if (phoneInput.isEmpty()) {
+
+            phonennum.setForeground(Color.RED);
+            errorLabelPnum.setText("Phone number is required");
+            errorLabelPnum.setForeground(Color.RED);
+            valid = false;
+
+        } else if (!phoneInput.matches(phoneRegex)) {
+
+            phonennum.setForeground(Color.RED);
+            errorLabelPnum.setText("Phone number is invalid");
+            errorLabelPnum.setForeground(Color.RED);
+            valid = false;
+        } else {
+            phonennum.setForeground(Color.BLACK);
+            errorLabelPnum.setText("");
+        }
+
+        phonennum.repaint();
+
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        String emailInput = email.getText();
+
+        if (emailInput.isEmpty()) {
+
+            email.setForeground(Color.RED);
+            errorLabelEmail.setText("Email is required");
+            errorLabelEmail.setForeground(Color.RED);
+            valid = false;
+
+        } else if (!emailInput.matches(emailRegex)) {
+
+            email.setForeground(Color.RED);
+            errorLabelEmail.setText("Email is invalid");
+            errorLabelEmail.setForeground(Color.RED);
+            valid = false;
+        }
+
+        email.repaint();
+
+        String user = username.getText();
+
+        if (user.isEmpty()) {
+            username.setForeground(Color.RED);
+            errorLabelUser.setText("Username is required");
+            errorLabelUser.setForeground(Color.RED);
+            valid = false;
+        } else {
+            username.setForeground(Color.BLACK);
+            errorLabelUser.setText("");
+        }
+
+        username.repaint();
+
+        String passInput = pass.getText();
+
+        if (passInput.isEmpty()) {
+            pass.setForeground(Color.RED);
+            errorLabelPass.setText("Password is required");
+            errorLabelPass.setForeground(Color.RED);
+            valid = false;
+        } else if (passInput.length() < 8) {
+
+            pass.setForeground(Color.RED);
+            errorLabelPass.setText("Password too short. Must be 8 characters or more");
+            errorLabelPass.setForeground(Color.RED);
+        } else {
+            pass.setForeground(Color.BLACK);
+            errorLabelPass.setText("");
+        }
+        pass.repaint();
+
+        String cPassInput = cpass.getText();
+
+        if (cPassInput.isEmpty()) {
+            cpass.setForeground(Color.RED);
+            errorLabelCPass.setText("This field is required");
+            errorLabelCPass.setForeground(Color.RED);
+            valid = false;
+        } else if (!passInput.equals(cPassInput)) {
+            cpass.setForeground(Color.RED);
+            errorLabelCPass.setText("Password does not match");
+            errorLabelCPass.setForeground(Color.RED);
+            valid = false;
+        } else {
+            cpass.setForeground(Color.BLACK);
+            errorLabelCPass.setText("");
+        }
+
+        cpass.repaint();
+
+        return valid;
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -325,21 +808,45 @@ public class register extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField cpass;
-    private javax.swing.JTextField email1;
+    private javax.swing.JTextField email;
+    private javax.swing.JLabel errorLabelCPass;
+    private javax.swing.JLabel errorLabelEmail;
+    private javax.swing.JLabel errorLabelFName;
+    private javax.swing.JLabel errorLabelLName;
+    private javax.swing.JLabel errorLabelPass;
+    private javax.swing.JLabel errorLabelPnum;
+    private javax.swing.JLabel errorLabelUser;
     private javax.swing.JTextField firstname;
+    private javax.swing.JLabel hideCPass;
+    private javax.swing.JLabel hidePass;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField lastname;
+    private javax.swing.JLabel login;
     private javax.swing.JPasswordField pass;
     private javax.swing.JTextField phonennum;
     private javax.swing.JPanel register;
+    private javax.swing.JLabel showCPass;
+    private javax.swing.JLabel showPass;
+    private javax.swing.JDialog signupError;
+    private javax.swing.JDialog signupSuccess;
+    private javax.swing.JLabel user;
+    private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }
