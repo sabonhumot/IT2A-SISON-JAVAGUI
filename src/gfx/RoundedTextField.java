@@ -40,7 +40,7 @@ public class RoundedTextField extends JTextField {
         int w = getWidth();
         int h = getHeight();
 
-        g2d.setColor(getForeground()); // Border color
+        g2d.setColor(Color.LIGHT_GRAY); // Border color
         g2d.draw(new RoundRectangle2D.Double(0, 0, w - 1, h - 1, cornerRadius, cornerRadius));
 
         g2d.dispose();

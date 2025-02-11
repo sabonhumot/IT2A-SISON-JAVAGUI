@@ -6,7 +6,7 @@ import java.awt.geom.RoundRectangle2D;
 
 public class RoundedButton extends JButton {
 
-    private int cornerRadius;
+    private final int cornerRadius;
 
     public RoundedButton(int cornerRadius) {
         this.cornerRadius = cornerRadius;

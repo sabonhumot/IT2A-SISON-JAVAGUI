@@ -38,7 +38,7 @@ public class RoundedPasswordField extends JPasswordField {
         int width = getWidth();
         int height = getHeight();
 
-        g2d.setColor(getForeground());
+        g2d.setColor(Color.LIGHT_GRAY);
         g2d.draw(new RoundRectangle2D.Double(0, 0, width - 1, height - 1, cornerRadius, cornerRadius));
 
         g2d.dispose();

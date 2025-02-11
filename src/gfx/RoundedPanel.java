@@ -34,19 +34,19 @@ public class RoundedPanel extends JPanel {
         g2d.dispose();
     }
 
-    @Override
-    protected void paintBorder(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        int w = getWidth();
-        int h = getHeight();
-
-        g2d.setColor(getForeground()); // Border color
-        g2d.draw(new RoundRectangle2D.Double(0, 0, w - 1, h - 1, cornerRadius, cornerRadius));
-
-        g2d.dispose();
-    }
+//    @Override
+//    protected void paintBorder(Graphics g) {
+//        Graphics2D g2d = (Graphics2D) g.create();
+//        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//
+//        int w = getWidth();
+//        int h = getHeight();
+//
+//        g2d.setColor(getForeground()); // Border color
+//        g2d.draw(new RoundRectangle2D.Double(0, 0, w - 1, h - 1, cornerRadius, cornerRadius));
+//
+//        g2d.dispose();
+//    }
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Rounded Panel Example");
