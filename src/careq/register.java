@@ -19,6 +19,9 @@ import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,6 +43,51 @@ public class register extends javax.swing.JFrame {
 
     }
 
+    private boolean emailExists(String email) {
+
+        connectDB con = new connectDB();
+
+        try {
+            String query = "SELECT * FROM user WHERE u_email = ?";
+            PreparedStatement pstmt = con.getConnection().prepareStatement(query);
+            pstmt.setString(1, email.trim());
+            ResultSet resultSet = pstmt.executeQuery();
+
+            if (resultSet.next()) {
+
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("" + ex);
+
+        }
+
+        return false;
+
+    }
+
+    private boolean usernameExists(String username) {
+
+        connectDB con = new connectDB();
+
+        try {
+            String query = "SELECT * FROM user WHERE u_user = ?";
+            PreparedStatement pstmt = con.getConnection().prepareStatement(query);
+            pstmt.setString(1, username.trim());
+            ResultSet resultSet = pstmt.executeQuery();
+
+            if (resultSet.next()) {
+
+                return true;
+            }
+
+        } catch (SQLException ex) {
+
+        }
+        return false;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,7 +107,7 @@ public class register extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        register = new GradientPanel(new Color(31, 63, 195), new Color(37, 171, 241), 1);
+        register = new GradientPanel(new Color(182, 251, 255), new Color(131, 164, 212), 2);
         jPanel2 = new GradientPanel(new Color(250,249, 246), new Color(227, 249, 246), 1);
         jLabel1 = new javax.swing.JLabel();
         firstname = new RoundedTextField(35);
@@ -71,7 +119,7 @@ public class register extends javax.swing.JFrame {
         showPass = new javax.swing.JLabel();
         hidePass = new javax.swing.JLabel();
         pass = new RoundedPasswordField(35);
-        jButton2 = new RoundGradientButton("Sign Up", new Color(31, 63, 195), new Color(37, 171, 241), 35);
+        jButton2 = new RoundGradientButton("Sign Up", new Color(131, 164, 212), new Color(182, 251, 255), 35);
         email = new RoundedTextField(35);
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -92,6 +140,7 @@ public class register extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         type = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
+        errorType = new javax.swing.JLabel();
 
         this.pack();
         this.setLocationRelativeTo(null);
@@ -389,7 +438,14 @@ public class register extends javax.swing.JFrame {
         jSeparator1.setPreferredSize(new java.awt.Dimension(50, 50));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 100, 10));
 
-        type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose account type", "Patient\t", "Doctor", " " }));
+        type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Choose account type)", "Patient", "Doctor", " " }));
+        type.setBorder(null);
+        type.setOpaque(false);
+        type.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                typeFocusLost(evt);
+            }
+        });
         type.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 typeActionPerformed(evt);
@@ -399,6 +455,7 @@ public class register extends javax.swing.JFrame {
 
         jLabel12.setText("Type");
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, -1, -1));
+        jPanel2.add(errorType, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 190, 20));
 
         register.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 550, 580));
 
@@ -437,13 +494,13 @@ public class register extends javax.swing.JFrame {
         if (signUpValidation()) {
 
             connectDB con = new connectDB();
-            
-            con.insertData("INSERT INTO user (u_fname, u_lname, u_email, u_pnum, u_user, u_pass, type)"
-                    + "VALUES ('"+firstname.getText()+"','"+lastname.getText()+"','"+email.getText()+"',"
-                    + "'"+phonennum.getText()+"','"+username.getText()+"','"+pass.getText()+"','"+type.getSelectedItem()+"')");
-            
+
+            con.insertData("INSERT INTO user (u_fname, u_lname, u_email, u_pnum, u_user, u_pass, type, status)"
+                    + "VALUES ('" + firstname.getText() + "','" + lastname.getText() + "','" + email.getText() + "',"
+                    + "'" + phonennum.getText() + "','" + username.getText() + "','" + pass.getText() + "','" + type.getSelectedItem() + "', 'Pending')");
+
             JOptionPane.showMessageDialog(this, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            
+
             logIn lg = new logIn();
             lg.setVisible(true);
             this.dispose();
@@ -537,10 +594,17 @@ public class register extends javax.swing.JFrame {
             email.setForeground(Color.RED);
             errorLabelEmail.setText("Email is invalid");
             errorLabelEmail.setForeground(Color.RED);
+        } else if (emailExists(emailInput)) {
+
+            email.setForeground(Color.RED);
+            errorLabelEmail.setText("Email already exists");
+            errorLabelEmail.setForeground(Color.RED);
+
         } else {
 
             email.setForeground(Color.GREEN);
-            errorLabelEmail.setText("");
+            errorLabelEmail.setText("Email valid");
+            errorLabelEmail.setForeground(Color.GREEN);
         }
 
         email.repaint();
@@ -572,8 +636,9 @@ public class register extends javax.swing.JFrame {
             errorLabelPass.setText("Password too short. Must be 8 characters or more");
             errorLabelPass.setForeground(Color.RED);
         } else {
-            pass.setForeground(Color.GREEN);
-            errorLabelPass.setText("");
+            pass.setForeground(Color.BLACK);
+            errorLabelPass.setText("Password good");
+            errorLabelPass.setForeground(Color.GREEN);
         }
         pass.repaint();
 
@@ -593,8 +658,9 @@ public class register extends javax.swing.JFrame {
             errorLabelCPass.setText("Password does not match");
             errorLabelCPass.setForeground(Color.RED);
         } else {
-            cpass.setForeground(Color.GREEN);
-            errorLabelCPass.setText("");
+            cpass.setForeground(Color.BLACK);
+            errorLabelCPass.setText("Password matched");
+            errorLabelCPass.setForeground(Color.GREEN);
         }
 
         cpass.repaint();
@@ -641,9 +707,15 @@ public class register extends javax.swing.JFrame {
             username.setForeground(Color.RED);
             errorLabelUser.setText("Username is required");
             errorLabelUser.setForeground(Color.RED);
+        } else if (usernameExists(user)) {
+
+            username.setForeground(Color.RED);
+            errorLabelUser.setText("Username already exists");
+            errorLabelUser.setForeground(Color.RED);
         } else {
             username.setForeground(Color.BLACK);
-            errorLabelUser.setText("");
+            errorLabelUser.setText("Username valid");
+            errorLabelUser.setForeground(Color.GREEN);
         }
 
         username.repaint();
@@ -682,8 +754,22 @@ public class register extends javax.swing.JFrame {
     }//GEN-LAST:event_hidePassMouseClicked
 
     private void typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeActionPerformed
-        
+
+
     }//GEN-LAST:event_typeActionPerformed
+
+    private void typeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_typeFocusLost
+        if (type.getSelectedIndex() == 0) {
+            type.setForeground(Color.RED);
+            errorType.setText("Please choose account type");
+            errorType.setForeground(Color.RED);
+        } else {
+            type.setForeground(Color.BLACK);
+            errorType.setText("");
+        }
+
+        type.repaint();
+    }//GEN-LAST:event_typeFocusLost
 
     private boolean signUpValidation() {
         boolean valid = true;
@@ -750,14 +836,23 @@ public class register extends javax.swing.JFrame {
             email.setForeground(Color.RED);
             errorLabelEmail.setText("Email is required");
             errorLabelEmail.setForeground(Color.RED);
-            valid = false;
 
         } else if (!emailInput.matches(emailRegex)) {
 
             email.setForeground(Color.RED);
             errorLabelEmail.setText("Email is invalid");
             errorLabelEmail.setForeground(Color.RED);
-            valid = false;
+        } else if (emailExists(emailInput)) {
+
+            email.setForeground(Color.RED);
+            errorLabelEmail.setText("Email already exists");
+            errorLabelEmail.setForeground(Color.RED);
+
+        } else {
+
+            email.setForeground(Color.BLACK);
+            errorLabelEmail.setText("Email valid");
+            errorLabelEmail.setForeground(Color.GREEN);
         }
 
         email.repaint();
@@ -768,10 +863,15 @@ public class register extends javax.swing.JFrame {
             username.setForeground(Color.RED);
             errorLabelUser.setText("Username is required");
             errorLabelUser.setForeground(Color.RED);
-            valid = false;
+        } else if (usernameExists(user)) {
+
+            username.setForeground(Color.RED);
+            errorLabelUser.setText("Username already exists");
+            errorLabelUser.setForeground(Color.RED);
         } else {
             username.setForeground(Color.BLACK);
-            errorLabelUser.setText("");
+            errorLabelUser.setText("Username valid");
+            errorLabelUser.setForeground(Color.GREEN);
         }
 
         username.repaint();
@@ -812,6 +912,17 @@ public class register extends javax.swing.JFrame {
         }
 
         cpass.repaint();
+
+        if (type.getSelectedIndex() == 0) {
+            type.setForeground(Color.RED);
+            errorType.setText("Please choose account type");
+            errorType.setForeground(Color.RED);
+        } else {
+            type.setForeground(Color.BLACK);
+            errorType.setText("");
+        }
+
+        type.repaint();
 
         return valid;
     }
@@ -888,6 +999,7 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JLabel errorLabelPass;
     private javax.swing.JLabel errorLabelPnum;
     private javax.swing.JLabel errorLabelUser;
+    private javax.swing.JLabel errorType;
     private javax.swing.JTextField firstname;
     private javax.swing.JLabel hideCPass;
     private javax.swing.JLabel hidePass;

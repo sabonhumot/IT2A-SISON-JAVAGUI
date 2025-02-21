@@ -31,7 +31,7 @@ public class RoundGradientButton extends JButton {
         int h = getHeight();
 
         // Apply gradient paint
-        GradientPaint gp = new GradientPaint(0, 0, color1, 0, h, color2);
+        GradientPaint gp = new GradientPaint(0, 0, color1, w, 0, color2);
         g2d.setPaint(gp);
 
         // Draw rounded rectangle

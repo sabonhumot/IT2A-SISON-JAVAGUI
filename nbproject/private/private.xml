@@ -3,10 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/admin/adminDashB.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/gfx/RoundedPanel.java</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/careq/register.java</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/careq/dashboard.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/doctor/doctorDashB.java</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/config/connectDB.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/gfx/GradientPanel.java</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/careq/logIn.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/patient/patientDashB.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/gfx/RoundGradientButton.java</file>
         </group>
     </open-files>
 </project-private>

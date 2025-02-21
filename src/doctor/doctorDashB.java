@@ -28,7 +28,7 @@ public class doctorDashB extends javax.swing.JFrame {
         loadOpenSans();
         loadItim();
         
-        dboard.setVisible(false);
+        
         
 
     }
@@ -52,8 +52,9 @@ public class doctorDashB extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         dboard = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        dboardHeader = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,13 +123,19 @@ public class doctorDashB extends javax.swing.JFrame {
 
         dboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(250, 249, 246));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        dboardHeader.setBackground(new java.awt.Color(250, 249, 246));
+        dboardHeader.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setText("Dashboard");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 140, -1));
+        jLabel5.setText("Doctor Dashboard");
+        dboardHeader.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 140, -1));
 
-        dboard.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 70));
+        dboard.add(dboardHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 70));
+
+        jLabel6.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel6.setText("Doctor Dashboard");
+        dboard.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 350, 120));
 
         mainbg.add(dboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 830, 620));
 
@@ -261,14 +268,15 @@ public class doctorDashB extends javax.swing.JFrame {
     private javax.swing.JPanel accountPanel;
     private javax.swing.JPanel dashboardPanel;
     private javax.swing.JPanel dboard;
+    private javax.swing.JPanel dboardHeader;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel mainbg;
     // End of variables declaration//GEN-END:variables
 }

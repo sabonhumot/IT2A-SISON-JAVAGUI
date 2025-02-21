@@ -49,41 +49,19 @@ public class logIn extends javax.swing.JFrame {
 
         connectDB con = new connectDB();
 
-//        try {
-//            String query = "SELECT * FROM user WHERE u_user=" + username + "AND u_pass=" + password + "";
-//            ResultSet resultSet = con.getData(query);
-//            return resultSet.next();
-//        } catch (SQLException ex) {
-//
-//            return false;
-//
-//        }
         try {
             String query = "SELECT * FROM user WHERE u_user = ? AND u_pass = ?";
             PreparedStatement pstmt = con.getConnection().prepareStatement(query);
             pstmt.setString(1, username.trim());
             pstmt.setString(2, password.trim());
             ResultSet resultSet = pstmt.executeQuery();
-            
+
             if (resultSet.next()) {
                 return resultSet.getString("type").trim();
             }
 
-//            if (resultSet.next()) {
-//                String accType = resultSet.getString("u_type");
-//
-//                if ("administrator".equalsIgnoreCase(accType)) {
-//                    new adminDashB().setVisible(true);
-//                } else if ("patient".equalsIgnoreCase(accType)) {
-//                    new patientDashB().setVisible(true);
-//                } else if ("doctor".equalsIgnoreCase(accType)) {
-//                    new doctorDashB().setVisible(true);
-//                }
-//                return true;
-//
-//            }
         } catch (SQLException ex) {
-            
+
         }
         return null;
     }
@@ -116,10 +94,10 @@ public class logIn extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
-        login = new GradientPanel(new Color(227, 249, 246), new Color(227, 249, 246), 1);
+        login = new GradientPanel(new Color(131, 164, 212), new Color(182, 251, 255), 2);
         ;
         jPanel2 = new GradientPanel(new Color(187, 222, 251), new Color(187, 222, 251), 1);
-        jButton1 = new gfx.RoundGradientButton ("Login", new Color(31, 63, 195), new Color(37, 171, 241), 35);
+        jButton1 = new gfx.RoundGradientButton ("Login", new Color(131, 164, 212), new Color(182, 251, 255), 35);
         showPass = new javax.swing.JLabel();
         hidePass = new javax.swing.JLabel();
         password = new RoundedPasswordField(35);
@@ -286,6 +264,7 @@ public class logIn extends javax.swing.JFrame {
 
         password.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         password.setToolTipText("Password");
+        password.setEchoChar('\u2022');
         password.setOpaque(false);
         password.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -430,7 +409,7 @@ public class logIn extends javax.swing.JFrame {
             return;
         }
 
-        String accType = loginAcc(user, pass); 
+        String accType = loginAcc(user, pass);
 
         if (accType != null) {
             if ("administrator".equalsIgnoreCase(accType)) {
