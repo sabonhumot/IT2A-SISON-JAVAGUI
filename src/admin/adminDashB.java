@@ -9,17 +9,31 @@ import careq.*;
 import config.connectDB;
 import gfx.RoundedPanel;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -39,6 +53,7 @@ public class adminDashB extends javax.swing.JFrame {
         loadOpenSans();
         loadItim();
         displayData();
+//        loadTableData();
         getTotalAcc();
         getPatientCount();
         getDoctorCount();
@@ -51,8 +66,61 @@ public class adminDashB extends javax.swing.JFrame {
         try {
             connectDB con = new connectDB();
             ResultSet rs = con.getData("SELECT u_id, u_fname, u_lname, u_email, u_pnum, type, status FROM user");
-            usersTable.setModel(DbUtils.resultSetToTableModel(rs));
+            DefaultTableModel model = (DefaultTableModel) (DbUtils.resultSetToTableModel(rs));
             rs.close();
+
+            String[] column = {"ID", "First Name", "Last Name", "Email", "Phone Number", "Account Type", "Account Status"};
+            model.setColumnIdentifiers(column);
+
+            usersTable.setModel(model);
+
+            DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer() {
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    JLabel label = new JLabel(value.toString());
+
+                    label.setFont(new Font("OpenSans", Font.BOLD, 12));
+                    label.setPreferredSize(new Dimension(label.getWidth(), 30));
+                    label.setOpaque(true);
+                    label.setBackground(new Color(250, 249, 246));
+
+                    label.setForeground(Color.BLACK);
+                    label.setHorizontalAlignment(SwingConstants.LEFT);
+
+                    return label;
+                }
+            };
+
+// Apply custom header renderer to all columns
+            for (int i = 0; i < usersTable.getColumnModel().getColumnCount(); i++) {
+                usersTable.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+            }
+            
+            DefaultTableCellRenderer alternatingRowRenderer = new DefaultTableCellRenderer() {
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        
+        // Set alternating row colors
+        if (row % 2 == 0) {
+            cell.setBackground(new Color(240, 240, 240)); // Light gray for even rows
+        } else {
+            cell.setBackground(new Color(250, 249, 246)); // White for odd rows
+        }
+        
+        // Highlight selected row
+        if (isSelected) {
+            cell.setBackground(new Color(37,171,241)); // Light blue selection color
+        }
+
+        return cell;
+    }
+};
+
+// Apply the custom renderer to all columns
+for (int i = 0; i < usersTable.getColumnCount(); i++) {
+    usersTable.getColumnModel().getColumn(i).setCellRenderer(alternatingRowRenderer);
+}
+
         } catch (SQLException ex) {
             System.out.println("Errors: " + ex.getMessage());
 
@@ -60,6 +128,39 @@ public class adminDashB extends javax.swing.JFrame {
 
     }
 
+//    public void loadTableData() {
+//    DefaultTableModel model = (DefaultTableModel) usersTable.getModel();
+//    model.setRowCount(0); // Clear existing data
+//
+//    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/careq", "root", "");
+//         Statement stmt = conn.createStatement();
+//         ResultSet rs = stmt.executeQuery("SELECT u_id, u_fname, u_lname, u_email, u_pnum, type, status FROM user")) {
+//
+//        ResultSetMetaData metaData = rs.getMetaData();
+//        int columnCount = metaData.getColumnCount();
+//        
+//        String[] columnNames = {"ID", "First Name", "Last Name", "Email", "Phone Number", "Account Type", "Account Status"}; 
+//        model.setColumnIdentifiers(columnNames);
+//
+//        // Add columns dynamically if not set in GUI
+//        if (model.getColumnCount() == 0) {
+//            for (int i = 1; i <= columnCount; i++) {
+//                model.addColumn(metaData.getColumnName(i));
+//            }
+//        }
+//
+//        // Populate rows
+//        while (rs.next()) {
+//            Object[] row = new Object[columnCount];
+//            for (int i = 1; i <= columnCount; i++) {
+//                row[i - 1] = rs.getObject(i);
+//            }
+//            model.addRow(row);
+//        }
+//    } catch (SQLException e) {
+//        JOptionPane.showMessageDialog(null, "Database Error: " + e.getMessage());
+//    }
+//}
     public void getTotalAcc() {
 
         connectDB con = new connectDB();
@@ -178,21 +279,25 @@ public class adminDashB extends javax.swing.JFrame {
         dboardBG = new RoundedPanel(15);
         jScrollPane1 = new javax.swing.JScrollPane();
         usersTable = new javax.swing.JTable();
-        penAcc = new javax.swing.JLabel();
-        patient = new javax.swing.JLabel();
-        doctor = new javax.swing.JLabel();
-        actAcc = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         totalAcc = new javax.swing.JLabel();
         accOV = new javax.swing.JLabel();
         TA = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         P = new javax.swing.JLabel();
+        patient = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        doctor = new javax.swing.JLabel();
         D = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        actAcc = new javax.swing.JLabel();
         AA = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
         PA = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        penAcc = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -302,36 +407,15 @@ public class adminDashB extends javax.swing.JFrame {
         dboardBG.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         usersTable.getTableHeader().setOpaque(false);
+        usersTable.setBackground(new java.awt.Color(250, 249, 246));
+        usersTable.setOpaque(false);
         usersTable.setRowHeight(25);
         usersTable.setRowMargin(0);
+        usersTable.setShowHorizontalLines(false);
+        usersTable.setShowVerticalLines(false);
         jScrollPane1.setViewportView(usersTable);
 
         dboardBG.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 750, 260));
-
-        penAcc.setText("Pending Accounts");
-        dboardBG.add(penAcc, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 180, -1, -1));
-
-        patient.setText("Patients");
-        patient.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        dboardBG.add(patient, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 90, -1));
-
-        doctor.setText("Doctors");
-        dboardBG.add(doctor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, -1));
-
-        actAcc.setText("Active Accounts");
-        dboardBG.add(actAcc, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, -1, -1));
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/patient.png"))); // NOI18N
-        dboardBG.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 40, -1));
-
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pendingUser.png"))); // NOI18N
-        dboardBG.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, -1, -1));
-
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/doctor.png"))); // NOI18N
-        dboardBG.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, -1, -1));
-
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/activeUser.png"))); // NOI18N
-        dboardBG.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, -1, -1));
 
         totalAcc.setText("Total Accounts");
         dboardBG.add(totalAcc, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
@@ -339,12 +423,73 @@ public class adminDashB extends javax.swing.JFrame {
         accOV.setText("Accounts Overview");
         dboardBG.add(accOV, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
         dboardBG.add(TA, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
-        dboardBG.add(P, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 30, 20));
-        dboardBG.add(D, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 30, 30));
-        dboardBG.add(AA, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 40, 40));
-        dboardBG.add(PA, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 130, 40, 40));
 
-        dboard.add(dboardBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 790, 530));
+        jPanel4.setBackground(new java.awt.Color(250, 249, 246));
+        jPanel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel4.setLayout(null);
+        jPanel4.add(P);
+        P.setBounds(60, 30, 30, 40);
+
+        patient.setText("Patients");
+        patient.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel4.add(patient);
+        patient.setBounds(10, 80, 90, 14);
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/patient.png"))); // NOI18N
+        jPanel4.add(jLabel11);
+        jLabel11.setBounds(10, 30, 40, 40);
+
+        dboardBG.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 120, 110));
+
+        jPanel5.setBackground(new java.awt.Color(250, 249, 246));
+        jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel5.setLayout(null);
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/doctor.png"))); // NOI18N
+        jPanel5.add(jLabel13);
+        jLabel13.setBounds(10, 30, 40, 40);
+
+        doctor.setText("Doctors");
+        jPanel5.add(doctor);
+        doctor.setBounds(20, 80, 80, 14);
+        jPanel5.add(D);
+        D.setBounds(60, 30, 30, 40);
+
+        dboardBG.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 120, 110));
+
+        jPanel6.setBackground(new java.awt.Color(250, 249, 246));
+        jPanel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel6.setLayout(null);
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/activeUser.png"))); // NOI18N
+        jPanel6.add(jLabel14);
+        jLabel14.setBounds(20, 30, 40, 50);
+
+        actAcc.setText("Active Accounts");
+        jPanel6.add(actAcc);
+        actAcc.setBounds(20, 80, 170, 14);
+        jPanel6.add(AA);
+        AA.setBounds(80, 40, 30, 30);
+
+        dboardBG.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 190, 110));
+
+        jPanel7.setBackground(new java.awt.Color(250, 249, 246));
+        jPanel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel7.setLayout(null);
+        jPanel7.add(PA);
+        PA.setBounds(80, 40, 30, 30);
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pendingUser.png"))); // NOI18N
+        jPanel7.add(jLabel12);
+        jLabel12.setBounds(20, 30, 40, 50);
+
+        penAcc.setText("Pending Accounts");
+        jPanel7.add(penAcc);
+        penAcc.setBounds(0, 70, 200, 30);
+
+        dboardBG.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, 190, 120));
+
+        dboard.add(dboardBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 790, 530));
 
         mainbg.add(dboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 830, 620));
 
@@ -448,7 +593,11 @@ public class adminDashB extends javax.swing.JFrame {
                 P.setFont(openSans.deriveFont(Font.BOLD, 20));
                 AA.setFont(openSans.deriveFont(Font.BOLD, 20));
                 PA.setFont(openSans.deriveFont(Font.BOLD, 20));
-                usersTable.getTableHeader().setFont(openSans.deriveFont(Font.BOLD, 12));
+                usersTable.getTableHeader().setFont(openSans.deriveFont(Font.BOLD, 15));
+                usersTable.getTableHeader().revalidate();
+                usersTable.getTableHeader().repaint();
+                usersTable.setFont(openSans.deriveFont(Font.PLAIN, 12));
+
             } else {
                 System.err.println("Font file not found!");
             }
@@ -540,6 +689,10 @@ public class adminDashB extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logout;
     private javax.swing.JPanel logoutPanel;

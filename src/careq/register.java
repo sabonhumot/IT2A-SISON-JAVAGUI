@@ -947,6 +947,7 @@ public class register extends javax.swing.JFrame {
                 login.setFont(openSans.deriveFont(Font.PLAIN, 14));
                 jLabel12.setFont(openSans.deriveFont(Font.PLAIN, 14));
                 type.setFont(openSans.deriveFont(Font.PLAIN, 12));
+                
 
                 // ... set font for other components
             } else {
