@@ -279,25 +279,26 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
         dboardBG = new RoundedPanel(15);
         jScrollPane1 = new javax.swing.JScrollPane();
         usersTable = new javax.swing.JTable();
-        totalAcc = new javax.swing.JLabel();
         accOV = new javax.swing.JLabel();
-        TA = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        jPanel4 = new RoundedPanel(15);
         P = new javax.swing.JLabel();
         patient = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        jPanel5 = new RoundedPanel(15);
         jLabel13 = new javax.swing.JLabel();
-        doctor = new javax.swing.JLabel();
         D = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        doctor = new javax.swing.JLabel();
+        jPanel6 = new RoundedPanel(15);
         jLabel14 = new javax.swing.JLabel();
         actAcc = new javax.swing.JLabel();
         AA = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        jPanel7 = new RoundedPanel(15);
         PA = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         penAcc = new javax.swing.JLabel();
+        jPanel8 = new RoundedPanel(15);
+        totalAcc = new javax.swing.JLabel();
+        TA = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -389,9 +390,9 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
         logout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logoutPanel.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 30));
 
-        jPanel1.add(logoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 530, 170, 70));
+        jPanel1.add(logoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 170, 70));
 
-        mainbg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 620));
+        mainbg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 700));
 
         dboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -401,7 +402,7 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
         jLabel5.setText("Admin Dashboard");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 300, -1));
 
-        dboard.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 70));
+        dboard.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 70));
 
         dboardBG.setBackground(new java.awt.Color(250, 249, 246));
         dboardBG.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -415,31 +416,29 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
         usersTable.setShowVerticalLines(false);
         jScrollPane1.setViewportView(usersTable);
 
-        dboardBG.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 750, 260));
-
-        totalAcc.setText("Total Accounts");
-        dboardBG.add(totalAcc, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
+        dboardBG.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 830, 260));
 
         accOV.setText("Accounts Overview");
-        dboardBG.add(accOV, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
-        dboardBG.add(TA, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
+        dboardBG.add(accOV, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        dboard.add(dboardBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 870, 330));
 
         jPanel4.setBackground(new java.awt.Color(250, 249, 246));
         jPanel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel4.setLayout(null);
         jPanel4.add(P);
-        P.setBounds(60, 30, 30, 40);
+        P.setBounds(20, 50, 30, 40);
 
         patient.setText("Patients");
         patient.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel4.add(patient);
-        patient.setBounds(10, 80, 90, 14);
+        patient.setBounds(10, 20, 90, 14);
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/patient.png"))); // NOI18N
         jPanel4.add(jLabel11);
-        jLabel11.setBounds(10, 30, 40, 40);
+        jLabel11.setBounds(200, 40, 40, 40);
 
-        dboardBG.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 120, 110));
+        dboard.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 270, 110));
 
         jPanel5.setBackground(new java.awt.Color(250, 249, 246));
         jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -447,15 +446,15 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/doctor.png"))); // NOI18N
         jPanel5.add(jLabel13);
-        jLabel13.setBounds(10, 30, 40, 40);
+        jLabel13.setBounds(200, 40, 40, 40);
+        jPanel5.add(D);
+        D.setBounds(10, 50, 30, 40);
 
         doctor.setText("Doctors");
         jPanel5.add(doctor);
-        doctor.setBounds(20, 80, 80, 14);
-        jPanel5.add(D);
-        D.setBounds(60, 30, 30, 40);
+        doctor.setBounds(10, 20, 80, 14);
 
-        dboardBG.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 120, 110));
+        dboard.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 270, 110));
 
         jPanel6.setBackground(new java.awt.Color(250, 249, 246));
         jPanel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -463,35 +462,42 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/activeUser.png"))); // NOI18N
         jPanel6.add(jLabel14);
-        jLabel14.setBounds(20, 30, 40, 50);
+        jLabel14.setBounds(200, 40, 40, 40);
 
         actAcc.setText("Active Accounts");
         jPanel6.add(actAcc);
-        actAcc.setBounds(20, 80, 170, 14);
+        actAcc.setBounds(20, 20, 170, 14);
         jPanel6.add(AA);
-        AA.setBounds(80, 40, 30, 30);
+        AA.setBounds(20, 50, 30, 30);
 
-        dboardBG.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 190, 110));
+        dboard.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 270, 110));
 
         jPanel7.setBackground(new java.awt.Color(250, 249, 246));
         jPanel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel7.setLayout(null);
         jPanel7.add(PA);
-        PA.setBounds(80, 40, 30, 30);
+        PA.setBounds(20, 50, 30, 30);
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pendingUser.png"))); // NOI18N
         jPanel7.add(jLabel12);
-        jLabel12.setBounds(20, 30, 40, 50);
+        jLabel12.setBounds(200, 40, 40, 50);
 
         penAcc.setText("Pending Accounts");
         jPanel7.add(penAcc);
-        penAcc.setBounds(0, 70, 200, 30);
+        penAcc.setBounds(20, 10, 190, 30);
 
-        dboardBG.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, 190, 120));
+        dboard.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 270, 110));
 
-        dboard.add(dboardBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 790, 530));
+        jPanel8.setBackground(new java.awt.Color(250, 249, 246));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        mainbg.add(dboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 830, 620));
+        totalAcc.setText("Total Accounts");
+        jPanel8.add(totalAcc, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        jPanel8.add(TA, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 30, 30));
+
+        dboard.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 160, 270, 110));
+
+        mainbg.add(dboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 910, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -693,6 +699,7 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logout;
     private javax.swing.JPanel logoutPanel;
