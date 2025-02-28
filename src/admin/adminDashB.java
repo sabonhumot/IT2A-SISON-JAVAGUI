@@ -44,6 +44,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 import net.proteanit.sql.DbUtils;
 import gfx.RoundedTextField;
+import java.sql.PreparedStatement;
 
 /**
  *
@@ -368,7 +369,7 @@ public class adminDashB extends javax.swing.JFrame {
         patient1.setForeground(new java.awt.Color(250, 249, 246));
         patient1.setText("Patients");
         patient1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(patient1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 110, 40));
+        jPanel2.add(patient1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 110, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 190, 50));
 
@@ -626,16 +627,7 @@ public class adminDashB extends javax.swing.JFrame {
 
     private void logoutPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseClicked
 
-//        try {
-//            if (connection != null) {
-//                connection.close();
-//                
-//            }
-//            
-//            
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }   
+                      
         logIn lg = new logIn();
         lg.setVisible(true);
         this.dispose();
@@ -752,6 +744,7 @@ public class adminDashB extends javax.swing.JFrame {
             }
         });
     }
+    
 
     /**
      * @param args the command line arguments

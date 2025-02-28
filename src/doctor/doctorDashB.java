@@ -127,7 +127,7 @@ public class doctorDashB extends javax.swing.JFrame {
         dboardHeader.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setText("Doctor Dashboard");
-        dboardHeader.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 140, -1));
+        dboardHeader.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 330, -1));
 
         dboard.add(dboardHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 70));
 
@@ -135,7 +135,7 @@ public class doctorDashB extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 153, 153));
         jLabel6.setText("Doctor Dashboard");
-        dboard.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 350, 120));
+        dboard.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 350, 120));
 
         mainbg.add(dboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 830, 620));
 
