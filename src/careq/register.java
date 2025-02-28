@@ -507,8 +507,7 @@ public class register extends javax.swing.JFrame {
 
         } else {
 
-            signupError.setVisible(true);
-            signupError.setLocationRelativeTo(null);
+            JOptionPane.showMessageDialog(this, "Sign up error. Please fill all required field.", "Warning", JOptionPane.WARNING_MESSAGE);
 
         }
 
@@ -774,6 +773,8 @@ public class register extends javax.swing.JFrame {
     private boolean signUpValidation() {
         boolean valid = true;
 
+        //fname validation
+        
         String fname = firstname.getText();
 
         if (fname.isEmpty()) {
@@ -790,6 +791,8 @@ public class register extends javax.swing.JFrame {
 
         firstname.repaint();
 
+        //lname validation
+        
         String lname = lastname.getText();
 
         if (lname.isEmpty()) {
@@ -805,6 +808,8 @@ public class register extends javax.swing.JFrame {
 
         lastname.repaint();
 
+        //pnum validation
+        
         String phoneRegex = "^[0-9]{11}$";
         String phoneInput = phonennum.getText();
 
@@ -828,6 +833,8 @@ public class register extends javax.swing.JFrame {
 
         phonennum.repaint();
 
+        //email validation
+        
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         String emailInput = email.getText();
 
@@ -857,6 +864,8 @@ public class register extends javax.swing.JFrame {
 
         email.repaint();
 
+        //username validation
+        
         String user = username.getText();
 
         if (user.isEmpty()) {
@@ -875,7 +884,9 @@ public class register extends javax.swing.JFrame {
         }
 
         username.repaint();
-
+        
+        //pass validation
+        
         String passInput = pass.getText();
 
         if (passInput.isEmpty()) {
@@ -892,8 +903,10 @@ public class register extends javax.swing.JFrame {
             pass.setForeground(Color.BLACK);
             errorLabelPass.setText("");
         }
-        pass.repaint();
-
+        pass.repaint();       
+        
+        //cpass validation
+        
         String cPassInput = cpass.getText();
 
         if (cPassInput.isEmpty()) {
@@ -913,6 +926,8 @@ public class register extends javax.swing.JFrame {
 
         cpass.repaint();
 
+        //type validation
+        
         if (type.getSelectedIndex() == 0) {
             type.setForeground(Color.RED);
             errorType.setText("Please choose account type");
@@ -957,6 +972,8 @@ public class register extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+    
+    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

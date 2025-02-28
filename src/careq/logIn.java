@@ -45,7 +45,7 @@ public class logIn extends javax.swing.JFrame {
 
     }
 
-    public String loginAcc(String username, String password) {
+    public String[] loginAcc(String username, String password) {
 
         connectDB con = new connectDB();
 
@@ -57,7 +57,7 @@ public class logIn extends javax.swing.JFrame {
             ResultSet resultSet = pstmt.executeQuery();
 
             if (resultSet.next()) {
-                return resultSet.getString("type").trim();
+                return new String[]{resultSet.getString("type").trim(), resultSet.getString("status")};
             }
 
         } catch (SQLException ex) {
@@ -65,6 +65,9 @@ public class logIn extends javax.swing.JFrame {
         }
         return null;
     }
+    
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -409,9 +412,18 @@ public class logIn extends javax.swing.JFrame {
             return;
         }
 
-        String accType = loginAcc(user, pass);
+        String[] loginData = loginAcc(user, pass);
+        
+        String accType = loginData[0];
+        String accStatus = loginData[1];
+        
+        if (!"active".equalsIgnoreCase(accStatus)) {
+            JOptionPane.showMessageDialog(this, "Your account is still pending. Please contact the administrator.", "Login Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
 
-        if (accType != null) {
+         if (accType != null) {
             if ("administrator".equalsIgnoreCase(accType)) {
                 new adminDashB().setVisible(true);
             } else if ("patient".equalsIgnoreCase(accType)) {

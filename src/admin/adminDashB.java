@@ -15,6 +15,8 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -25,16 +27,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JViewport;
+import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableRowSorter;
 import net.proteanit.sql.DbUtils;
+import gfx.RoundedTextField;
 
 /**
  *
@@ -94,32 +103,32 @@ public class adminDashB extends javax.swing.JFrame {
             for (int i = 0; i < usersTable.getColumnModel().getColumnCount(); i++) {
                 usersTable.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
             }
-            
-            DefaultTableCellRenderer alternatingRowRenderer = new DefaultTableCellRenderer() {
-    @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        
-        // Set alternating row colors
-        if (row % 2 == 0) {
-            cell.setBackground(new Color(240, 240, 240)); // Light gray for even rows
-        } else {
-            cell.setBackground(new Color(250, 249, 246)); // White for odd rows
-        }
-        
-        // Highlight selected row
-        if (isSelected) {
-            cell.setBackground(new Color(37,171,241)); // Light blue selection color
-        }
 
-        return cell;
-    }
-};
+            DefaultTableCellRenderer alternatingRowRenderer = new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                    // Set alternating row colors
+                    if (row % 2 == 0) {
+                        cell.setBackground(new Color(240, 240, 240)); // Light gray for even rows
+                    } else {
+                        cell.setBackground(new Color(250, 249, 246)); // White for odd rows
+                    }
+
+                    // Highlight selected row
+                    if (isSelected) {
+                        cell.setBackground(new Color(37, 171, 241)); // Light blue selection color
+                    }
+
+                    return cell;
+                }
+            };
 
 // Apply the custom renderer to all columns
-for (int i = 0; i < usersTable.getColumnCount(); i++) {
-    usersTable.getColumnModel().getColumn(i).setCellRenderer(alternatingRowRenderer);
-}
+            for (int i = 0; i < usersTable.getColumnCount(); i++) {
+                usersTable.getColumnModel().getColumn(i).setCellRenderer(alternatingRowRenderer);
+            }
 
         } catch (SQLException ex) {
             System.out.println("Errors: " + ex.getMessage());
@@ -264,7 +273,11 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
         mainbg = new javax.swing.JPanel();
         jPanel1 = new RoundedPanel(5);
         accountPanel = new RoundedPanel(50);
+        jLabel9 = new javax.swing.JLabel();
+        doctor1 = new javax.swing.JLabel();
         jPanel2 = new RoundedPanel(50);
+        jLabel15 = new javax.swing.JLabel();
+        patient1 = new javax.swing.JLabel();
         dashboardPanel = new RoundedPanel(50);
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -277,13 +290,16 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         dboardBG = new RoundedPanel(15);
-        jScrollPane1 = new javax.swing.JScrollPane();
-        usersTable = new javax.swing.JTable();
         accOV = new javax.swing.JLabel();
+        scroll = new javax.swing.JScrollPane();
+        usersTable = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        searchh = new RoundedTextField(35);
+        jLabel8 = new javax.swing.JLabel();
         jPanel4 = new RoundedPanel(15);
         P = new javax.swing.JLabel();
-        patient = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        patient = new javax.swing.JLabel();
         jPanel5 = new RoundedPanel(15);
         jLabel13 = new javax.swing.JLabel();
         D = new javax.swing.JLabel();
@@ -299,6 +315,7 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
         jPanel8 = new RoundedPanel(15);
         totalAcc = new javax.swing.JLabel();
         TA = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -320,6 +337,15 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
             }
         });
         accountPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/doctor_white.png"))); // NOI18N
+        accountPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 50, 50));
+
+        doctor1.setForeground(new java.awt.Color(250, 249, 246));
+        doctor1.setText("Doctors");
+        accountPanel.add(doctor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 100, 50));
+
         jPanel1.add(accountPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 190, 50));
 
         jPanel2.setBackground(new java.awt.Color(37, 171, 241));
@@ -333,6 +359,17 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
             }
         });
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/patient_white.png"))); // NOI18N
+        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 50, 50));
+
+        patient1.setForeground(new java.awt.Color(250, 249, 246));
+        patient1.setText("Patients");
+        patient1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(patient1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 110, 40));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 190, 50));
 
         dashboardPanel.setBackground(new java.awt.Color(37, 171, 241));
@@ -407,19 +444,46 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
         dboardBG.setBackground(new java.awt.Color(250, 249, 246));
         dboardBG.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        accOV.setText("Accounts Overview");
+        dboardBG.add(accOV, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
         usersTable.getTableHeader().setOpaque(false);
         usersTable.setBackground(new java.awt.Color(250, 249, 246));
+        usersTable.setDragEnabled(true);
         usersTable.setOpaque(false);
-        usersTable.setRowHeight(25);
-        usersTable.setRowMargin(0);
+        usersTable.setRowHeight(30);
+        usersTable.setRowSelectionAllowed(false);
         usersTable.setShowHorizontalLines(false);
         usersTable.setShowVerticalLines(false);
-        jScrollPane1.setViewportView(usersTable);
+        scroll.setViewportView(usersTable);
 
-        dboardBG.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 830, 260));
+        dboardBG.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 830, 260));
 
-        accOV.setText("Accounts Overview");
-        dboardBG.add(accOV, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clear.png"))); // NOI18N
+        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
+        dboardBG.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, 30, 30));
+
+        searchh.setBackground(new java.awt.Color(240, 240, 240));
+        searchh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchhActionPerformed(evt);
+            }
+        });
+        searchh.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                searchhKeyTyped(evt);
+            }
+        });
+        dboardBG.add(searchh, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 190, 30));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
+        dboardBG.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, 20, 30));
 
         dboard.add(dboardBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 870, 330));
 
@@ -429,14 +493,14 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
         jPanel4.add(P);
         P.setBounds(20, 50, 30, 40);
 
-        patient.setText("Patients");
-        patient.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel4.add(patient);
-        patient.setBounds(10, 20, 90, 14);
-
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/patient.png"))); // NOI18N
         jPanel4.add(jLabel11);
         jLabel11.setBounds(200, 40, 40, 40);
+
+        patient.setText("Patients");
+        patient.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel4.add(patient);
+        patient.setBounds(10, 10, 90, 14);
 
         dboard.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 270, 110));
 
@@ -494,6 +558,9 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
         totalAcc.setText("Total Accounts");
         jPanel8.add(totalAcc, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
         jPanel8.add(TA, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 30, 30));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/accounts.png"))); // NOI18N
+        jPanel8.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 40, 40));
 
         dboard.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 160, 270, 110));
 
@@ -576,6 +643,19 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
 
     }//GEN-LAST:event_logoutPanelMouseClicked
 
+    private void searchhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchhActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchhActionPerformed
+
+    private void searchhKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchhKeyTyped
+        searchTable();
+    }//GEN-LAST:event_searchhKeyTyped
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        searchh.setText("");
+        usersTable.setRowSorter(null);
+    }//GEN-LAST:event_jLabel7MouseClicked
+
     private void loadOpenSans() {
         try {
             InputStream fontStream = getClass().getResourceAsStream("/font/OpenSans-VariableFont_wdth,wght.ttf");
@@ -588,7 +668,9 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
                 jLabel5.setFont(openSans.deriveFont(Font.BOLD, 24));
                 logout.setFont(openSans.deriveFont(Font.PLAIN, 18));
                 patient.setFont(openSans.deriveFont(Font.BOLD, 18));
+                patient1.setFont(openSans.deriveFont(Font.BOLD, 14));
                 doctor.setFont(openSans.deriveFont(Font.BOLD, 18));
+                doctor1.setFont(openSans.deriveFont(Font.BOLD, 14));
                 actAcc.setFont(openSans.deriveFont(Font.BOLD, 18));
                 penAcc.setFont(openSans.deriveFont(Font.BOLD, 18));
                 totalAcc.setFont(openSans.deriveFont(Font.BOLD, 18));
@@ -631,6 +713,46 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
 
     }
 
+    private void searchTable() {
+        DefaultTableModel model = (DefaultTableModel) usersTable.getModel();
+        TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(model);
+        usersTable.setRowSorter(rowSorter);
+
+        searchh.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filter();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filter();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filter();
+            }
+
+            private void filter() {
+                String searchText = searchh.getText().trim();
+                if (searchText.isEmpty()) {
+                    rowSorter.setRowFilter(null); // Show all rows if empty
+                } else {
+                    rowSorter.setRowFilter(new RowFilter<DefaultTableModel, Integer>() {
+                        @Override
+                        public boolean include(Entry<? extends DefaultTableModel, ? extends Integer> entry) {
+                            String firstName = entry.getStringValue(1).toLowerCase(); // First Name (Column 1)
+                            String lastName = entry.getStringValue(2).toLowerCase();  // Last Name (Column 2)
+
+                            return firstName.contains(searchText.toLowerCase()) || lastName.contains(searchText.toLowerCase());
+                        }
+                    });
+                }
+            }
+        });
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -669,6 +791,7 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AA;
     private javax.swing.JLabel D;
@@ -682,16 +805,22 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
     private javax.swing.JPanel dboard;
     private javax.swing.JPanel dboardBG;
     private javax.swing.JLabel doctor;
+    private javax.swing.JLabel doctor1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -700,12 +829,14 @@ for (int i = 0; i < usersTable.getColumnCount(); i++) {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logout;
     private javax.swing.JPanel logoutPanel;
     private javax.swing.JPanel mainbg;
     private javax.swing.JLabel patient;
+    private javax.swing.JLabel patient1;
     private javax.swing.JLabel penAcc;
+    private javax.swing.JScrollPane scroll;
+    private javax.swing.JTextField searchh;
     private javax.swing.JLabel totalAcc;
     private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables
