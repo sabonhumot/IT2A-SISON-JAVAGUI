@@ -5,11 +5,11 @@
         <group>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/admin/adminDashB.java</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/careq/register.java</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/doctor/doctorDashB.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/admin/profileMenu.java</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/careq/dashboard.java</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/config/connectDB.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/admin/doctorMenu.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/admin/patientMenu.java</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/careq/logIn.java</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/careq/src/patient/patientDashB.java</file>
         </group>
     </open-files>
 </project-private>

@@ -44,6 +44,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 import net.proteanit.sql.DbUtils;
 import gfx.RoundedTextField;
+import java.awt.BorderLayout;
 import java.sql.PreparedStatement;
 
 /**
@@ -57,6 +58,8 @@ public class adminDashB extends javax.swing.JFrame {
 
     Color logoutColor = new Color(100, 188, 234);
     Color hoverlogoutColor = new Color(250, 249, 246);
+    
+    
 
     public adminDashB() {
         initComponents();
@@ -69,6 +72,7 @@ public class adminDashB extends javax.swing.JFrame {
         getDoctorCount();
         getActiveAccCount();
         getPendingAccCount();
+        
 
     }
 
@@ -273,10 +277,10 @@ public class adminDashB extends javax.swing.JFrame {
 
         mainbg = new javax.swing.JPanel();
         jPanel1 = new RoundedPanel(5);
-        accountPanel = new RoundedPanel(50);
+        doctorPanel = new RoundedPanel(50);
         jLabel9 = new javax.swing.JLabel();
         doctor1 = new javax.swing.JLabel();
-        jPanel2 = new RoundedPanel(50);
+        patientPanel = new RoundedPanel(50);
         jLabel15 = new javax.swing.JLabel();
         patient1 = new javax.swing.JLabel();
         dashboardPanel = new RoundedPanel(50);
@@ -287,6 +291,9 @@ public class adminDashB extends javax.swing.JFrame {
         logoutPanel = new RoundedPanel(25);
         jLabel6 = new javax.swing.JLabel();
         logout = new javax.swing.JLabel();
+        profilePanel = new RoundedPanel(50);
+        jLabel16 = new javax.swing.JLabel();
+        profile = new javax.swing.JLabel();
         dboard = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -317,6 +324,7 @@ public class adminDashB extends javax.swing.JFrame {
         totalAcc = new javax.swing.JLabel();
         TA = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        patientMenu1 = new admin.patientMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -327,51 +335,54 @@ public class adminDashB extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(37, 171, 241));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        accountPanel.setBackground(new java.awt.Color(37, 171, 241));
-        accountPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        accountPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+        doctorPanel.setBackground(new java.awt.Color(37, 171, 241));
+        doctorPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        doctorPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                accountPanelMouseEntered(evt);
+                doctorPanelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                accountPanelMouseExited(evt);
+                doctorPanelMouseExited(evt);
             }
         });
-        accountPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        doctorPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/doctor_white.png"))); // NOI18N
-        accountPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 50, 50));
+        doctorPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 50, 50));
 
         doctor1.setForeground(new java.awt.Color(250, 249, 246));
         doctor1.setText("Doctors");
-        accountPanel.add(doctor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 100, 50));
+        doctorPanel.add(doctor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 100, 50));
 
-        jPanel1.add(accountPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 190, 50));
+        jPanel1.add(doctorPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 190, 50));
 
-        jPanel2.setBackground(new java.awt.Color(37, 171, 241));
-        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        patientPanel.setBackground(new java.awt.Color(37, 171, 241));
+        patientPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        patientPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                patientPanelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel2MouseEntered(evt);
+                patientPanelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel2MouseExited(evt);
+                patientPanelMouseExited(evt);
             }
         });
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        patientPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/patient_white.png"))); // NOI18N
         jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 50, 50));
+        patientPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 50, 50));
 
         patient1.setForeground(new java.awt.Color(250, 249, 246));
         patient1.setText("Patients");
         patient1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(patient1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 110, 50));
+        patientPanel.add(patient1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 110, 50));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 190, 50));
+        jPanel1.add(patientPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 190, 50));
 
         dashboardPanel.setBackground(new java.awt.Color(37, 171, 241));
         dashboardPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -429,6 +440,33 @@ public class adminDashB extends javax.swing.JFrame {
         logoutPanel.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 30));
 
         jPanel1.add(logoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 170, 70));
+
+        profilePanel.setBackground(new java.awt.Color(37, 171, 241));
+        profilePanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        profilePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                profilePanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                profilePanelMouseExited(evt);
+            }
+        });
+        profilePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/profile.png"))); // NOI18N
+        jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel16MouseEntered(evt);
+            }
+        });
+        profilePanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 50, 50));
+
+        profile.setForeground(new java.awt.Color(250, 249, 246));
+        profile.setText("Profile");
+        profilePanel.add(profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 100, 50));
+
+        jPanel1.add(profilePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 190, -1));
 
         mainbg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 700));
 
@@ -564,6 +602,7 @@ public class adminDashB extends javax.swing.JFrame {
         jPanel8.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 40, 40));
 
         dboard.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 160, 270, 110));
+        dboard.add(patientMenu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         mainbg.add(dboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 910, 700));
 
@@ -595,21 +634,21 @@ public class adminDashB extends javax.swing.JFrame {
 
     }//GEN-LAST:event_dashboardPanelMouseExited
 
-    private void jPanel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseEntered
-        jPanel2.setBackground(hoverColor);
-    }//GEN-LAST:event_jPanel2MouseEntered
+    private void patientPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientPanelMouseEntered
+        patientPanel.setBackground(hoverColor);
+    }//GEN-LAST:event_patientPanelMouseEntered
 
-    private void jPanel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseExited
-        jPanel2.setBackground(mainColor);
-    }//GEN-LAST:event_jPanel2MouseExited
+    private void patientPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientPanelMouseExited
+        patientPanel.setBackground(mainColor);
+    }//GEN-LAST:event_patientPanelMouseExited
 
-    private void accountPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountPanelMouseEntered
-        accountPanel.setBackground(hoverColor);
-    }//GEN-LAST:event_accountPanelMouseEntered
+    private void doctorPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorPanelMouseEntered
+        doctorPanel.setBackground(hoverColor);
+    }//GEN-LAST:event_doctorPanelMouseEntered
 
-    private void accountPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountPanelMouseExited
-        accountPanel.setBackground(mainColor);
-    }//GEN-LAST:event_accountPanelMouseExited
+    private void doctorPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorPanelMouseExited
+        doctorPanel.setBackground(mainColor);
+    }//GEN-LAST:event_doctorPanelMouseExited
 
     private void dashboardPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseClicked
 
@@ -647,6 +686,30 @@ public class adminDashB extends javax.swing.JFrame {
         searchh.setText("");
         usersTable.setRowSorter(null);
     }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void patientPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientPanelMouseClicked
+        
+        patientMenu pMenu = new patientMenu();
+              
+        
+        
+    }//GEN-LAST:event_patientPanelMouseClicked
+
+    private void profilePanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseEntered
+        
+        profilePanel.setBackground(hoverColor);
+        
+    }//GEN-LAST:event_profilePanelMouseEntered
+
+    private void profilePanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseExited
+        
+        profilePanel.setBackground(mainColor);
+        
+    }//GEN-LAST:event_profilePanelMouseExited
+
+    private void jLabel16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel16MouseEntered
 
     private void loadOpenSans() {
         try {
@@ -792,13 +855,13 @@ public class adminDashB extends javax.swing.JFrame {
     private javax.swing.JLabel PA;
     private javax.swing.JLabel TA;
     private javax.swing.JLabel accOV;
-    private javax.swing.JPanel accountPanel;
     private javax.swing.JLabel actAcc;
     private javax.swing.JPanel dashboardPanel;
     private javax.swing.JPanel dboard;
     private javax.swing.JPanel dboardBG;
     private javax.swing.JLabel doctor;
     private javax.swing.JLabel doctor1;
+    private javax.swing.JPanel doctorPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -806,6 +869,7 @@ public class adminDashB extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -815,7 +879,6 @@ public class adminDashB extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -827,7 +890,11 @@ public class adminDashB extends javax.swing.JFrame {
     private javax.swing.JPanel mainbg;
     private javax.swing.JLabel patient;
     private javax.swing.JLabel patient1;
+    private admin.patientMenu patientMenu1;
+    private javax.swing.JPanel patientPanel;
     private javax.swing.JLabel penAcc;
+    private javax.swing.JLabel profile;
+    private javax.swing.JPanel profilePanel;
     private javax.swing.JScrollPane scroll;
     private javax.swing.JTextField searchh;
     private javax.swing.JLabel totalAcc;
