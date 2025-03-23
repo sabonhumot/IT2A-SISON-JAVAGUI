@@ -40,13 +40,15 @@ public class profileMenu extends javax.swing.JFrame {
 
         String fullName = session.getFirstName() + " " + session.getLastName();
 
-        name.setText(fullName);
+        name.setText("Name: " + fullName);
         
 
-        email.setText(session.getEmail());
+        email.setText("Email: " +session.getEmail());
         
         
-        contact.setText(session.getContact());
+        contact.setText("Contact Number: " +session.getContact());
+        
+        
 
     }
 

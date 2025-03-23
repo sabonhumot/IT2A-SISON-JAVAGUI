@@ -566,7 +566,9 @@ public class accountsMenu extends javax.swing.JFrame {
 
     private void dashboardPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseClicked
 
-        dboard.setVisible(true);
+        adminDashB adb = new adminDashB();
+        adb.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_dashboardPanelMouseClicked
 
     private void dashboardPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseEntered

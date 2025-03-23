@@ -6,6 +6,7 @@
 package patient;
 
 import careq.*;
+import config.session;
 import gfx.RoundedPanel;
 import java.awt.Color;
 import java.awt.Font;
@@ -13,6 +14,7 @@ import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.io.IOException;
 import java.io.InputStream;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,6 +24,9 @@ public class patientDashB extends javax.swing.JFrame {
 
     Color mainColor = new Color(37, 171, 241);
     Color hoverColor = new Color(31, 128, 179);
+
+    Color logoutColor = new Color(100, 188, 234);
+    Color hoverlogoutColor = new Color(250, 249, 246);
 
     public patientDashB() {
         initComponents();
@@ -43,18 +48,22 @@ public class patientDashB extends javax.swing.JFrame {
     private void initComponents() {
 
         mainbg = new javax.swing.JPanel();
+        dboard = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel1 = new RoundedPanel(5);
-        accountPanel = new RoundedPanel(50);
-        jPanel2 = new RoundedPanel(50);
         dashboardPanel = new RoundedPanel(50);
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        dboard = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        logoutPanel = new RoundedPanel(25);
+        jLabel7 = new javax.swing.JLabel();
+        logout = new javax.swing.JLabel();
+        profilePanel = new RoundedPanel(50);
+        jLabel16 = new javax.swing.JLabel();
+        profile = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,34 +71,29 @@ public class patientDashB extends javax.swing.JFrame {
         mainbg.setMinimumSize(new java.awt.Dimension(1017, 620));
         mainbg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        dboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setBackground(new java.awt.Color(250, 249, 246));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setText("Patient Dashboard");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 300, -1));
+
+        dboard.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 70));
+
+        jLabel6.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel6.setText("Patient Dashboard");
+        dboard.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 360, 120));
+
+        mainbg.add(dboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 910, 700));
+
         jPanel1.setBackground(new java.awt.Color(37, 171, 241));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        accountPanel.setBackground(new java.awt.Color(37, 171, 241));
-        accountPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                accountPanelMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                accountPanelMouseExited(evt);
-            }
-        });
-        accountPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(accountPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 190, 50));
-
-        jPanel2.setBackground(new java.awt.Color(37, 171, 241));
-        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel2MouseExited(evt);
-            }
-        });
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 190, 50));
-
         dashboardPanel.setBackground(new java.awt.Color(37, 171, 241));
+        dashboardPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         dashboardPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 dashboardPanelMouseClicked(evt);
@@ -103,7 +107,7 @@ public class patientDashB extends javax.swing.JFrame {
         });
         dashboardPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/dashboard.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/dashboard_filled.png"))); // NOI18N
         dashboardPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 40, 50));
 
         jLabel2.setForeground(new java.awt.Color(250, 249, 246));
@@ -119,25 +123,63 @@ public class patientDashB extends javax.swing.JFrame {
         jLabel4.setText("CareQ");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 100, 30));
 
-        mainbg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 620));
+        logoutPanel.setBackground(new java.awt.Color(100, 188, 234));
+        logoutPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        logoutPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutPanelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                logoutPanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                logoutPanelMouseExited(evt);
+            }
+        });
+        logoutPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        dboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/log-out.png"))); // NOI18N
+        logoutPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 30, 50));
 
-        jPanel3.setBackground(new java.awt.Color(250, 249, 246));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        logout.setBackground(new java.awt.Color(73, 138, 172));
+        logout.setForeground(new java.awt.Color(73, 138, 172));
+        logout.setText("Logout");
+        logout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        logoutPanel.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 30));
 
-        jLabel5.setText("Patient Dashboard");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 300, -1));
+        jPanel1.add(logoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 170, 70));
 
-        dboard.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 70));
+        profilePanel.setBackground(new java.awt.Color(37, 171, 241));
+        profilePanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        profilePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                profilePanelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                profilePanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                profilePanelMouseExited(evt);
+            }
+        });
+        profilePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel6.setText("Patient Dashboard");
-        dboard.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 360, 120));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/profile-white.png"))); // NOI18N
+        jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel16MouseEntered(evt);
+            }
+        });
+        profilePanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 50, 50));
 
-        mainbg.add(dboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 830, 620));
+        profile.setForeground(new java.awt.Color(250, 249, 246));
+        profile.setText("Profile");
+        profilePanel.add(profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 100, 50));
+
+        jPanel1.add(profilePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 190, -1));
+
+        mainbg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,40 +196,69 @@ public class patientDashB extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void dashboardPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseClicked
+       
+    }//GEN-LAST:event_dashboardPanelMouseClicked
+
     private void dashboardPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseEntered
 
         dashboardPanel.setBackground(hoverColor);
-
-
     }//GEN-LAST:event_dashboardPanelMouseEntered
 
     private void dashboardPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseExited
 
         dashboardPanel.setBackground(mainColor);
-
     }//GEN-LAST:event_dashboardPanelMouseExited
 
-    private void jPanel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseEntered
-        jPanel2.setBackground(hoverColor);
-    }//GEN-LAST:event_jPanel2MouseEntered
+    private void logoutPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseClicked
 
-    private void jPanel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseExited
-        jPanel2.setBackground(mainColor);
-    }//GEN-LAST:event_jPanel2MouseExited
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Logout", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            session userSession = session.getInstance();
 
-    private void accountPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountPanelMouseEntered
-        accountPanel.setBackground(hoverColor);
-    }//GEN-LAST:event_accountPanelMouseEntered
+            userSession.setU_id(null);
+            userSession.setFirstName(null);
+            userSession.setLastName(null);
+            userSession.setEmail(null);
+            userSession.setUsername(null);
+            userSession.setAcc_type(null);
+            userSession.setAcc_status(null);
 
-    private void accountPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountPanelMouseExited
-        accountPanel.setBackground(mainColor);
-    }//GEN-LAST:event_accountPanelMouseExited
+            logIn lg = new logIn();
+            lg.setVisible(true);
+            this.dispose();
 
-    private void dashboardPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseClicked
-        
-        dboard.setVisible(true);
-        
-    }//GEN-LAST:event_dashboardPanelMouseClicked
+        }
+    }//GEN-LAST:event_logoutPanelMouseClicked
+
+    private void logoutPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseEntered
+        logoutPanel.setBackground(hoverlogoutColor);
+    }//GEN-LAST:event_logoutPanelMouseEntered
+
+    private void logoutPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseExited
+        logoutPanel.setBackground(logoutColor);
+    }//GEN-LAST:event_logoutPanelMouseExited
+
+    private void jLabel16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel16MouseEntered
+
+    private void profilePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseClicked
+
+        patientProfileMenu ppm = new patientProfileMenu();
+        ppm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_profilePanelMouseClicked
+
+    private void profilePanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseEntered
+
+        profilePanel.setBackground(hoverColor);
+    }//GEN-LAST:event_profilePanelMouseEntered
+
+    private void profilePanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseExited
+
+        profilePanel.setBackground(mainColor);
+    }//GEN-LAST:event_profilePanelMouseExited
 
     private void loadOpenSans() {
         try {
@@ -198,7 +269,7 @@ public class patientDashB extends javax.swing.JFrame {
                 ge.registerFont(openSans);
                 // Now you can use the font:
                 jLabel2.setFont(openSans.deriveFont(Font.BOLD, 14));
-                jLabel5.setFont(openSans.deriveFont(Font.BOLD, 24));
+                jLabel5.setFont(openSans.deriveFont(Font.BOLD, 24));               
             } else {
                 System.err.println("Font file not found!");
             }
@@ -265,18 +336,22 @@ public class patientDashB extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel accountPanel;
     private javax.swing.JPanel dashboardPanel;
     private javax.swing.JPanel dboard;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel logout;
+    private javax.swing.JPanel logoutPanel;
     private javax.swing.JPanel mainbg;
+    private javax.swing.JLabel profile;
+    private javax.swing.JPanel profilePanel;
     // End of variables declaration//GEN-END:variables
 }

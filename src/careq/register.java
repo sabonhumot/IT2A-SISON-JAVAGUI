@@ -486,9 +486,7 @@ public class register extends javax.swing.JFrame {
     }//GEN-LAST:event_phonennumActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        signupSuccess.pack();
-        signupError.pack();
+      
 
         if (signUpValidation()) {
 

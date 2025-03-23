@@ -21,6 +21,12 @@ public class pwHasher {
         String encoded = Base64.getEncoder().encodeToString(hashBytes);
         return encoded;
     }
+     
+     
+     public static boolean verifyPassword(String inputPassword, String storedHash) throws NoSuchAlgorithmException {
+        String hashedInput = hashPassword(inputPassword); // Hash the input password
+        return hashedInput.equals(storedHash); // Compare with stored hash
+    }
     
     
 }
