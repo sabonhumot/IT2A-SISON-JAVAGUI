@@ -291,8 +291,6 @@ public class adminDashB extends javax.swing.JFrame {
         dashboardPanel = new RoundedPanel(50);
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         logoutPanel = new RoundedPanel(25);
         jLabel6 = new javax.swing.JLabel();
         logout = new javax.swing.JLabel();
@@ -302,6 +300,7 @@ public class adminDashB extends javax.swing.JFrame {
         accMngrPanel = new RoundedPanel(50);
         jLabel17 = new javax.swing.JLabel();
         accM = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
         dboard = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -419,13 +418,6 @@ public class adminDashB extends javax.swing.JFrame {
 
         jPanel1.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 190, 50));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-stethoscope-48.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jLabel4.setForeground(new java.awt.Color(250, 249, 246));
-        jLabel4.setText("CareQ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 100, 30));
-
         logoutPanel.setBackground(new java.awt.Color(100, 188, 234));
         logoutPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logoutPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -512,6 +504,9 @@ public class adminDashB extends javax.swing.JFrame {
         accMngrPanel.add(accM, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 150, 50));
 
         jPanel1.add(accMngrPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 190, -1));
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui_img/logo.png"))); // NOI18N
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
 
         mainbg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 700));
 
@@ -856,7 +851,7 @@ public class adminDashB extends javax.swing.JFrame {
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(itim);
 
-                jLabel4.setFont(itim.deriveFont(Font.ITALIC, 22));
+                
 
             } else {
                 System.err.println("Font file not found!");
@@ -975,9 +970,8 @@ public class adminDashB extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

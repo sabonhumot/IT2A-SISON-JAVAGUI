@@ -11,6 +11,7 @@ public class session {
     private static String username;
     private static String acc_type;
     private static String acc_status;
+    private static String acc_pfp;
 
     private session() {
 
@@ -89,6 +90,14 @@ public class session {
 
     public static void setAcc_status(String acc_status) {
         session.acc_status = acc_status;
+    }
+
+    public static String getAcc_pfp() {
+        return acc_pfp;
+    }
+
+    public static void setAcc_pfp(String acc_pfp) {
+        session.acc_pfp = acc_pfp;
     }
 
 }

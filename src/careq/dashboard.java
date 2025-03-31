@@ -48,8 +48,7 @@ public class dashboard extends javax.swing.JFrame {
         dashboardPanel = new RoundedPanel(50);
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         dboard = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -110,12 +109,8 @@ public class dashboard extends javax.swing.JFrame {
 
         jPanel1.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 190, 50));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-stethoscope-48.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jLabel4.setForeground(new java.awt.Color(250, 249, 246));
-        jLabel4.setText("CareQ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 100, 30));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         mainbg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 620));
 
@@ -207,7 +202,7 @@ public class dashboard extends javax.swing.JFrame {
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(itim);
 
-                jLabel4.setFont(itim.deriveFont(Font.ITALIC, 22));
+                
 
             } else {
                 System.err.println("Font file not found!");
@@ -260,9 +255,8 @@ public class dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel dboard;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -6,10 +6,28 @@
 package patient;
 
 import careq.logIn;
+import config.connectDB;
 import config.session;
 import gfx.RoundedPanel;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -17,17 +35,16 @@ import javax.swing.JOptionPane;
  */
 public class patientProfileMenu extends javax.swing.JFrame {
 
-    
     Color mainColor = new Color(37, 171, 241);
     Color hoverColor = new Color(31, 128, 179);
 
     Color logoutColor = new Color(100, 188, 234);
     Color hoverlogoutColor = new Color(250, 249, 246);
-    
-    
+
     public patientProfileMenu() {
         initComponents();
         accountInformation();
+
     }
 
     /**
@@ -47,24 +64,26 @@ public class patientProfileMenu extends javax.swing.JFrame {
         contact = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
         email = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         password = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        pfp = new javax.swing.JLabel();
+        addpfp = new gfx.RoundGradientButton ("Refresh", new Color(25, 175, 219), new Color(21, 162, 203), 30);
+        removepfp = new gfx.RoundGradientButton ("Delete", new Color(220, 53, 69), new Color(255, 0, 0), 30);
         jPanel1 = new RoundedPanel(5);
         dashboardPanel = new RoundedPanel(50);
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         logoutPanel = new RoundedPanel(25);
         jLabel6 = new javax.swing.JLabel();
         logout = new javax.swing.JLabel();
         profilePanel = new RoundedPanel(50);
         jLabel16 = new javax.swing.JLabel();
         profile = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,11 +105,10 @@ public class patientProfileMenu extends javax.swing.JFrame {
 
         contact.setText("contact");
 
+        name.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         name.setText("name");
 
         email.setText("email");
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mark.png.png"))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 153, 255));
@@ -114,44 +132,88 @@ public class patientProfileMenu extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel12.setText("Personal Information");
 
+        jPanel2.setLayout(null);
+        jPanel2.add(pfp);
+        pfp.setBounds(0, 0, 290, 210);
+
+        addpfp.setForeground(new java.awt.Color(255, 255, 255));
+        addpfp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
+        addpfp.setText("Add Profile Picture");
+        addpfp.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        addpfp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addpfpMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addpfpMouseExited(evt);
+            }
+        });
+        addpfp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addpfpActionPerformed(evt);
+            }
+        });
+
+        removepfp.setForeground(new java.awt.Color(255, 255, 255));
+        removepfp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-delete-15.png"))); // NOI18N
+        removepfp.setText("Remove");
+        removepfp.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        removepfp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removepfpMouseClicked(evt);
+            }
+        });
+        removepfp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removepfpActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout dboardBGLayout = new javax.swing.GroupLayout(dboardBG);
         dboardBG.setLayout(dboardBGLayout);
         dboardBGLayout.setHorizontalGroup(
             dboardBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dboardBGLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(32, 32, 32)
                 .addGroup(dboardBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dboardBGLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
                         .addGroup(dboardBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(contact, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
+                            .addComponent(password))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(dboardBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(41, 41, 41))
                     .addGroup(dboardBGLayout.createSequentialGroup()
-                        .addComponent(password)
-                        .addGap(454, 454, 454))))
-            .addGroup(dboardBGLayout.createSequentialGroup()
-                .addGap(281, 281, 281)
-                .addGroup(dboardBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel12)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dboardBGLayout.createSequentialGroup()
-                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)))
-                .addGap(0, 319, Short.MAX_VALUE))
+                        .addGroup(dboardBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(dboardBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(addpfp, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                            .addComponent(removepfp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(379, 379, 379))))
         );
         dboardBGLayout.setVerticalGroup(
             dboardBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dboardBGLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(29, 29, 29)
+                .addGroup(dboardBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(dboardBGLayout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(addpfp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(removepfp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addGap(56, 56, 56)
                 .addComponent(jLabel12)
                 .addGap(26, 26, 26)
                 .addGroup(dboardBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -165,7 +227,7 @@ public class patientProfileMenu extends javax.swing.JFrame {
                 .addGroup(dboardBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(password)
                     .addComponent(jLabel11))
-                .addContainerGap())
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         dboard.add(dboardBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 870, 590));
@@ -198,13 +260,6 @@ public class patientProfileMenu extends javax.swing.JFrame {
         dashboardPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 110, 30));
 
         jPanel1.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 190, 50));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-stethoscope-48.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jLabel4.setForeground(new java.awt.Color(250, 249, 246));
-        jLabel4.setText("CareQ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 100, 30));
 
         logoutPanel.setBackground(new java.awt.Color(100, 188, 234));
         logoutPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -262,6 +317,9 @@ public class patientProfileMenu extends javax.swing.JFrame {
 
         jPanel1.add(profilePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 190, -1));
 
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         mainbg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -276,29 +334,45 @@ public class patientProfileMenu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
     private void accountInformation() {
-        
-        session sess = session.getInstance();
-        
-        String fullName = session.getFirstName() + " " + session.getLastName();
 
-        name.setText("Name: " + fullName);
-        
+        try {
+            session sess = session.getInstance();
+            connectDB conn = new connectDB();
 
-        email.setText("Email: " +session.getEmail());
-        
-        
-        contact.setText("Contact Number: " +session.getContact());
-        
-        password.setText("*********");
-        
-        
+            String fullName = session.getFirstName() + " " + session.getLastName();
+
+            name.setText(fullName);
+
+            email.setText("Email: " + session.getEmail());
+
+            contact.setText("Contact Number: " + session.getContact());
+
+            password.setText("Password: •••••••••••");
+
+            String query = "SELECT u_pfp FROM user WHERE u_id = ?";
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            pstmt.setString(1, sess.getU_id());
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String pfpPath = rs.getString("u_pfp");
+                pfp.setIcon(ResizeImage(pfpPath, null, pfp));
+                oldpath = pfpPath;
+                path = pfpPath;
+                destination = pfpPath;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(patientProfileMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
-    
-    
+
+
     private void dashboardPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseClicked
 
         patientDashB pdb = new patientDashB();
@@ -350,7 +424,7 @@ public class patientProfileMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel16MouseEntered
 
     private void profilePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseClicked
-      
+
     }//GEN-LAST:event_profilePanelMouseClicked
 
     private void profilePanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseEntered
@@ -364,14 +438,130 @@ public class patientProfileMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_profilePanelMouseExited
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        
+
         changePassForm cpForm = new changePassForm();
-        
+
         cpForm.setVisible(true);
-        
-        
-        
+
+
     }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void addpfpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addpfpMouseEntered
+
+    }//GEN-LAST:event_addpfpMouseEntered
+
+    private void addpfpMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addpfpMouseExited
+
+    }//GEN-LAST:event_addpfpMouseExited
+
+    public String destination = "";
+    File selectedFile;
+    public String oldpath = "";
+    public String path = "";
+
+    public int FileExistenceChecker(String path) {
+        File file = new File(path);
+        String fileName = file.getName();
+
+        Path filePath = Paths.get("src/user_img", fileName);
+        boolean fileExists = Files.exists(filePath);
+
+        if (fileExists) {
+            return 1;
+        } else {
+            return 0;
+        }
+
+    }
+
+
+    private void addpfpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addpfpActionPerformed
+
+        connectDB con = new connectDB();
+        session sess = session.getInstance();
+
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            try {
+                selectedFile = fileChooser.getSelectedFile();
+                destination = "src/user_img/" + selectedFile.getName();
+                path = selectedFile.getAbsolutePath();
+
+                if (FileExistenceChecker(path) == 1) {
+                    JOptionPane.showMessageDialog(null, "File Already Exist, Rename or Choose another!");
+                    destination = "";
+                    path = "";
+                } else {
+                    pfp.setIcon(ResizeImage(path, null, pfp));
+                    addpfp.setEnabled(false);
+                    removepfp.setEnabled(true);
+                    JOptionPane.showMessageDialog(this, "Profile Photo Updated Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                    con.updateData("UPDATE user SET u_pfp = '" + destination + "' WHERE u_id = '" + session.getU_id() + "'");
+                    Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
+                }
+            } catch (Exception ex) {
+                System.out.println("File Error!");
+            }
+        }
+
+
+    }//GEN-LAST:event_addpfpActionPerformed
+
+    public ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
+        ImageIcon MyImage = null;
+        if (ImagePath != null) {
+            MyImage = new ImageIcon(ImagePath);
+        } else {
+            MyImage = new ImageIcon(pic);
+        }
+
+        int newHeight = getHeightFromWidth(ImagePath, label.getWidth());
+
+        Image img = MyImage.getImage();
+        Image newImg = img.getScaledInstance(label.getWidth(), newHeight, Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImg);
+        return image;
+    }
+
+    public static int getHeightFromWidth(String imagePath, int desiredWidth) {
+        try {
+            // Read the image file
+            File imageFile = new File(imagePath);
+            BufferedImage image = ImageIO.read(imageFile);
+
+            // Get the original width and height of the image
+            int originalWidth = image.getWidth();
+            int originalHeight = image.getHeight();
+
+            // Calculate the new height based on the desired width and the aspect ratio
+            int newHeight = (int) ((double) desiredWidth / originalWidth * originalHeight);
+
+            return newHeight;
+        } catch (IOException ex) {
+            System.out.println("No image found!");
+        }
+
+        return -1;
+    }
+
+
+    private void removepfpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removepfpMouseClicked
+
+    }//GEN-LAST:event_removepfpMouseClicked
+
+    private void removepfpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removepfpActionPerformed
+
+        removepfp.setEnabled(false);
+        addpfp.setEnabled(true);
+
+        pfp.setIcon(null);
+        destination = "";
+        path = "";
+
+
+    }//GEN-LAST:event_removepfpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -409,31 +599,33 @@ public class patientProfileMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addpfp;
     private javax.swing.JLabel contact;
     private javax.swing.JPanel dashboardPanel;
     private javax.swing.JPanel dboard;
     private javax.swing.JPanel dboardBG;
     private javax.swing.JLabel email;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel logout;
     private javax.swing.JPanel logoutPanel;
     private javax.swing.JPanel mainbg;
     private javax.swing.JLabel name;
     private javax.swing.JLabel password;
+    private javax.swing.JLabel pfp;
     private javax.swing.JLabel profile;
     private javax.swing.JPanel profilePanel;
+    private javax.swing.JButton removepfp;
     // End of variables declaration//GEN-END:variables
 }

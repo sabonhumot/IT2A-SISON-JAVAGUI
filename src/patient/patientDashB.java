@@ -31,7 +31,7 @@ public class patientDashB extends javax.swing.JFrame {
     public patientDashB() {
         initComponents();
         loadOpenSans();
-        loadItim();
+      
         
         
         
@@ -56,14 +56,13 @@ public class patientDashB extends javax.swing.JFrame {
         dashboardPanel = new RoundedPanel(50);
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         logoutPanel = new RoundedPanel(25);
         jLabel7 = new javax.swing.JLabel();
         logout = new javax.swing.JLabel();
         profilePanel = new RoundedPanel(50);
         jLabel16 = new javax.swing.JLabel();
         profile = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,13 +114,6 @@ public class patientDashB extends javax.swing.JFrame {
         dashboardPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 110, 30));
 
         jPanel1.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 190, 50));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-stethoscope-48.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jLabel4.setForeground(new java.awt.Color(250, 249, 246));
-        jLabel4.setText("CareQ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 100, 30));
 
         logoutPanel.setBackground(new java.awt.Color(100, 188, 234));
         logoutPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -178,6 +170,9 @@ public class patientDashB extends javax.swing.JFrame {
         profilePanel.add(profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 100, 50));
 
         jPanel1.add(profilePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 190, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         mainbg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 700));
 
@@ -278,24 +273,7 @@ public class patientDashB extends javax.swing.JFrame {
         }
     }
 
-    private void loadItim() {
-        try {
-            InputStream fontStream = getClass().getResourceAsStream("/font/Itim-Regular.ttf");
-            if (fontStream != null) {
-                Font itim = Font.createFont(Font.TRUETYPE_FONT, fontStream);
-                GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                ge.registerFont(itim);
-
-                jLabel4.setFont(itim.deriveFont(Font.ITALIC, 22));
-
-            } else {
-                System.err.println("Font file not found!");
-            }
-        } catch (IOException | FontFormatException e) {
-            e.printStackTrace();
-        }
-
-    }
+    
 
     /**
      * @param args the command line arguments
@@ -341,11 +319,10 @@ public class patientDashB extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel logout;

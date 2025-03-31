@@ -136,8 +136,8 @@ public class logIn extends javax.swing.JFrame {
         errorLabelPass = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
 
         jPanel3.setBackground(new java.awt.Color(239, 239, 215));
         jPanel3.setToolTipText("");
@@ -353,15 +353,15 @@ public class logIn extends javax.swing.JFrame {
         jSeparator1.setPreferredSize(new java.awt.Dimension(50, 50));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 80, 10));
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel8.setText("Forgot Password?");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, -1, -1));
+
         login.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 450, 480));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/careq.png"))); // NOI18N
-        login.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 130, 120));
-
-        jLabel1.setBackground(new java.awt.Color(46, 155, 254));
-        jLabel1.setForeground(new java.awt.Color(46, 155, 254));
-        jLabel1.setText("CareQ");
-        login.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 220, 130, 50));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mediq_black-removebg-preview (1).png"))); // NOI18N
+        login.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, -1, -1));
 
         getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 805, 479));
 
@@ -480,6 +480,8 @@ public class logIn extends javax.swing.JFrame {
             sess.setAcc_type(accType);
             sess.setAcc_status(accStatus);
 
+            
+
             if (accType != null) {
                 if ("administrator".equalsIgnoreCase(accType)) {
                     new adminDashB().setVisible(true);
@@ -567,7 +569,7 @@ public class logIn extends javax.swing.JFrame {
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(itim);
 
-                jLabel1.setFont(itim.deriveFont(Font.ITALIC, 36));
+                
 
             } else {
                 System.err.println("Font file not found!");
@@ -630,7 +632,6 @@ public class logIn extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -642,6 +643,7 @@ public class logIn extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
