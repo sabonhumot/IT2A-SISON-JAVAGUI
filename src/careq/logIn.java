@@ -356,6 +356,12 @@ public class logIn extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 153, 255));
         jLabel8.setText("Forgot Password?");
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, -1, -1));
 
         login.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 450, 480));
@@ -539,6 +545,17 @@ public class logIn extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton1MouseEntered
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        
+        
+        forgotPassword1 fp1 = new forgotPassword1();
+        
+        fp1.setVisible(true);
+        
+        
+        
+    }//GEN-LAST:event_jLabel8MouseClicked
 
     private void loadOpenSans() {
         try {

@@ -12,6 +12,8 @@ public class session {
     private static String acc_type;
     private static String acc_status;
     private static String acc_pfp;
+    private static String secQ;
+    private static String secQanswer;
 
     private session() {
 
@@ -98,6 +100,22 @@ public class session {
 
     public static void setAcc_pfp(String acc_pfp) {
         session.acc_pfp = acc_pfp;
+    }
+    
+    public static String getSecQ() {
+        return secQ;
+    }
+
+    public static void setSecQ(String secQ) {
+        session.secQ = secQ;
+    }
+
+    public static String getSecQanswer() {
+        return secQanswer;
+    }
+
+    public static void setSecQanswer(String secQanswer) {
+        session.secQanswer = secQanswer;
     }
 
 }
