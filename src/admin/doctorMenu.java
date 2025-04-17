@@ -192,7 +192,7 @@ public class doctorMenu extends javax.swing.JFrame {
 
         add.setForeground(new java.awt.Color(255, 255, 255));
         add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        add.setText("Add Patient");
+        add.setText("Add Doctor");
         add.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -388,6 +388,9 @@ public class doctorMenu extends javax.swing.JFrame {
         accMngrPanel.setBackground(new java.awt.Color(37, 171, 241));
         accMngrPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         accMngrPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                accMngrPanelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 accMngrPanelMouseEntered(evt);
             }
@@ -528,7 +531,7 @@ public class doctorMenu extends javax.swing.JFrame {
 
                 switch (value.toString()) {
                     case "Active":
-                        label.setBackground(new Color(25, 135, 84)); // Light Green
+                        label.setBackground(new Color(144, 238, 144)); // Light Green
                         label.setForeground(Color.BLACK);
                         break;
                     case "Pending":
@@ -745,6 +748,14 @@ public class doctorMenu extends javax.swing.JFrame {
     private void doctorPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorPanelMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_doctorPanelMouseClicked
+
+    private void accMngrPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accMngrPanelMouseClicked
+        
+        accountsMenu accM = new accountsMenu();
+        accM.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_accMngrPanelMouseClicked
 
     private void searchTable() {
         DefaultTableModel model = (DefaultTableModel) usersTable.getModel();

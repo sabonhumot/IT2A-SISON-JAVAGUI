@@ -505,8 +505,8 @@ public class adminDashB extends javax.swing.JFrame {
 
         jPanel1.add(accMngrPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 190, -1));
 
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui_img/logo.png"))); // NOI18N
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 60));
 
         mainbg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 700));
 

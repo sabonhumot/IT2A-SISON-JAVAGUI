@@ -252,7 +252,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/img/add.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Add Patient"/>
+                    <Property name="text" type="java.lang.String" value="Add Doctor"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                   </Properties>
                   <Events>
@@ -682,6 +682,7 @@
                 </Property>
               </Properties>
               <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="accMngrPanelMouseClicked"/>
                 <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="accMngrPanelMouseEntered"/>
                 <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="accMngrPanelMouseExited"/>
               </Events>

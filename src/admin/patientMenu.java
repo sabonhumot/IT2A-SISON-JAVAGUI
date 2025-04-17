@@ -147,7 +147,7 @@ public class patientMenu extends javax.swing.JFrame {
 
                 switch (value.toString()) {
                     case "Active":
-                        label.setBackground(new Color(25, 135, 84)); // Light Green
+                        label.setBackground(new Color(144, 238, 144)); // Light Green
                         label.setForeground(Color.BLACK);
                         break;
                     case "Pending":
