@@ -32,7 +32,7 @@ public class doctorDashB extends javax.swing.JFrame {
     public doctorDashB() {
         initComponents();
         loadOpenSans();
-        loadItim();
+        
 
     }
 
@@ -55,6 +55,8 @@ public class doctorDashB extends javax.swing.JFrame {
         noAppPanel = new javax.swing.JPanel();
         noApp = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        upc1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new RoundedPanel(5);
         dashboardPanel = new RoundedPanel(50);
         jLabel1 = new javax.swing.JLabel();
@@ -62,7 +64,7 @@ public class doctorDashB extends javax.swing.JFrame {
         logoutPanel = new RoundedPanel(25);
         jLabel7 = new javax.swing.JLabel();
         logout = new javax.swing.JLabel();
-        bookAppointment = new RoundedPanel(50);
+        appointmentsPanel = new RoundedPanel(50);
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         profilePanel = new RoundedPanel(50);
@@ -94,10 +96,10 @@ public class doctorDashB extends javax.swing.JFrame {
         dboardBG.add(welcome);
         welcome.setBounds(20, 20, 390, 50);
 
-        upc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        upc.setText("Upcoming appointments");
+        upc.setFont(new java.awt.Font("Trebuchet MS", 1, 16)); // NOI18N
+        upc.setText("Today");
         dboardBG.add(upc);
-        upc.setBounds(20, 100, 330, 50);
+        upc.setBounds(50, 140, 120, 50);
 
         noAppPanel.setBackground(new java.awt.Color(250, 249, 246));
         noAppPanel.setLayout(null);
@@ -115,6 +117,15 @@ public class doctorDashB extends javax.swing.JFrame {
 
         dboardBG.add(noAppPanel);
         noAppPanel.setBounds(250, 260, 310, 200);
+
+        upc1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        upc1.setText("Upcoming appointments");
+        dboardBG.add(upc1);
+        upc1.setBounds(20, 100, 330, 50);
+
+        jPanel2.setLayout(null);
+        dboardBG.add(jPanel2);
+        jPanel2.setBounds(50, 190, 770, 110);
 
         dboard.add(dboardBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 860, 590));
 
@@ -173,29 +184,29 @@ public class doctorDashB extends javax.swing.JFrame {
 
         jPanel1.add(logoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 170, 70));
 
-        bookAppointment.setBackground(new java.awt.Color(37, 171, 241));
-        bookAppointment.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        bookAppointment.addMouseListener(new java.awt.event.MouseAdapter() {
+        appointmentsPanel.setBackground(new java.awt.Color(37, 171, 241));
+        appointmentsPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        appointmentsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bookAppointmentMouseClicked(evt);
+                appointmentsPanelMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                bookAppointmentMouseEntered(evt);
+                appointmentsPanelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                bookAppointmentMouseExited(evt);
+                appointmentsPanelMouseExited(evt);
             }
         });
-        bookAppointment.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        appointmentsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/appointment-filled.png"))); // NOI18N
-        bookAppointment.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 40, 50));
+        appointmentsPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 40, 50));
 
         jLabel4.setForeground(new java.awt.Color(250, 249, 246));
         jLabel4.setText("Appointments");
-        bookAppointment.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 110, 30));
+        appointmentsPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 110, 30));
 
-        jPanel1.add(bookAppointment, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 190, 50));
+        jPanel1.add(appointmentsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 190, 50));
 
         profilePanel.setBackground(new java.awt.Color(37, 171, 241));
         profilePanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -292,17 +303,25 @@ public class doctorDashB extends javax.swing.JFrame {
         logoutPanel.setBackground(logoutColor);
     }//GEN-LAST:event_logoutPanelMouseExited
 
-    private void bookAppointmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bookAppointmentMouseClicked
+    private void appointmentsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsPanelMouseClicked
+        
+        doctorAppointment dApp = new doctorAppointment();
+        
+        dApp.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_appointmentsPanelMouseClicked
 
-    private void bookAppointmentMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bookAppointmentMouseEntered
+    private void appointmentsPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsPanelMouseEntered
+        appointmentsPanel.setBackground(hoverColor);
+        
+    }//GEN-LAST:event_appointmentsPanelMouseEntered
 
-    private void bookAppointmentMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bookAppointmentMouseExited
+    private void appointmentsPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsPanelMouseExited
+        
+        appointmentsPanel.setBackground(mainColor);
+        
+    }//GEN-LAST:event_appointmentsPanelMouseExited
 
     private void jLabel16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseEntered
         // TODO add your handling code here:
@@ -401,7 +420,7 @@ public class doctorDashB extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel bookAppointment;
+    private javax.swing.JPanel appointmentsPanel;
     private javax.swing.JPanel dashboardPanel;
     private javax.swing.JPanel dboard;
     private javax.swing.JPanel dboardBG;
@@ -416,6 +435,7 @@ public class doctorDashB extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel logout;
     private javax.swing.JPanel logoutPanel;
     private javax.swing.JPanel mainbg;
@@ -424,6 +444,7 @@ public class doctorDashB extends javax.swing.JFrame {
     private javax.swing.JLabel profile;
     private javax.swing.JPanel profilePanel;
     private javax.swing.JLabel upc;
+    private javax.swing.JLabel upc1;
     private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables
 }

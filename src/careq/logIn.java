@@ -44,7 +44,7 @@ public class logIn extends javax.swing.JFrame {
 
         showPass.setVisible(true);
         hidePass.setVisible(false);
-       
+
     }
 
     public String[] loginAcc(String username, String password) {
@@ -449,7 +449,7 @@ public class logIn extends javax.swing.JFrame {
 
         try {
             // Hash the entered password before checking it in loginAcc
-            
+
             String hashedPass = pwHasher.hashPassword(pass);
 
             String[] loginData = loginAcc(user, hashedPass);
@@ -477,6 +477,7 @@ public class logIn extends javax.swing.JFrame {
             }
 
             session sess = session.getInstance();
+
             sess.setU_id(userID);
             sess.setUsername(username);
             sess.setFirstName(firstName);
@@ -485,8 +486,6 @@ public class logIn extends javax.swing.JFrame {
             sess.setContact(contactNumber);
             sess.setAcc_type(accType);
             sess.setAcc_status(accStatus);
-
-            
 
             if (accType != null) {
                 if ("administrator".equalsIgnoreCase(accType)) {
@@ -547,14 +546,12 @@ public class logIn extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseEntered
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        
-        
+
         forgotPassword1 fp1 = new forgotPassword1();
-        
+
         fp1.setVisible(true);
-        
-        
-        
+
+
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void loadOpenSans() {
@@ -585,8 +582,6 @@ public class logIn extends javax.swing.JFrame {
                 Font itim = Font.createFont(Font.TRUETYPE_FONT, fontStream);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(itim);
-
-                
 
             } else {
                 System.err.println("Font file not found!");

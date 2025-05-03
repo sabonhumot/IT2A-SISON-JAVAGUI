@@ -252,17 +252,17 @@ public class appointmentForm extends javax.swing.JFrame {
 
             conn.insertData("INSERT INTO appointments (doctor, date, time, notes, patient_id, appointment_status)"
                     + "VALUES ('" + doctor + "', '" + date.getText() + "', '" + time.getText() + "',"
-                    + " '" + jTextField1.getText() + "', '" + session.getU_id() + "', 'Pending')");
+                    + " '" + jTextField1.getText() + "', '" + sess.getU_id() + "', 'Pending')");
 
             this.dispose();
             
-            appointments app = new appointments();
+            patientAppointments app = new patientAppointments();
             app.getDataCounts();
             app.noData();
             app.displayData();
             
             conn.insertData("INSERT INTO logs (u_id, action, action_date, action_time)"
-                        + "VALUES ('"+session.getU_id()+"', 'Made an appointment', '"+actionDate+"', '"+actionTime+"')");
+                        + "VALUES ('"+sess.getU_id()+"', 'Made an appointment', '"+actionDate+"', '"+actionTime+"')");
             
 
         } else {

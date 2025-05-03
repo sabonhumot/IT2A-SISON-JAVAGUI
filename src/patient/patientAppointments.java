@@ -30,7 +30,7 @@ import net.proteanit.sql.DbUtils;
  *
  * @author Administrator
  */
-public class appointments extends javax.swing.JFrame {
+public class patientAppointments extends javax.swing.JFrame {
 
     Color mainColor = new Color(37, 171, 241);
     Color hoverColor = new Color(31, 128, 179);
@@ -38,7 +38,7 @@ public class appointments extends javax.swing.JFrame {
     Color logoutColor = new Color(100, 188, 234);
     Color hoverlogoutColor = new Color(250, 249, 246);
 
-    public appointments() {
+    public patientAppointments() {
         initComponents();
         displayData();
         noData();
@@ -336,7 +336,7 @@ public class appointments extends javax.swing.JFrame {
         session sess = session.getInstance();
 
         try {
-            ResultSet rs = con.getData("SELECT COUNT(*) FROM appointments WHERE patient_id = '"+session.getU_id()+"'");
+            ResultSet rs = con.getData("SELECT COUNT(*) FROM appointments WHERE patient_id = '"+sess.getU_id()+"'");
             
             if(rs.next()){
                 int count = rs.getInt(1);
@@ -368,7 +368,7 @@ public class appointments extends javax.swing.JFrame {
             session sess = session.getInstance();
 
             connectDB con = new connectDB();
-            ResultSet rs = con.getData("SELECT appointment_id, doctor, date, time, appointment_status FROM appointments WHERE patient_id = '" + session.getU_id() + "'");
+            ResultSet rs = con.getData("SELECT appointment_id, doctor, date, time, appointment_status FROM appointments WHERE patient_id = '" + sess.getU_id() + "'");
 
             String[] column = {"Appointment ID", "Doctor", "Scheduled Date", "Scheduled Time", "Appointment Status"};
 
@@ -624,20 +624,21 @@ public class appointments extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(appointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(patientAppointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(appointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(patientAppointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(appointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(patientAppointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(appointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(patientAppointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new appointments().setVisible(true);
+                new patientAppointments().setVisible(true);
             }
         });
     }

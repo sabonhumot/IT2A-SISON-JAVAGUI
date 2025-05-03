@@ -63,13 +63,13 @@ public class profileMenu extends javax.swing.JFrame {
             session sess = session.getInstance();
             connectDB conn = new connectDB();
 
-            String fullName = session.getFirstName() + " " + session.getLastName();
+            String fullName = sess.getFirstName() + " " + sess.getLastName();
 
             name.setText(fullName);
 
-            email.setText("" + session.getEmail());
+            email.setText("" + sess.getEmail());
 
-            contact.setText("" + session.getContact());
+            contact.setText("" + sess.getContact());
 
             password.setText("•••••••••••");
 
@@ -693,11 +693,11 @@ public class profileMenu extends javax.swing.JFrame {
                     removepfp.setEnabled(true);
                     JOptionPane.showMessageDialog(this, "Profile Photo Updated Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
-                    con.updateData("UPDATE user SET u_pfp = '" + destination + "' WHERE u_id = '" + session.getU_id() + "'");
+                    con.updateData("UPDATE user SET u_pfp = '" + destination + "' WHERE u_id = '" + sess.getU_id() + "'");
                     Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
                     
                     con.insertData("INSERT INTO logs (u_id, action, action_date, action_time)"
-                        + "VALUES ('"+session.getU_id()+"', 'Updated profile photo', '"+actionDate+"', '"+actionTime+"')");
+                        + "VALUES ('"+sess.getU_id()+"', 'Updated profile photo', '"+actionDate+"', '"+actionTime+"')");
                     
                 }
             } catch (Exception ex) {
@@ -765,6 +765,7 @@ public class profileMenu extends javax.swing.JFrame {
         String actionTime = atime.format(formatter);
         
         connectDB con = new connectDB();
+        session sess = session.getInstance();
 
         removepfp.setEnabled(false);
         addpfp.setEnabled(true);
@@ -774,10 +775,10 @@ public class profileMenu extends javax.swing.JFrame {
         pfp.setIcon(ResizeImage(blankPfpPath, null, pfp));
         destination = "";
         path = "";
-        con.updateData("UPDATE user SET u_pfp = '" + destination + "' WHERE u_id = '" + session.getU_id() + "'");
+        con.updateData("UPDATE user SET u_pfp = '" + destination + "' WHERE u_id = '" + sess.getU_id() + "'");
         
         con.insertData("INSERT INTO logs (u_id, action, action_date, action_time)"
-                        + "VALUES ('"+session.getU_id()+"', 'Removed profile photo', '"+actionDate+"', '"+actionTime+"')");
+                        + "VALUES ('"+sess.getU_id()+"', 'Removed profile photo', '"+actionDate+"', '"+actionTime+"')");
 
     }//GEN-LAST:event_removepfpActionPerformed
 

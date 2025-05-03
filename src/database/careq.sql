@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2025 at 03:21 PM
+-- Generation Time: May 03, 2025 at 09:48 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,8 +42,22 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`appointment_id`, `doctor`, `date`, `time`, `notes`, `patient_id`, `appointment_status`) VALUES
-(1, 'Dr. Trixie Mae', '2025-05-05', '12:00', 'gihilantan ko', 14, 'Pending'),
 (4, 'Dr. Trixie Mae', '2025-05-05', '10:00', 'gimingaw nimo', 19, 'Pending');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `diagnosis`
+--
+
+CREATE TABLE `diagnosis` (
+  `diagnosis_id` int(11) NOT NULL,
+  `appointment_id` int(11) NOT NULL,
+  `doctor` int(11) NOT NULL,
+  `patient_id` int(11) NOT NULL,
+  `d_diagnosis` int(11) NOT NULL,
+  `notes` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -68,7 +82,47 @@ INSERT INTO `logs` (`log_id`, `u_id`, `action`, `action_date`, `action_time`) VA
 (2, 1, 'Activated an account', '2025-05-02', '21:08'),
 (3, 1, 'Deleted an account', '2025-05-02', '21:08'),
 (4, 1, 'Deleted an account', '2025-05-02', '21:08'),
-(5, 1, 'Updated profile photo', '2025-05-02', '21:08');
+(5, 1, 'Updated profile photo', '2025-05-02', '21:08'),
+(6, 1, 'Activated an account', '2025-05-03', '09:38'),
+(7, 18, 'Changed password', '2025-05-03', '13:10'),
+(8, 18, 'Accepted an appointment', '2025-05-03', '13:53'),
+(9, 1, 'Activated an account', '2025-05-03', '15:39'),
+(10, 1, 'Activated an account', '2025-05-03', '15:41'),
+(11, 23, 'Updated profile photo', '2025-05-03', '15:42:34.458');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `otps`
+--
+
+CREATE TABLE `otps` (
+  `u_id` varchar(10) NOT NULL,
+  `otp_code` varchar(6) NOT NULL,
+  `otp_duration` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `otps`
+--
+
+INSERT INTO `otps` (`u_id`, `otp_code`, `otp_duration`) VALUES
+('21', '572840', '2025-05-03 01:44:07'),
+('21', '376208', '2025-05-03 02:31:05'),
+('21', '847813', '2025-05-03 02:31:28'),
+('21', '722490', '2025-05-03 02:40:35'),
+('21', '412322', '2025-05-03 02:43:31'),
+('21', '373031', '2025-05-03 02:45:33'),
+('21', '213910', '2025-05-03 02:47:32'),
+('21', '318177', '2025-05-03 03:23:33'),
+('18', '365091', '2025-05-03 05:08:24'),
+('18', '541385', '2025-05-03 05:09:45'),
+('18', '963011', '2025-05-03 05:10:09'),
+('18', '768920', '2025-05-03 05:10:43'),
+('21', '903099', '2025-05-03 05:17:44'),
+('18', '842259', '2025-05-03 05:21:28'),
+('22', '437201', '2025-05-03 07:38:43'),
+('22', '904748', '2025-05-03 07:42:53');
 
 -- --------------------------------------------------------
 
@@ -82,26 +136,29 @@ CREATE TABLE `user` (
   `u_lname` varchar(255) NOT NULL,
   `u_email` varchar(255) NOT NULL,
   `u_pnum` varchar(255) NOT NULL,
+  `sex` text NOT NULL,
+  `age` varchar(10) NOT NULL,
   `u_user` varchar(255) NOT NULL,
   `u_pass` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
-  `u_pfp` varchar(255) DEFAULT NULL,
-  `sq` varchar(255) DEFAULT NULL,
-  `sq_answer` varchar(255) DEFAULT NULL
+  `u_pfp` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`u_id`, `u_fname`, `u_lname`, `u_email`, `u_pnum`, `u_user`, `u_pass`, `type`, `status`, `u_pfp`, `sq`, `sq_answer`) VALUES
-(1, 'joshua', 'gwapo', 'gwapoolok321@gmail.com', '09090909090', 'admin', 'JAvlGPq9JyTdtvBO6x2llnRI1+gxwIyPqCKAn3THIKk=', 'administrator', 'active', 'src/user_img/2e83c67ca33455cfacf66717c923eefc.jpg', '', ''),
-(14, 'pacure', 'bota', 'pacurebota1@gmail.com', '12345678941', 'pacurebota123', 'bItZVbKg+/xCEuTTrgHxsHkZXfb2acWj7NdFn26kNgY=', 'Patient', 'Active', 'src/user_img/borjak.jpg', '', ''),
-(17, 'Bombardino', 'Crocodilo', 'bombardo_c@gmail.com', '09325648245', 'bombardino', 'S/oy7zM+IizvxEWqQoikMDo53s47de3rVdBbFWJE4ew=', 'Patient', 'Active', 'src/user_img/Bombardiro_crocodilo_cover.jpg', 'What is the first name of your dog?', 'nori'),
-(18, 'Trixie', 'Mae', 'trixiemae@gmail.com', '09875757654', 'trixielovenorrie', 'trixie123', 'Doctor', 'Active', NULL, NULL, NULL),
-(19, 'Joshua', 'Gwapo', 'joshuagwapo@gmail.com', '09090945124', 'joshuagwaps', 'goAXAbp531py6wn5mqsFydzuNz5sqLzXnnTJfz0uGQM=', 'Patient', 'Active', NULL, 'What is the first name of your dog?', 'norrie'),
-(20, 'Norrie', 'Ugly', 'norrie@gmail.com', '09451265845', 'norrie', 'KecLiTYwylt2E2ESWrV7Ysd7Vgae2DiT36m58r3Sl7w=', 'Patient', 'Active', NULL, 'What is the first name of your dog?', 'trixie');
+INSERT INTO `user` (`u_id`, `u_fname`, `u_lname`, `u_email`, `u_pnum`, `sex`, `age`, `u_user`, `u_pass`, `type`, `status`, `u_pfp`) VALUES
+(1, 'joshua', 'gwapo', 'gwapoolok321@gmail.com', '09090909090', '', '', 'admin', 'JAvlGPq9JyTdtvBO6x2llnRI1+gxwIyPqCKAn3THIKk=', 'administrator', 'active', 'src/user_img/2e83c67ca33455cfacf66717c923eefc.jpg'),
+(14, 'pacure', 'bota', 'pacurebota1@gmail.com', '12345678941', '', '', 'pacurebota123', 'bItZVbKg+/xCEuTTrgHxsHkZXfb2acWj7NdFn26kNgY=', 'Patient', 'Active', 'src/user_img/borjak.jpg'),
+(17, 'Bombardino', 'Crocodilo', 'bombardo_c@gmail.com', '09325648245', '', '', 'bombardino', 'S/oy7zM+IizvxEWqQoikMDo53s47de3rVdBbFWJE4ew=', 'Patient', 'Active', 'src/user_img/Bombardiro_crocodilo_cover.jpg'),
+(18, 'Trixie', 'Mae', 'raikonnenwhahah@gmail.com', '09875757654', '', '', 'trixielovenorrie', 'n4HRZCTdUMYTsAuYPmd1V1hDnQ5xBb2KhhAHqE3fdbU=', 'Doctor', 'Active', NULL),
+(19, 'Joshua', 'Gwapo', 'joshuagwapo@gmail.com', '09090945124', '', '', 'joshuagwaps', 'goAXAbp531py6wn5mqsFydzuNz5sqLzXnnTJfz0uGQM=', 'Patient', 'Active', NULL),
+(20, 'Norrie', 'Ugly', 'norrie@gmail.com', '09451265845', '', '', 'norrie', 'KecLiTYwylt2E2ESWrV7Ysd7Vgae2DiT36m58r3Sl7w=', 'Patient', 'Active', NULL),
+(21, 'Arl Joshua', 'Sison', 'arljoshua9@gmail.com', '09912191641', '', '', 'goodboyarl', 'pJOYoJF2Eq/a79ip8fbKVkUFsPUfiFnyEsownDZyo+Y=', 'Patient', 'Active', NULL),
+(22, 'Norrie', 'Pangit', 'jopedregosa1980@gmail.com', '09657654567', 'Female', '20', 'norriepangit', 'KecLiTYwylt2E2ESWrV7Ysd7Vgae2DiT36m58r3Sl7w=', 'Patient', 'Active', NULL),
+(23, 'Abdul', 'Jamal', 'abduljamal@gmail.com', '09456821595', 'Male', '45', 'abduljamal', 'Al2vBYAyDWFhEGr4I78yTL5GDPwuOBEna9QFv7Iv4sE=', 'Doctor', 'Active', 'src/user_img/brainrot squad.jpg');
 
 --
 -- Indexes for dumped tables
@@ -114,6 +171,12 @@ ALTER TABLE `appointments`
   ADD PRIMARY KEY (`appointment_id`),
   ADD KEY `doctor_id` (`doctor`(768)),
   ADD KEY `patient_id` (`patient_id`);
+
+--
+-- Indexes for table `diagnosis`
+--
+ALTER TABLE `diagnosis`
+  ADD PRIMARY KEY (`diagnosis_id`);
 
 --
 -- Indexes for table `logs`
@@ -139,16 +202,22 @@ ALTER TABLE `appointments`
   MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `diagnosis`
+--
+ALTER TABLE `diagnosis`
+  MODIFY `diagnosis_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables

@@ -477,8 +477,10 @@ public class editDoctor extends javax.swing.JFrame {
             doctorMenu dM = new doctorMenu();
             dM.displayData();
 
+            session sess = session.getInstance();
+            
             con.insertData("INSERT INTO logs (u_id, action, action_date)"
-                    + "VALUES ('" + session.getU_id() + "', 'Edited account details', '" + actionDate + "', '" + actionTime + "')");
+                    + "VALUES ('" + sess.getU_id() + "', 'Edited account details', '" + actionDate + "', '" + actionTime + "')");
 
         } else {
 

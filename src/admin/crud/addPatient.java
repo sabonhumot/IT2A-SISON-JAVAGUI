@@ -394,6 +394,8 @@ public class addPatient extends javax.swing.JFrame {
         if (signUpValidation()) {
 
             connectDB con = new connectDB();
+            
+            
             try {
                 String hashedPW = pwHasher.hashPassword(pass.getText());
 
@@ -410,8 +412,10 @@ public class addPatient extends javax.swing.JFrame {
                 pM.emptyData();
                 pM.getPatientCount();
                 
+                session sess = session.getInstance();
+                
                 con.insertData("INSERT INTO logs (u_id, action, action_date)"
-                    + "VALUES ('"+session.getU_id()+"', 'Added a Patient type account', '"+actionDate+"', '"+actionTime+"')");
+                    + "VALUES ('"+sess.getU_id()+"', 'Added a Patient type account', '"+actionDate+"', '"+actionTime+"')");
 
             } catch (NoSuchAlgorithmException ex) {
                 System.out.println("" + ex);

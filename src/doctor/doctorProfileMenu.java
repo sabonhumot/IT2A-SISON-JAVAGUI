@@ -3,25 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package patient;
+package doctor;
 
 import careq.logIn;
 import config.connectDB;
 import config.session;
 import gfx.RoundedPanel;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,32 +24,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import patient.changePassForm;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import patient.patientProfileMenu;
 
 /**
  *
  * @author Administrator
  */
-public class patientProfileMenu extends javax.swing.JFrame {
+public class doctorProfileMenu extends javax.swing.JFrame {
 
     Color mainColor = new Color(37, 171, 241);
     Color hoverColor = new Color(31, 128, 179);
 
     Color logoutColor = new Color(100, 188, 234);
     Color hoverlogoutColor = new Color(250, 249, 246);
-
-    ImageIcon blankPfp = new ImageIcon("src/img/blankpfp.jpg");
-
-    public patientProfileMenu() {
+    
+    
+    public doctorProfileMenu() {
         initComponents();
         accountInformation();
-        loadOpenSans();
-
     }
 
     /**
@@ -95,12 +89,15 @@ public class patientProfileMenu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         logoutPanel = new RoundedPanel(25);
-        jLabel6 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         logout = new javax.swing.JLabel();
+        appointmentsPanel = new RoundedPanel(50);
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         profilePanel = new RoundedPanel(50);
         jLabel16 = new javax.swing.JLabel();
         profile = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -259,7 +256,7 @@ public class patientProfileMenu extends javax.swing.JFrame {
         jLabel2.setText("Dashboard");
         dashboardPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 110, 30));
 
-        jPanel1.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 190, 50));
+        jPanel1.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 190, 50));
 
         logoutPanel.setBackground(new java.awt.Color(100, 188, 234));
         logoutPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -276,8 +273,8 @@ public class patientProfileMenu extends javax.swing.JFrame {
         });
         logoutPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/log-out.png"))); // NOI18N
-        logoutPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 30, 50));
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/log-out.png"))); // NOI18N
+        logoutPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 30, 50));
 
         logout.setBackground(new java.awt.Color(73, 138, 172));
         logout.setForeground(new java.awt.Color(73, 138, 172));
@@ -286,6 +283,30 @@ public class patientProfileMenu extends javax.swing.JFrame {
         logoutPanel.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 30));
 
         jPanel1.add(logoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 170, 70));
+
+        appointmentsPanel.setBackground(new java.awt.Color(37, 171, 241));
+        appointmentsPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        appointmentsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                appointmentsPanelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                appointmentsPanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                appointmentsPanelMouseExited(evt);
+            }
+        });
+        appointmentsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/appointment-filled.png"))); // NOI18N
+        appointmentsPanel.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 40, 50));
+
+        jLabel19.setForeground(new java.awt.Color(250, 249, 246));
+        jLabel19.setText("Appointments");
+        appointmentsPanel.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 110, 30));
+
+        jPanel1.add(appointmentsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 190, 50));
 
         profilePanel.setBackground(new java.awt.Color(37, 171, 241));
         profilePanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -317,8 +338,8 @@ public class patientProfileMenu extends javax.swing.JFrame {
 
         jPanel1.add(profilePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 190, -1));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         mainbg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 700));
 
@@ -326,15 +347,18 @@ public class patientProfileMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainbg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainbg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainbg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainbg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void accountInformation() {
@@ -379,78 +403,13 @@ public class patientProfileMenu extends javax.swing.JFrame {
         }
 
     }
-
-
-    private void dashboardPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseClicked
-
-        patientDashB pdb = new patientDashB();
-        pdb.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_dashboardPanelMouseClicked
-
-    private void dashboardPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseEntered
-
-        dashboardPanel.setBackground(hoverColor);
-    }//GEN-LAST:event_dashboardPanelMouseEntered
-
-    private void dashboardPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseExited
-
-        dashboardPanel.setBackground(mainColor);
-    }//GEN-LAST:event_dashboardPanelMouseExited
-
-    private void logoutPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseClicked
-
-        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Logout", JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            session userSession = session.getInstance();
-
-            userSession.setU_id(null);
-            userSession.setFirstName(null);
-            userSession.setLastName(null);
-            userSession.setEmail(null);
-            userSession.setUsername(null);
-            userSession.setAcc_type(null);
-            userSession.setAcc_status(null);
-
-            logIn lg = new logIn();
-            lg.setVisible(true);
-            this.dispose();
-
-        }
-    }//GEN-LAST:event_logoutPanelMouseClicked
-
-    private void logoutPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseEntered
-        logoutPanel.setBackground(hoverlogoutColor);
-    }//GEN-LAST:event_logoutPanelMouseEntered
-
-    private void logoutPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseExited
-        logoutPanel.setBackground(logoutColor);
-    }//GEN-LAST:event_logoutPanelMouseExited
-
-    private void jLabel16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel16MouseEntered
-
-    private void profilePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseClicked
-
-    }//GEN-LAST:event_profilePanelMouseClicked
-
-    private void profilePanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseEntered
-
-        profilePanel.setBackground(hoverColor);
-    }//GEN-LAST:event_profilePanelMouseEntered
-
-    private void profilePanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseExited
-
-        profilePanel.setBackground(mainColor);
-    }//GEN-LAST:event_profilePanelMouseExited
-
+    
+    
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
 
         changePassForm cpForm = new changePassForm();
 
         cpForm.setVisible(true);
-
 
     }//GEN-LAST:event_jLabel11MouseClicked
 
@@ -481,14 +440,13 @@ public class patientProfileMenu extends javax.swing.JFrame {
         }
 
     }
-
-
+    
+    
     private void addpfpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addpfpActionPerformed
 
         LocalDate actionDate = LocalDate.now();
         LocalTime actionTime = LocalTime.now();
-        
-        
+
         connectDB con = new connectDB();
         session sess = session.getInstance();
 
@@ -512,16 +470,15 @@ public class patientProfileMenu extends javax.swing.JFrame {
 
                     con.updateData("UPDATE user SET u_pfp = '" + destination + "' WHERE u_id = '" + sess.getU_id() + "'");
                     Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
-                    
+
                     con.insertData("INSERT INTO logs (u_id, action, action_date, action_time)"
                         + "VALUES ('"+sess.getU_id()+"', 'Updated profile photo', '"+actionDate+"', '"+actionTime+"')");
-                    
+
                 }
             } catch (Exception ex) {
                 System.out.println("File Error!");
             }
         }
-
 
     }//GEN-LAST:event_addpfpActionPerformed
 
@@ -569,8 +526,8 @@ public class patientProfileMenu extends javax.swing.JFrame {
 
         return -1;
     }
-
-
+    
+    
     private void removepfpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removepfpMouseClicked
 
     }//GEN-LAST:event_removepfpMouseClicked
@@ -581,62 +538,111 @@ public class patientProfileMenu extends javax.swing.JFrame {
         LocalTime atime = LocalTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         String actionTime = atime.format(formatter);
-        
+
         connectDB con = new connectDB();
 
         removepfp.setEnabled(false);
         addpfp.setEnabled(true);
 
         String blankPfpPath = "src/img/blankpfp.jpg";
-        
+
         pfp.setIcon(ResizeImage(blankPfpPath, null, pfp));
         destination = "";
         path = "";
-        
-        session sess = session.getInstance();
-        
-        con.updateData("UPDATE user SET u_pfp = '" + destination + "' WHERE u_id = '" + sess.getU_id() + "'");
-        
-        con.insertData("INSERT INTO logs (u_id, action, action_date, action_time)"
-                        + "VALUES ('"+sess.getU_id()+"', 'Removed profile photo', '"+actionDate+"', '"+actionTime+"')");
 
+        session sess = session.getInstance();
+
+        con.updateData("UPDATE user SET u_pfp = '" + destination + "' WHERE u_id = '" + sess.getU_id() + "'");
+
+        con.insertData("INSERT INTO logs (u_id, action, action_date, action_time)"
+            + "VALUES ('"+sess.getU_id()+"', 'Removed profile photo', '"+actionDate+"', '"+actionTime+"')");
 
     }//GEN-LAST:event_removepfpActionPerformed
 
-    private void loadOpenSans() {
-        try {
-            InputStream fontStream = getClass().getResourceAsStream("/font/OpenSans-VariableFont_wdth,wght.ttf");
-            if (fontStream != null) {
-                Font openSans = Font.createFont(Font.TRUETYPE_FONT, fontStream);
-                GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                ge.registerFont(openSans);
-                // Now you can use the font:
-                jLabel2.setFont(openSans.deriveFont(Font.BOLD, 12));
-                jLabel5.setFont(openSans.deriveFont(Font.BOLD, 24));
-                logout.setFont(openSans.deriveFont(Font.BOLD, 18));
-                profile.setFont(openSans.deriveFont(Font.BOLD, 16));
-                jLabel12.setFont(openSans.deriveFont(Font.BOLD, 18));
-                jLabel13.setFont(openSans.deriveFont(Font.BOLD, 14));
-                jLabel14.setFont(openSans.deriveFont(Font.BOLD, 14));
-                jLabel15.setFont(openSans.deriveFont(Font.BOLD, 14));            
-                jLabel8.setFont(openSans.deriveFont(Font.PLAIN, 14));            
-                jLabel9.setFont(openSans.deriveFont(Font.PLAIN, 14));            
-                jLabel11.setFont(openSans.deriveFont(Font.PLAIN, 14));            
-                email.setFont(openSans.deriveFont(Font.PLAIN, 12));            
-                contact.setFont(openSans.deriveFont(Font.PLAIN, 12));            
-                password.setFont(openSans.deriveFont(Font.PLAIN, 12));            
-                name.setFont(openSans.deriveFont(Font.BOLD, 26));            
-                addpfp.setFont(openSans.deriveFont(Font.BOLD, 12));
-                removepfp.setFont(openSans.deriveFont(Font.BOLD, 12));            
-            } else {
-                System.err.println("Font file not found!");
-            }
-        } catch (IOException | FontFormatException e) {
-            e.printStackTrace();
+    private void dashboardPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseClicked
+
+    }//GEN-LAST:event_dashboardPanelMouseClicked
+
+    private void dashboardPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseEntered
+
+        dashboardPanel.setBackground(hoverColor);
+    }//GEN-LAST:event_dashboardPanelMouseEntered
+
+    private void dashboardPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseExited
+
+        dashboardPanel.setBackground(mainColor);
+    }//GEN-LAST:event_dashboardPanelMouseExited
+
+    private void logoutPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseClicked
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Logout", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            session userSession = session.getInstance();
+
+            userSession.setU_id(null);
+            userSession.setFirstName(null);
+            userSession.setLastName(null);
+            userSession.setEmail(null);
+            userSession.setUsername(null);
+            userSession.setAcc_type(null);
+            userSession.setAcc_status(null);
+
+            logIn lg = new logIn();
+            lg.setVisible(true);
+            this.dispose();
+
         }
-    }
-    
-    
+    }//GEN-LAST:event_logoutPanelMouseClicked
+
+    private void logoutPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseEntered
+        logoutPanel.setBackground(hoverlogoutColor);
+    }//GEN-LAST:event_logoutPanelMouseEntered
+
+    private void logoutPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseExited
+        logoutPanel.setBackground(logoutColor);
+    }//GEN-LAST:event_logoutPanelMouseExited
+
+    private void appointmentsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsPanelMouseClicked
+
+        doctorAppointment dApp = new doctorAppointment();
+
+        dApp.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_appointmentsPanelMouseClicked
+
+    private void appointmentsPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsPanelMouseEntered
+        appointmentsPanel.setBackground(hoverColor);
+
+    }//GEN-LAST:event_appointmentsPanelMouseEntered
+
+    private void appointmentsPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsPanelMouseExited
+
+        appointmentsPanel.setBackground(mainColor);
+
+    }//GEN-LAST:event_appointmentsPanelMouseExited
+
+    private void jLabel16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel16MouseEntered
+
+    private void profilePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseClicked
+
+        patientProfileMenu ppm = new patientProfileMenu();
+        ppm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_profilePanelMouseClicked
+
+    private void profilePanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseEntered
+
+        profilePanel.setBackground(hoverColor);
+    }//GEN-LAST:event_profilePanelMouseEntered
+
+    private void profilePanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseExited
+
+        profilePanel.setBackground(mainColor);
+    }//GEN-LAST:event_profilePanelMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -654,44 +660,47 @@ public class patientProfileMenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(patientProfileMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(doctorProfileMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(patientProfileMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(doctorProfileMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(patientProfileMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(doctorProfileMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(patientProfileMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(doctorProfileMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new patientProfileMenu().setVisible(true);
+                new doctorProfileMenu().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addpfp;
+    private javax.swing.JPanel appointmentsPanel;
     private javax.swing.JLabel contact;
     private javax.swing.JPanel dashboardPanel;
     private javax.swing.JPanel dboard;
     private javax.swing.JPanel dboardBG;
     private javax.swing.JLabel email;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

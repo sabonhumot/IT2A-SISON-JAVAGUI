@@ -22,10 +22,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
+import javax.swing.JFormattedTextField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -110,6 +115,11 @@ public class register extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
+        buttonGroup5 = new javax.swing.ButtonGroup();
         register = new GradientPanel(new Color(182, 251, 255), new Color(131, 164, 212), 2);
         jPanel2 = new GradientPanel(new Color(250,249, 246), new Color(227, 249, 246), 1);
         jLabel1 = new javax.swing.JLabel();
@@ -144,12 +154,15 @@ public class register extends javax.swing.JFrame {
         type = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         errorType = new javax.swing.JLabel();
-        answer = new RoundedTextField(35);
-        sQ = new javax.swing.JComboBox<>();
-        jLabel13 = new javax.swing.JLabel();
         errorSQ = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        errorAnswer = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        birthdate = new RoundedTextField(15);
+        user1 = new javax.swing.JLabel();
+        user2 = new javax.swing.JLabel();
+        femaleButton = new javax.swing.JRadioButton();
+        maleButton = new javax.swing.JRadioButton();
+        dateError = new javax.swing.JLabel();
+        sexLabelError = new javax.swing.JLabel();
 
         this.pack();
         this.setLocationRelativeTo(null);
@@ -258,7 +271,7 @@ public class register extends javax.swing.JFrame {
                 firstnameActionPerformed(evt);
             }
         });
-        jPanel2.add(firstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 200, 40));
+        jPanel2.add(firstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 200, 40));
 
         lastname.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         lastname.setOpaque(false);
@@ -272,7 +285,7 @@ public class register extends javax.swing.JFrame {
                 lastnameActionPerformed(evt);
             }
         });
-        jPanel2.add(lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 210, 40));
+        jPanel2.add(lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 210, 40));
 
         phonennum.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         phonennum.setOpaque(false);
@@ -286,7 +299,7 @@ public class register extends javax.swing.JFrame {
                 phonennumActionPerformed(evt);
             }
         });
-        jPanel2.add(phonennum, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 200, 40));
+        jPanel2.add(phonennum, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 200, 40));
 
         showCPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/view.png"))); // NOI18N
         showCPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -295,7 +308,7 @@ public class register extends javax.swing.JFrame {
                 showCPassMouseClicked(evt);
             }
         });
-        jPanel2.add(showCPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 410, 30, 40));
+        jPanel2.add(showCPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 690, 30, 40));
 
         hideCPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/hide.png"))); // NOI18N
         hideCPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -304,7 +317,7 @@ public class register extends javax.swing.JFrame {
                 hideCPassMouseClicked(evt);
             }
         });
-        jPanel2.add(hideCPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 410, 30, 40));
+        jPanel2.add(hideCPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 690, 30, 40));
 
         cpass.setEchoChar('\u2022');
         cpass.setOpaque(false);
@@ -313,7 +326,7 @@ public class register extends javax.swing.JFrame {
                 cpassFocusLost(evt);
             }
         });
-        jPanel2.add(cpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, 400, 40));
+        jPanel2.add(cpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 690, 430, 40));
 
         showPass.setForeground(new java.awt.Color(102, 102, 102));
         showPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/view.png"))); // NOI18N
@@ -323,7 +336,7 @@ public class register extends javax.swing.JFrame {
                 showPassMouseClicked(evt);
             }
         });
-        jPanel2.add(showPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 310, 30, 40));
+        jPanel2.add(showPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 590, 30, 40));
 
         hidePass.setForeground(new java.awt.Color(102, 102, 102));
         hidePass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/hide.png"))); // NOI18N
@@ -333,7 +346,7 @@ public class register extends javax.swing.JFrame {
                 hidePassMouseClicked(evt);
             }
         });
-        jPanel2.add(hidePass, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 310, 30, 40));
+        jPanel2.add(hidePass, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 590, 30, 40));
 
         pass.setEchoChar('\u2022');
         pass.setOpaque(false);
@@ -347,7 +360,7 @@ public class register extends javax.swing.JFrame {
                 passActionPerformed(evt);
             }
         });
-        jPanel2.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 310, 400, 40));
+        jPanel2.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 590, 430, 40));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jButton2.setForeground(new java.awt.Color(250, 249, 246));
@@ -359,7 +372,7 @@ public class register extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, 210, 50));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 780, 430, 50));
 
         email.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         email.setOpaque(false);
@@ -373,45 +386,45 @@ public class register extends javax.swing.JFrame {
                 emailActionPerformed(evt);
             }
         });
-        jPanel2.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 210, 40));
+        jPanel2.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 210, 40));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Email Address");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 190, 20));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 190, 20));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Username");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 170, 20));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, 170, 20));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Last Name");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 160, 20));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 160, 20));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("Confirm Password");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 390, 200, 20));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 670, 200, 20));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Phone Number");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 180, 20));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 180, 20));
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setText("Password");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 290, 170, 20));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 570, 170, 20));
 
         errorLabelCPass.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 errorLabelCPassFocusLost(evt);
             }
         });
-        jPanel2.add(errorLabelCPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 460, 200, 20));
-        jPanel2.add(errorLabelFName, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 190, 20));
-        jPanel2.add(errorLabelLName, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 210, 20));
-        jPanel2.add(errorLabelPnum, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 200, 20));
-        jPanel2.add(errorLabelEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 200, 20));
+        jPanel2.add(errorLabelCPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 730, 200, 20));
+        jPanel2.add(errorLabelFName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 190, 20));
+        jPanel2.add(errorLabelLName, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 210, 20));
+        jPanel2.add(errorLabelPnum, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 200, 20));
+        jPanel2.add(errorLabelEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, 200, 20));
 
         errorLabelPass.setToolTipText("Password too short. Must be 8 characters or more");
-        jPanel2.add(errorLabelPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 350, 190, 20));
+        jPanel2.add(errorLabelPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 630, 190, 20));
 
         login.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         login.setText("Already have an account? Login here");
@@ -421,7 +434,7 @@ public class register extends javax.swing.JFrame {
                 loginMouseClicked(evt);
             }
         });
-        jPanel2.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 610, -1, -1));
+        jPanel2.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 870, -1, -1));
 
         username.setToolTipText("Username");
         username.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -436,11 +449,11 @@ public class register extends javax.swing.JFrame {
                 usernameActionPerformed(evt);
             }
         });
-        jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, 400, 40));
+        jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 430, 40));
 
         user.setText("First Name");
-        jPanel2.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 150, 20));
-        jPanel2.add(errorLabelUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, 190, 20));
+        jPanel2.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 150, 20));
+        jPanel2.add(errorLabelUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 440, 190, 20));
 
         jSeparator1.setForeground(new java.awt.Color(31, 63, 195));
         jSeparator1.setAutoscrolls(true);
@@ -460,66 +473,75 @@ public class register extends javax.swing.JFrame {
                 typeActionPerformed(evt);
             }
         });
-        jPanel2.add(type, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, 400, 40));
+        jPanel2.add(type, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 490, 430, 40));
 
         jLabel12.setText("Type");
-        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, -1, -1));
-        jPanel2.add(errorType, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 250, 190, 20));
-
-        answer.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        answer.setOpaque(false);
-        answer.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                answerFocusLost(evt);
-            }
-        });
-        answer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                answerActionPerformed(evt);
-            }
-        });
-        jPanel2.add(answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 430, 40));
-
-        sQ.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Choose questions)", "What is the first name of your dog?", "What is your favorite color?", "What is your mother's maiden name?", " " }));
-        sQ.setBorder(null);
-        sQ.setOpaque(false);
-        sQ.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                sQFocusLost(evt);
-            }
-        });
-        sQ.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sQActionPerformed(evt);
-            }
-        });
-        jPanel2.add(sQ, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 430, 40));
-
-        jLabel13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel13.setText("Security Questions");
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 180, 20));
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, 70, -1));
+        jPanel2.add(errorType, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 530, 190, 20));
         jPanel2.add(errorSQ, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 190, 20));
 
-        jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel14.setText("Answer");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, 180, 20));
-        jPanel2.add(errorAnswer, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, 190, 20));
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close.png"))); // NOI18N
+        jLabel15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel15MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 30, 30));
 
-        register.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 980, 650));
+        try  {
+            MaskFormatter dateFormatter = new MaskFormatter("####/##/##");
+            birthdate = new JFormattedTextField(dateFormatter);
+        } catch (Exception e){
+            birthdate = new JFormattedTextField();
+        }
+        birthdate.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                birthdateFocusLost(evt);
+            }
+        });
+        jPanel2.add(birthdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 200, 40));
+
+        user1.setText("Birthdate (YYYY/MM/DD)");
+        jPanel2.add(user1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 150, 20));
+
+        user2.setText("Sex");
+        jPanel2.add(user2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, 150, 20));
+
+        femaleButton.setBackground(new java.awt.Color(250, 249, 246));
+        femaleButton.setText("Female");
+        femaleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                femaleButtonActionPerformed(evt);
+            }
+        });
+        jPanel2.add(femaleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 120, 40));
+
+        maleButton.setBackground(new java.awt.Color(250, 249, 246));
+        maleButton.setText("Male");
+        maleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maleButtonActionPerformed(evt);
+            }
+        });
+        jPanel2.add(maleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 80, 40));
+        jPanel2.add(dateError, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 200, 20));
+        jPanel2.add(sexLabelError, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 350, 200, 20));
+
+        register.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 630, 910));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(register, javax.swing.GroupLayout.PREFERRED_SIZE, 1076, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(register, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(register, javax.swing.GroupLayout.PREFERRED_SIZE, 759, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(register, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -544,8 +566,8 @@ public class register extends javax.swing.JFrame {
         LocalTime atime = LocalTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         String actionTime = atime.format(formatter);
-        
-        
+        String sex = "";
+
         if (signUpValidation()) {
 
             connectDB con = new connectDB();
@@ -554,21 +576,28 @@ public class register extends javax.swing.JFrame {
             try {
                 String hashedPW = pwHasher.hashPassword(pass.getText());
 
-                con.insertData("INSERT INTO user (u_fname, u_lname, u_email, u_pnum, u_user, u_pass, type, status, sq, sq_answer)"
+                int age = AgeCalculator(birthdate);
+                
+                
+                if (maleButton.isSelected()) {
+                    sex = "Male";
+                } else if (femaleButton.isSelected()) {
+                    sex = "Female";
+                }
+
+                con.insertData("INSERT INTO user (u_fname, u_lname, u_email, u_pnum, u_user, u_pass, type, status, age, sex)"
                         + "VALUES ('" + firstname.getText() + "','" + lastname.getText() + "','" + email.getText() + "',"
-                        + "'" + phonennum.getText() + "','" + username.getText() + "','" + hashedPW + "','" + type.getSelectedItem() + "', 'Pending',"
-                        + "'" + sQ.getSelectedItem() + "', '" + answer.getText() + "')");
+                        + "'" + phonennum.getText() + "','" + username.getText() + "','" + hashedPW + "',"
+                        + "'" + type.getSelectedItem() + "', 'Pending', '" + age + "', '" + sex + "')");
 
                 JOptionPane.showMessageDialog(this, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
                 logIn lg = new logIn();
                 lg.setVisible(true);
                 this.dispose();
-                
-                con.insertData("INSERT INTO logs (u_id, action, action_date, action_time)"
-                        + "VALUES ('"+session.getU_id()+"', 'Registered an account', '"+actionDate+"', '"+actionTime+"')");
-                
-                
+
+//                con.insertData("INSERT INTO logs (u_id, action, action_date, action_time)"
+//                        + "VALUES ('"+session.getU_id()+"', 'Registered an account', '"+actionDate+"', '"+actionTime+"')");
             } catch (NoSuchAlgorithmException ex) {
                 System.out.println("" + ex);
             }
@@ -580,6 +609,33 @@ public class register extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    public static int AgeCalculator(JTextField birthDateField) {
+        try {
+            // Get the text from the JTextField
+            String birthdayString = birthDateField.getText().trim();
+
+            // Define the date pattern matching the expected format (e.g., 2000/05/03)
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+
+            // Parse the birth date string to LocalDate
+            LocalDate birthDate = LocalDate.parse(birthdayString, formatter);
+
+            // Get current date
+            LocalDate currentDate = LocalDate.now();
+
+            // Validate and calculate age
+            if (!birthDate.isAfter(currentDate)) {
+                return Period.between(birthDate, currentDate).getYears();
+            } else {
+                System.out.println("Birth date is in the future.");
+                return -1;
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println("Error parsing birth date: " + e.getMessage());
+            return -1;
+        }
+    }
 
     private void firstnameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstnameFocusLost
 
@@ -678,6 +734,7 @@ public class register extends javax.swing.JFrame {
 
         email.repaint();
     }//GEN-LAST:event_emailFocusLost
+
 
     private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
         // TODO add your handling code here:
@@ -840,37 +897,71 @@ public class register extends javax.swing.JFrame {
         type.repaint();
     }//GEN-LAST:event_typeFocusLost
 
-    private void answerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_answerFocusLost
+    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
 
-        if (answer.getText().trim().isEmpty()) {
-            answer.setForeground(Color.RED);
-            errorAnswer.setText("Answer is required");
-            errorAnswer.setForeground(Color.RED);
-        }
+        logIn lg = new logIn();
 
+        lg.setVisible(true);
 
-    }//GEN-LAST:event_answerFocusLost
+        this.dispose();
+    }//GEN-LAST:event_jLabel15MouseClicked
 
-    private void answerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_answerActionPerformed
+    private void birthdateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_birthdateFocusLost
 
-    private void sQFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sQFocusLost
-        if (sQ.getSelectedIndex() == 0) {
-            sQ.setForeground(Color.RED);
-            errorSQ.setText("Please choose account type");
-            sQ.setForeground(Color.RED);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+
+        if (birthdate.getText().trim().isEmpty()) {
+            birthdate.setForeground(Color.RED);
+            dateError.setText("Please set a valid date");
+            dateError.setForeground(Color.RED);
+
         } else {
-            sQ.setForeground(Color.BLACK);
-            errorSQ.setText("");
+            try {
+
+                LocalDate inputDate = LocalDate.parse(birthdate.getText().trim(), dateFormatter);
+                LocalDate today = LocalDate.now();
+
+                if (inputDate.isAfter(today)) {
+                    birthdate.setForeground(Color.RED);
+                    dateError.setText("Invalid Birthdate");
+                    dateError.setForeground(Color.RED);
+
+                } else {
+                    birthdate.setForeground(Color.BLACK);
+                    dateError.setText("");
+                    dateError.setForeground(Color.BLACK);
+                }
+
+            } catch (DateTimeParseException ex) {
+                birthdate.setForeground(Color.RED);
+                dateError.setText("Invalid date format. Use YYYY/MM/DD");
+                dateError.setForeground(Color.RED);
+                System.out.println("" + ex);
+            }
         }
 
-        sQ.repaint();
-    }//GEN-LAST:event_sQFocusLost
+        birthdate.repaint();
+    }//GEN-LAST:event_birthdateFocusLost
 
-    private void sQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sQActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sQActionPerformed
+    private void femaleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femaleButtonActionPerformed
+
+        if (femaleButton.isSelected()) {
+            maleButton.setEnabled(false);
+        } else {
+            maleButton.setEnabled(true);
+        }
+
+    }//GEN-LAST:event_femaleButtonActionPerformed
+
+    private void maleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleButtonActionPerformed
+
+        if (maleButton.isSelected()) {
+            femaleButton.setEnabled(false);
+        } else {
+            femaleButton.setEnabled(true);
+        }
+
+    }//GEN-LAST:event_maleButtonActionPerformed
 
     private boolean signUpValidation() {
         boolean valid = true;
@@ -1042,17 +1133,55 @@ public class register extends javax.swing.JFrame {
 
         type.repaint();
 
-        if (sQ.getSelectedIndex() == 0) {
-            sQ.setForeground(Color.RED);
-            errorSQ.setText("Please choose account type");
-            sQ.setForeground(Color.RED);
+        if (!maleButton.isSelected() && !femaleButton.isSelected()) {
+            sexLabelError.setText("Please select one option");
+            sexLabelError.setForeground(Color.RED);
+            maleButton.setForeground(Color.RED);
+            femaleButton.setForeground(Color.BLACK);
             valid = false;
         } else {
-            type.setForeground(Color.BLACK);
-            errorSQ.setText("");
+            sexLabelError.setText("");
+            sexLabelError.setForeground(Color.BLACK);
+            maleButton.setForeground(Color.BLACK);
+            femaleButton.setForeground(Color.BLACK);
+
+            maleButton.repaint();
+            femaleButton.repaint();
         }
 
-        sQ.repaint();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+
+        if (birthdate.getText().trim().isEmpty()) {
+            birthdate.setForeground(Color.RED);
+            dateError.setText("Please set a valid date");
+            dateError.setForeground(Color.RED);
+            valid = false;
+        } else {
+            try {
+
+                LocalDate inputDate = LocalDate.parse(birthdate.getText().trim(), dateFormatter);
+                LocalDate today = LocalDate.now();
+
+                if (inputDate.isAfter(today)) {
+                    birthdate.setForeground(Color.RED);
+                    dateError.setText("Invalid Birthdate");
+                    dateError.setForeground(Color.RED);
+                    valid = false;
+                } else {
+                    birthdate.setForeground(Color.BLACK);
+                    dateError.setText("");
+                    dateError.setForeground(Color.BLACK);
+                }
+
+            } catch (DateTimeParseException ex) {
+                birthdate.setForeground(Color.RED);
+                dateError.setText("Invalid date format. Use YYYY/MM/DD");
+                dateError.setForeground(Color.RED);
+                System.out.println("" + ex);
+            }
+        }
+
+        birthdate.repaint();
 
         return valid;
     }
@@ -1120,10 +1249,15 @@ public class register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField answer;
+    private javax.swing.JTextField birthdate;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.JPasswordField cpass;
+    private javax.swing.JLabel dateError;
     private javax.swing.JTextField email;
-    private javax.swing.JLabel errorAnswer;
     private javax.swing.JLabel errorLabelCPass;
     private javax.swing.JLabel errorLabelEmail;
     private javax.swing.JLabel errorLabelFName;
@@ -1133,6 +1267,7 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JLabel errorLabelUser;
     private javax.swing.JLabel errorSQ;
     private javax.swing.JLabel errorType;
+    private javax.swing.JRadioButton femaleButton;
     private javax.swing.JTextField firstname;
     private javax.swing.JLabel hideCPass;
     private javax.swing.JLabel hidePass;
@@ -1143,8 +1278,7 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1159,16 +1293,19 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField lastname;
     private javax.swing.JLabel login;
+    private javax.swing.JRadioButton maleButton;
     private javax.swing.JPasswordField pass;
     private javax.swing.JTextField phonennum;
     private javax.swing.JPanel register;
-    private javax.swing.JComboBox<String> sQ;
+    private javax.swing.JLabel sexLabelError;
     private javax.swing.JLabel showCPass;
     private javax.swing.JLabel showPass;
     private javax.swing.JDialog signupError;
     private javax.swing.JDialog signupSuccess;
     private javax.swing.JComboBox<String> type;
     private javax.swing.JLabel user;
+    private javax.swing.JLabel user1;
+    private javax.swing.JLabel user2;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

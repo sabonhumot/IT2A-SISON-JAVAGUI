@@ -766,9 +766,7 @@ public class accountsMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_searchhKeyTyped
 
     private void activateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_activateMouseClicked
-
-        addPatient addp = new addPatient();
-        addp.setVisible(true);
+      
     }//GEN-LAST:event_activateMouseClicked
 
     private void activateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activateActionPerformed
@@ -788,11 +786,13 @@ public class accountsMenu extends javax.swing.JFrame {
         String id = usersTable.getValueAt(selectedRow, 0).toString();
 
         connectDB con = new connectDB();
+        
+        session sess = session.getInstance();
 
         con.updateData("UPDATE user SET status = 'Active' WHERE u_id = '" + id + "'");
         
         con.insertData("INSERT INTO logs (u_id, action, action_date, action_time)"
-                        + "VALUES ('"+session.getU_id()+"', 'Activated an account', '"+actionDate+"', '"+actionTime+"')");
+                        + "VALUES ('"+sess.getU_id()+"', 'Activated an account', '"+actionDate+"', '"+actionTime+"')");
         
     }//GEN-LAST:event_activateActionPerformed
 

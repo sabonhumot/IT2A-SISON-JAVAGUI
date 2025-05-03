@@ -157,7 +157,7 @@ public class forgotPassword3 extends javax.swing.JFrame {
             }
         });
         jPanel2.add(errorLabelCPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 200, 20));
-        jPanel2.add(errorLabelOldPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 190, 20));
+        jPanel2.add(errorLabelOldPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 190, 20));
 
         errorLabelPass.setToolTipText("Password too short. Must be 8 characters or more");
         jPanel2.add(errorLabelPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 190, 20));
@@ -291,11 +291,11 @@ public class forgotPassword3 extends javax.swing.JFrame {
 
                 String hashedNewPW = pwHasher.hashPassword(newPass.getText());
 
-                conn.updateData("UPDATE user SET u_pass = '" + hashedNewPW + "' WHERE u_user = '" + session.getUsername() + "'");
+                conn.updateData("UPDATE user SET u_pass = '" + hashedNewPW + "' WHERE u_user = '" + sess.getUsername() + "'");
                 this.dispose();
                 
                 conn.insertData("INSERT INTO logs (u_id, action, action_date, action_time)"
-                        + "VALUES ('"+session.getU_id()+"', 'Changed password', '"+actionDate+"', '"+actionTime+"')");
+                        + "VALUES ('"+sess.getU_id()+"', 'Changed password', '"+actionDate+"', '"+actionTime+"')");
                 
 
             } catch (NoSuchAlgorithmException ex) {

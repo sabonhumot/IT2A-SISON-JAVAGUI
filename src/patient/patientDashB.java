@@ -253,7 +253,7 @@ public class patientDashB extends javax.swing.JFrame {
 
         session sess = session.getInstance();
 
-        welcome.setText("Welcome, " + session.getFirstName() + "!");
+        welcome.setText("Welcome, " + sess.getFirstName() + "!");
 
     }
     private void dashboardPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseClicked
@@ -322,7 +322,7 @@ public class patientDashB extends javax.swing.JFrame {
 
     private void bookAppointmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMouseClicked
 
-        appointments app = new appointments();
+        patientAppointments app = new patientAppointments();
 
         app.setVisible(true);
         this.dispose();

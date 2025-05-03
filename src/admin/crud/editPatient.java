@@ -301,8 +301,10 @@ public class editPatient extends javax.swing.JFrame {
             patientMenu pM = new patientMenu();
             pM.displayData();
 
+            session sess = session.getInstance();
+            
             con.insertData("INSERT INTO logs (u_id, action, action_date)"
-                    + "VALUES ('" + session.getU_id() + "', 'Edited account details', '" + actionDate + "', '" + actionTime + "')");
+                    + "VALUES ('" + sess.getU_id() + "', 'Edited account details', '" + actionDate + "', '" + actionTime + "')");
 
         } else {
 

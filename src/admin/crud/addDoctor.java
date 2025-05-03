@@ -7,6 +7,7 @@ package admin.crud;
 
 import admin.doctorMenu;
 import config.connectDB;
+import config.pwHasher;
 import config.session;
 import gfx.GradientPanel;
 import gfx.RoundGradientButton;
@@ -14,6 +15,7 @@ import gfx.RoundedPanel;
 import gfx.RoundedPasswordField;
 import gfx.RoundedTextField;
 import java.awt.Color;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -467,10 +469,14 @@ public class addDoctor extends javax.swing.JFrame {
 
             connectDB con = new connectDB();
             session sess = session.getInstance();
+            
+            try {
+                
+                String hashedPW = pwHasher.hashPassword(pass.getText());
 
             con.insertData("INSERT INTO user (u_fname, u_lname, u_email, u_pnum, u_user, u_pass, type, status)"
                     + "VALUES ('" + firstname.getText() + "','" + lastname.getText() + "','" + email.getText() + "',"
-                    + "'" + phonennum.getText() + "','" + username.getText() + "','" + pass.getText() + "','Doctor','Pending')");
+                    + "'" + phonennum.getText() + "','" + username.getText() + "','" + hashedPW + "','Doctor','Pending')");
 
             JOptionPane.showMessageDialog(this, "Doctor Added Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
@@ -481,9 +487,16 @@ public class addDoctor extends javax.swing.JFrame {
             dM.getDoctorCount();
             dM.emptyData();
             
+            
+            
             con.insertData("INSERT INTO logs (u_id, action, action_date)"
-                    + "VALUES ('"+session.getU_id()+"', 'Added a Doctor type account', '"+actionDate+"', '"+actionTime+"')");
+                    + "VALUES ('"+sess.getU_id()+"', 'Added a Doctor type account', '"+actionDate+"', '"+actionTime+"')");
 
+            } catch (NoSuchAlgorithmException e) {
+                System.out.println("" + e);
+            }
+            
+            
         } else {
 
             JOptionPane.showMessageDialog(this, "Sign up error. Please fill all required field.", "Warning", JOptionPane.WARNING_MESSAGE);

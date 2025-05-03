@@ -828,8 +828,10 @@ public class patientMenu extends javax.swing.JFrame {
             // Refresh table
             displayData();
             
+            session sess = session.getInstance();
+            
             con.insertData("INSERT INTO logs (u_id, action, action_date, action_time)"
-                        + "VALUES ('"+session.getU_id()+"', 'Deleted an account', '"+actionDate+"', '"+actionTime+"')");
+                        + "VALUES ('"+sess.getU_id()+"', 'Deleted an account', '"+actionDate+"', '"+actionTime+"')");
             
 
             JOptionPane.showMessageDialog(this, "User deleted successfully.");

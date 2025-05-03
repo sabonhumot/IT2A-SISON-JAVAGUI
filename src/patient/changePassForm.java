@@ -296,11 +296,11 @@ public class changePassForm extends javax.swing.JFrame {
 
                 String hashedNewPW = pwHasher.hashPassword(newPass.getText());
                 
-                conn.updateData("UPDATE user SET u_pass = '"+hashedNewPW+"' WHERE u_id = '"+session.getU_id()+"'");
+                conn.updateData("UPDATE user SET u_pass = '"+hashedNewPW+"' WHERE u_id = '"+sess.getU_id()+"'");
                 this.dispose();
                 
                 conn.insertData("INSERT INTO logs (u_id, action, action_date, action_time)"
-                        + "VALUES ('"+session.getU_id()+"', 'Changed password', '"+actionDate+"', '"+actionTime+"')");
+                        + "VALUES ('"+sess.getU_id()+"', 'Changed password', '"+actionDate+"', '"+actionTime+"')");
                 
                 
             } catch (NoSuchAlgorithmException ex) {

@@ -15,6 +15,8 @@ import java.awt.Color;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
@@ -46,6 +48,7 @@ public class forgotPassword1 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         username = new RoundedTextField(35);
         errorLabelUser = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -72,7 +75,7 @@ public class forgotPassword1 extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 150, 50));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 150, 50));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close.png"))); // NOI18N
         jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -85,7 +88,7 @@ public class forgotPassword1 extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Enter Username");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 170, 20));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 170, 20));
 
         username.setToolTipText("Username");
         username.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -100,8 +103,13 @@ public class forgotPassword1 extends javax.swing.JFrame {
                 usernameActionPerformed(evt);
             }
         });
-        jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 400, 40));
-        jPanel2.add(errorLabelUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 190, 20));
+        jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 400, 40));
+        jPanel2.add(errorLabelUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 190, 20));
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setText("Let's find your account.");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,9 +121,9 @@ public class forgotPassword1 extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 320, Short.MAX_VALUE)
+            .addGap(0, 368, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 320, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE))
         );
 
         pack();
@@ -125,16 +133,15 @@ public class forgotPassword1 extends javax.swing.JFrame {
     public String[] getSecurityDetails(String username) {
         connectDB con = new connectDB();
         try {
-            String query = "SELECT u_id ,sq, sq_answer FROM user WHERE u_user = ?";
+            String query = "SELECT u_id , u_email FROM user WHERE u_user = ?";
             PreparedStatement pstmt = con.getConnection().prepareStatement(query);
             pstmt.setString(1, username.trim());
             ResultSet resultSet = pstmt.executeQuery();
 
             if (resultSet.next()) {
                 return new String[]{
-                    resultSet.getString("u_id"),
-                    resultSet.getString("sq").trim(),
-                    resultSet.getString("sq_answer").trim(),                  
+                    resultSet.getString("u_id"),                  
+                    resultSet.getString("u_email").trim(),                                        
                 };
             }
         } catch (SQLException ex) {
@@ -142,32 +149,38 @@ public class forgotPassword1 extends javax.swing.JFrame {
         }
         return null;
     }
-    
-    
+
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         if (signUpValidation()) {
+          
+            forgotPassword2 fp21 = new forgotPassword2();
 
-            forgotPassword2 fp2 = new forgotPassword2();
-            
-            
             String user = username.getText().trim();
-            
-            String [] securityDetails = getSecurityDetails(user);
-            
+
+            String[] securityDetails = getSecurityDetails(user);
+
             String uid = securityDetails[0];
-            String secQue = securityDetails[1];
-            String secQueAns = securityDetails[2];
-            
+//            String secQue = securityDetails[1];
+//            String secQueAns = securityDetails[2];            
+            String email = securityDetails[1];
+
             session sess = session.getInstance();
+
+            sess.setU_id(uid);
+            sess.setUsername(user);
+            sess.setEmail(email);
             
-            session.setU_id(uid);
-            session.setUsername(user);
-            session.setSecQ(secQue);
-            session.setSecQanswer(secQueAns);
-            
-            fp2.setVisible(true);
-            fp2.displayQuestion();
+            System.out.println(""+ uid);
+            System.out.println(""+ user);
+            System.out.println("" + email);
+//            session.setSecQ(secQue);
+//            session.setSecQanswer(secQueAns);
+
+            fp21.updateEmail();
+            fp21.setVisible(true);
+//            fp2.displayQuestion();
             this.dispose();
 
         } else {
@@ -189,7 +202,7 @@ public class forgotPassword1 extends javax.swing.JFrame {
             username.setForeground(Color.RED);
             errorLabelUser.setText("Username is required");
             errorLabelUser.setForeground(Color.RED);
-        } else if (! usernameExists(user)) {
+        } else if (!usernameExists(user)) {
 
             username.setForeground(Color.RED);
             errorLabelUser.setText("Username does not exists");
@@ -208,10 +221,10 @@ public class forgotPassword1 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_usernameActionPerformed
 
-    private boolean signUpValidation () {
-        
+    private boolean signUpValidation() {
+
         boolean valid = true;
-        
+
         String user = username.getText();
 
         if (user.isEmpty()) {
@@ -232,13 +245,10 @@ public class forgotPassword1 extends javax.swing.JFrame {
         }
 
         username.repaint();
-        
-        
+
         return valid;
     }
-    
-    
-    
+
     private boolean usernameExists(String username) {
 
         connectDB con = new connectDB();
@@ -259,7 +269,7 @@ public class forgotPassword1 extends javax.swing.JFrame {
         }
         return false;
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -300,6 +310,7 @@ public class forgotPassword1 extends javax.swing.JFrame {
     private javax.swing.JLabel errorLabelUser;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;

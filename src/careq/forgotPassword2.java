@@ -6,15 +6,18 @@
 package careq;
 
 import config.connectDB;
+import config.otp;
 import config.session;
 import gfx.GradientPanel;
 import gfx.RoundGradientButton;
 import gfx.RoundedPanel;
 import gfx.RoundedTextField;
 import java.awt.Color;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,12 +26,11 @@ import javax.swing.JOptionPane;
  */
 public class forgotPassword2 extends javax.swing.JFrame {
 
-    /**
-     * Creates new form forgotPassword2
-     */
+    session sess = session.getInstance();
+
     public forgotPassword2() {
         initComponents();
-        displayQuestion();
+
     }
 
     /**
@@ -44,11 +46,11 @@ public class forgotPassword2 extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new RoundGradientButton("Sign Up", new Color(131, 164, 212), new Color(182, 251, 255), 35);
         jLabel8 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        question = new javax.swing.JTextField();
+        eM = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        answer = new RoundedTextField(35);
-        answerErrorLabel = new javax.swing.JLabel();
+        otpInput = new RoundedTextField(35);
+        otpErrorLabel = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -75,7 +77,7 @@ public class forgotPassword2 extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 150, 50));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 150, 50));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close.png"))); // NOI18N
         jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -84,53 +86,58 @@ public class forgotPassword2 extends javax.swing.JFrame {
                 jLabel8MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, 30, 30));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, 30, 30));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setText("Question");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 170, 20));
-
-        question.setEnabled(false);
-        question.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                questionActionPerformed(evt);
-            }
-        });
-        jPanel2.add(question, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 380, 40));
+        eM.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        eM.setText("email");
+        jPanel2.add(eM, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 300, 20));
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel14.setText("Answer");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 180, 20));
+        jLabel14.setForeground(new java.awt.Color(0, 204, 204));
+        jLabel14.setText("Get OTP");
+        jLabel14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, 150, 20));
 
-        answer.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        answer.setOpaque(false);
-        answer.addFocusListener(new java.awt.event.FocusAdapter() {
+        otpInput.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        otpInput.setOpaque(false);
+        otpInput.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                answerFocusLost(evt);
+                otpInputFocusLost(evt);
             }
         });
-        answer.addActionListener(new java.awt.event.ActionListener() {
+        otpInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                answerActionPerformed(evt);
+                otpInputActionPerformed(evt);
             }
         });
-        jPanel2.add(answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 380, 40));
-        jPanel2.add(answerErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 290, 270, 20));
+        jPanel2.add(otpInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 230, 40));
+        jPanel2.add(otpErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 270, 20));
+
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel4.setText("Verification code has been sent via email to");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 300, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
+            .addGap(0, 530, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+            .addGap(0, 399, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -138,38 +145,77 @@ public class forgotPassword2 extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    void displayQuestion() {
+    public void updateEmail() {
+
+        String maskedEmail = maskEmail(sess.getEmail());
         
-        session sess = session.getInstance();
-        
-        System.out.println("" + session.getSecQ());
-        System.out.println("" + session.getSecQanswer());
-        
-        question.setText(session.getSecQ());
-        
+        eM.setText("" + maskedEmail);
+     
     }
-    
-    
-    
+
+    public String maskEmail(String email) {
+        int atIndex = email.indexOf("@");
+        if (atIndex <= 1) {
+            return email; // too short to mask
+        }
+
+        String localPart = email.substring(0, atIndex);
+        String domainPart = email.substring(atIndex);
+
+        StringBuilder stars = new StringBuilder();
+        for (int i = 0; i < localPart.length() - 2; i++) {
+            stars.append("*");
+        }
+
+        return localPart.charAt(0) + stars.toString() + localPart.charAt(localPart.length() - 1) + domainPart;
+    }
+
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        if(answer.getText().equalsIgnoreCase(session.getSecQanswer())) {
-            
-            forgotPassword3 fp3 = new forgotPassword3();
-            
-            fp3.setVisible(true);
-            this.dispose();
-            
-            
-        } else {
-            
-            answer.setForeground(Color.RED);
-            answerErrorLabel.setText("Answer does not match.");
-            answerErrorLabel.setForeground(Color.RED);
-            JOptionPane.showMessageDialog(this, "Submit error. Please fill all required field.", "Warning", JOptionPane.WARNING_MESSAGE);
+        connectDB con = new connectDB();
+
+        try {
+
+            ResultSet rs = con.getData("SELECT otp_code, otp_duration FROM otps WHERE u_id = '" + sess.getU_id() + "' ORDER BY otp_duration DESC LIMIT 1");
+
+            if (rs.next()) {
+
+                String storedOTP = rs.getString("otp_code");
+                Timestamp expiration = rs.getTimestamp("otp_duration");
+
+                if (otpInput.getText().equals(storedOTP)) {
+
+                    Instant currentTime = Instant.now();
+                    Instant expirationTime = expiration.toInstant();
+
+                    if (currentTime.isBefore(expirationTime)) {
+                        forgotPassword3 fp3 = new forgotPassword3();
+
+                        fp3.setVisible(true);
+                        this.dispose();
+                    } else {
+                        otpInput.setForeground(Color.RED);
+                        otpErrorLabel.setText("OTP has expired. Please request a new one.");
+                        otpErrorLabel.setForeground(Color.RED);
+
+                    }
+
+                } else {
+                    otpInput.setForeground(Color.RED);
+                    otpErrorLabel.setText("Invalid OTP. Please try again");
+                    otpErrorLabel.setForeground(Color.RED);
+                    JOptionPane.showMessageDialog(this, "Submit error. Please fill all required field.", "Warning", JOptionPane.WARNING_MESSAGE);
+                    System.out.println("" + storedOTP);
+                }
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println("" + e);
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
@@ -177,17 +223,45 @@ public class forgotPassword2 extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabel8MouseClicked
 
-    private void answerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_answerFocusLost
+    private void otpInputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_otpInputFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_answerFocusLost
+    }//GEN-LAST:event_otpInputFocusLost
 
-    private void answerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answerActionPerformed
+    private void otpInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_otpInputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_answerActionPerformed
+    }//GEN-LAST:event_otpInputActionPerformed
 
-    private void questionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_questionActionPerformed
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+
+        jLabel14.setForeground(Color.GRAY);
+        jLabel14.setText("OTP sent to email");
+        jLabel14.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        String generatedOTP = generateOTP(6);
+        Timestamp expirationTime = new Timestamp(System.currentTimeMillis() + 5 * 60 * 1000);
+
+        connectDB con = new connectDB();
+//        session sess = session.getInstance();
+
+        con.insertData("INSERT INTO otps (u_id, otp_code, otp_duration)"
+                + "VALUES ('" + sess.getU_id() + "', '" + generatedOTP + "', '" + expirationTime + "')");
+
+        otp.sendOTP(sess.getEmail(), generatedOTP);
+
+
+    }//GEN-LAST:event_jLabel14MouseClicked
+
+    public String generateOTP(int lenght) {
+
+        Random random = new Random();
+        String numbers = "0123456789";
+        StringBuilder user_otp = new StringBuilder();
+
+        for (int i = 0; i < lenght; i++) {
+            user_otp.append(numbers.charAt(random.nextInt(numbers.length())));
+        }
+        return user_otp.toString();
+    }
 
     /**
      * @param args the command line arguments
@@ -215,6 +289,7 @@ public class forgotPassword2 extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(forgotPassword2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -225,14 +300,14 @@ public class forgotPassword2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField answer;
-    private javax.swing.JLabel answerErrorLabel;
+    private javax.swing.JLabel eM;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField question;
+    private javax.swing.JLabel otpErrorLabel;
+    private javax.swing.JTextField otpInput;
     // End of variables declaration//GEN-END:variables
 }
