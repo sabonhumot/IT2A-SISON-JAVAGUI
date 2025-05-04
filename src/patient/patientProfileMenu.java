@@ -95,12 +95,15 @@ public class patientProfileMenu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         logoutPanel = new RoundedPanel(25);
-        jLabel6 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         logout = new javax.swing.JLabel();
+        bookAppointment = new RoundedPanel(50);
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         profilePanel = new RoundedPanel(50);
         jLabel16 = new javax.swing.JLabel();
         profile = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -259,7 +262,7 @@ public class patientProfileMenu extends javax.swing.JFrame {
         jLabel2.setText("Dashboard");
         dashboardPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 110, 30));
 
-        jPanel1.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 190, 50));
+        jPanel1.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 190, 50));
 
         logoutPanel.setBackground(new java.awt.Color(100, 188, 234));
         logoutPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -276,8 +279,8 @@ public class patientProfileMenu extends javax.swing.JFrame {
         });
         logoutPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/log-out.png"))); // NOI18N
-        logoutPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 30, 50));
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/log-out.png"))); // NOI18N
+        logoutPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 30, 50));
 
         logout.setBackground(new java.awt.Color(73, 138, 172));
         logout.setForeground(new java.awt.Color(73, 138, 172));
@@ -286,6 +289,30 @@ public class patientProfileMenu extends javax.swing.JFrame {
         logoutPanel.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 30));
 
         jPanel1.add(logoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 170, 70));
+
+        bookAppointment.setBackground(new java.awt.Color(37, 171, 241));
+        bookAppointment.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bookAppointment.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bookAppointmentMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bookAppointmentMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bookAppointmentMouseExited(evt);
+            }
+        });
+        bookAppointment.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/appointment-filled.png"))); // NOI18N
+        bookAppointment.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 40, 50));
+
+        jLabel19.setForeground(new java.awt.Color(250, 249, 246));
+        jLabel19.setText("Appointments");
+        bookAppointment.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 110, 30));
+
+        jPanel1.add(bookAppointment, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 190, 50));
 
         profilePanel.setBackground(new java.awt.Color(37, 171, 241));
         profilePanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -317,8 +344,8 @@ public class patientProfileMenu extends javax.swing.JFrame {
 
         jPanel1.add(profilePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 190, -1));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         mainbg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 700));
 
@@ -380,70 +407,6 @@ public class patientProfileMenu extends javax.swing.JFrame {
 
     }
 
-
-    private void dashboardPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseClicked
-
-        patientDashB pdb = new patientDashB();
-        pdb.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_dashboardPanelMouseClicked
-
-    private void dashboardPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseEntered
-
-        dashboardPanel.setBackground(hoverColor);
-    }//GEN-LAST:event_dashboardPanelMouseEntered
-
-    private void dashboardPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseExited
-
-        dashboardPanel.setBackground(mainColor);
-    }//GEN-LAST:event_dashboardPanelMouseExited
-
-    private void logoutPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseClicked
-
-        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Logout", JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            session userSession = session.getInstance();
-
-            userSession.setU_id(null);
-            userSession.setFirstName(null);
-            userSession.setLastName(null);
-            userSession.setEmail(null);
-            userSession.setUsername(null);
-            userSession.setAcc_type(null);
-            userSession.setAcc_status(null);
-
-            logIn lg = new logIn();
-            lg.setVisible(true);
-            this.dispose();
-
-        }
-    }//GEN-LAST:event_logoutPanelMouseClicked
-
-    private void logoutPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseEntered
-        logoutPanel.setBackground(hoverlogoutColor);
-    }//GEN-LAST:event_logoutPanelMouseEntered
-
-    private void logoutPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseExited
-        logoutPanel.setBackground(logoutColor);
-    }//GEN-LAST:event_logoutPanelMouseExited
-
-    private void jLabel16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel16MouseEntered
-
-    private void profilePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseClicked
-
-    }//GEN-LAST:event_profilePanelMouseClicked
-
-    private void profilePanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseEntered
-
-        profilePanel.setBackground(hoverColor);
-    }//GEN-LAST:event_profilePanelMouseEntered
-
-    private void profilePanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseExited
-
-        profilePanel.setBackground(mainColor);
-    }//GEN-LAST:event_profilePanelMouseExited
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
 
@@ -603,6 +566,97 @@ public class patientProfileMenu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_removepfpActionPerformed
 
+    private void dashboardPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseClicked
+
+        patientDashB pdb = new patientDashB();
+        
+        pdb.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_dashboardPanelMouseClicked
+
+    private void dashboardPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseEntered
+
+        dashboardPanel.setBackground(hoverColor);
+    }//GEN-LAST:event_dashboardPanelMouseEntered
+
+    private void dashboardPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseExited
+
+        dashboardPanel.setBackground(mainColor);
+    }//GEN-LAST:event_dashboardPanelMouseExited
+
+    private void logoutPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseClicked
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Logout", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            session userSession = session.getInstance();
+
+            userSession.setU_id(null);
+            userSession.setFirstName(null);
+            userSession.setLastName(null);
+            userSession.setEmail(null);
+            userSession.setUsername(null);
+            userSession.setAcc_type(null);
+            userSession.setAcc_status(null);
+
+            logIn lg = new logIn();
+            lg.setVisible(true);
+            this.dispose();
+
+        }
+    }//GEN-LAST:event_logoutPanelMouseClicked
+
+    private void logoutPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseEntered
+        logoutPanel.setBackground(hoverlogoutColor);
+    }//GEN-LAST:event_logoutPanelMouseEntered
+
+    private void logoutPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseExited
+        logoutPanel.setBackground(logoutColor);
+    }//GEN-LAST:event_logoutPanelMouseExited
+
+    private void bookAppointmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMouseClicked
+        
+        patientAppointments pApp = new patientAppointments();
+        
+        pApp.setVisible(true);
+        this.dispose();
+        
+        
+    }//GEN-LAST:event_bookAppointmentMouseClicked
+
+    private void bookAppointmentMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMouseEntered
+        
+        bookAppointment.setBackground(hoverColor);
+        
+    }//GEN-LAST:event_bookAppointmentMouseEntered
+
+    private void bookAppointmentMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMouseExited
+        
+        bookAppointment.setBackground(mainColor);
+        
+    }//GEN-LAST:event_bookAppointmentMouseExited
+
+    private void jLabel16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel16MouseEntered
+
+    private void profilePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseClicked
+
+        patientProfileMenu ppm = new patientProfileMenu();
+        ppm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_profilePanelMouseClicked
+
+    private void profilePanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseEntered
+
+        profilePanel.setBackground(hoverColor);
+    }//GEN-LAST:event_profilePanelMouseEntered
+
+    private void profilePanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseExited
+
+        profilePanel.setBackground(mainColor);
+    }//GEN-LAST:event_profilePanelMouseExited
+
     private void loadOpenSans() {
         try {
             InputStream fontStream = getClass().getResourceAsStream("/font/OpenSans-VariableFont_wdth,wght.ttf");
@@ -674,24 +728,27 @@ public class patientProfileMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addpfp;
+    private javax.swing.JPanel bookAppointment;
     private javax.swing.JLabel contact;
     private javax.swing.JPanel dashboardPanel;
     private javax.swing.JPanel dboard;
     private javax.swing.JPanel dboardBG;
     private javax.swing.JLabel email;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

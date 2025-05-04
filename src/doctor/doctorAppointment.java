@@ -36,6 +36,7 @@ public class doctorAppointment extends javax.swing.JFrame {
         initComponents();
         displayData();
         noData();
+        getDataCounts();
     }
 
     /**
@@ -368,7 +369,7 @@ public class doctorAppointment extends javax.swing.JFrame {
                     + "a.date, a.time, a.notes, a.appointment_status "
                     + "FROM appointments a "
                     + "JOIN user u ON a.patient_id = u.u_id "
-                    + "WHERE a.doctor = '" + doctorName + "'"
+                    + "WHERE a.doctor_id = '" + sess.getU_id() + "'"
             );
 
             String[] column = {"Appointment ID", "Patient Name", "Scheduled Date", "Scheduled Time", "Notes", "Appointment Status"};
@@ -523,6 +524,10 @@ public class doctorAppointment extends javax.swing.JFrame {
 
     private void dashboardPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseClicked
 
+        doctorDashB ddb = new doctorDashB();
+        ddb.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_dashboardPanelMouseClicked
 
     private void dashboardPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseEntered

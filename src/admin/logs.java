@@ -37,9 +37,9 @@ public class logs extends javax.swing.JFrame {
     Color hoverlogoutColor = new Color(250, 249, 246);
 
     public logs() {
-        initComponents();
-        emptyData();
+        initComponents();       
         displayData();
+        emptyData();
     }
 
     /**
@@ -56,7 +56,6 @@ public class logs extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         dboardBG = new RoundedPanel(15);
-        pAccOV = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         scroll = new javax.swing.JScrollPane();
@@ -97,6 +96,7 @@ public class logs extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(250, 249, 246));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel5.setText("Logs");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 300, -1));
 
@@ -104,9 +104,6 @@ public class logs extends javax.swing.JFrame {
 
         dboardBG.setBackground(new java.awt.Color(250, 249, 246));
         dboardBG.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        pAccOV.setText("Patients Account Overview");
-        dboardBG.add(pAccOV, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 340, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/no-data.png"))); // NOI18N
         dboardBG.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, -1, -1));
@@ -701,7 +698,6 @@ public class logs extends javax.swing.JFrame {
     private javax.swing.JPanel logsPanel;
     private javax.swing.JTable logsTable;
     private javax.swing.JPanel mainbg;
-    private javax.swing.JLabel pAccOV;
     private javax.swing.JLabel patient1;
     private javax.swing.JPanel patientPanel;
     private javax.swing.JLabel profile;

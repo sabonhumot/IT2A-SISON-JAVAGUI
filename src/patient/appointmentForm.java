@@ -28,6 +28,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -214,14 +215,18 @@ public class appointmentForm extends javax.swing.JFrame {
 
         try {
 
-            ResultSet rs = con.getData("SELECT u_fname, u_lname FROM user WHERE type = 'Doctor'");
+            ResultSet rs = con.getData("SELECT u_id, CONCAT ('Dr. ', u_fname, ' ', u_lname) AS doctor_name FROM user WHERE type = 'Doctor'");
+
+            doctorMap = new HashMap<>();
+
             while (rs.next()) {
 
-                String fname = rs.getString("u_fname");
-                String lname = rs.getString("u_lname");
-                String fullname = "" + fname + " " + lname;
+                int doctorId = rs.getInt("u_id");
+                String doctorName = rs.getString("doctor_name");
 
-                jComboBox1.addItem("Dr. " + fullname);
+                jComboBox1.addItem(doctorName);
+
+                doctorMap.put(doctorName, doctorId);
 
             }
 
@@ -234,15 +239,11 @@ public class appointmentForm extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        
-        
         LocalDate actionDate = LocalDate.now();
         LocalTime atime = LocalTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         String actionTime = atime.format(formatter);
-                
-        
-        
+
         if (signUpValidation()) {
 
             connectDB conn = new connectDB();
@@ -250,27 +251,27 @@ public class appointmentForm extends javax.swing.JFrame {
 
             String doctor = (String) jComboBox1.getSelectedItem();
 
-            conn.insertData("INSERT INTO appointments (doctor, date, time, notes, patient_id, appointment_status)"
-                    + "VALUES ('" + doctor + "', '" + date.getText() + "', '" + time.getText() + "',"
+            int doctorId = doctorMap.get(doctor);
+
+            conn.insertData("INSERT INTO appointments (doctor_id, date, time, notes, patient_id, appointment_status)"
+                    + "VALUES ('" + doctorId + "', '" + date.getText() + "', '" + time.getText() + "',"
                     + " '" + jTextField1.getText() + "', '" + sess.getU_id() + "', 'Pending')");
 
             this.dispose();
-            
+
             patientAppointments app = new patientAppointments();
             app.getDataCounts();
             app.noData();
             app.displayData();
-            
+
             conn.insertData("INSERT INTO logs (u_id, action, action_date, action_time)"
-                        + "VALUES ('"+sess.getU_id()+"', 'Made an appointment', '"+actionDate+"', '"+actionTime+"')");
-            
+                    + "VALUES ('" + sess.getU_id() + "', 'Made an appointment', '" + actionDate + "', '" + actionTime + "')");
 
         } else {
             JOptionPane.showMessageDialog(this, "Submit error. Please fill all required field.", "Warning", JOptionPane.WARNING_MESSAGE);
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -496,6 +497,7 @@ public class appointmentForm extends javax.swing.JFrame {
         });
     }
 
+    private HashMap<String, Integer> doctorMap;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField date;
     private javax.swing.JLabel dateError;

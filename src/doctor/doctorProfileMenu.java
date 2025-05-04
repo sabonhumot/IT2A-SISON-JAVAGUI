@@ -561,6 +561,11 @@ public class doctorProfileMenu extends javax.swing.JFrame {
 
     private void dashboardPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseClicked
 
+        doctorDashB ddb = new doctorDashB();
+        ddb.setVisible(true);
+        
+        this.dispose();
+        
     }//GEN-LAST:event_dashboardPanelMouseClicked
 
     private void dashboardPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseEntered

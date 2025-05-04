@@ -34,7 +34,6 @@ public class patientDashB extends javax.swing.JFrame {
         initComponents();
         loadOpenSans();
         accountInformation();
-        
 
     }
 
@@ -190,7 +189,7 @@ public class patientDashB extends javax.swing.JFrame {
         });
         bookAppointment.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/dashboard_filled.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/appointment-filled.png"))); // NOI18N
         bookAppointment.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 40, 50));
 
         jLabel4.setForeground(new java.awt.Color(250, 249, 246));
@@ -249,13 +248,6 @@ public class patientDashB extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void accountInformation() {
-
-        session sess = session.getInstance();
-
-        welcome.setText("Welcome, " + sess.getFirstName() + "!");
-
-    }
     private void dashboardPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseClicked
 
     }//GEN-LAST:event_dashboardPanelMouseClicked
@@ -299,6 +291,24 @@ public class patientDashB extends javax.swing.JFrame {
         logoutPanel.setBackground(logoutColor);
     }//GEN-LAST:event_logoutPanelMouseExited
 
+    private void bookAppointmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMouseClicked
+
+        patientAppointments pApp = new patientAppointments();
+        pApp.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_bookAppointmentMouseClicked
+
+    private void bookAppointmentMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMouseEntered
+
+        bookAppointment.setBackground(hoverColor);
+
+    }//GEN-LAST:event_bookAppointmentMouseEntered
+
+    private void bookAppointmentMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMouseExited
+        bookAppointment.setBackground(hoverColor);
+    }//GEN-LAST:event_bookAppointmentMouseExited
+
     private void jLabel16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel16MouseEntered
@@ -320,23 +330,13 @@ public class patientDashB extends javax.swing.JFrame {
         profilePanel.setBackground(mainColor);
     }//GEN-LAST:event_profilePanelMouseExited
 
-    private void bookAppointmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMouseClicked
+    private void accountInformation() {
 
-        patientAppointments app = new patientAppointments();
+        session sess = session.getInstance();
 
-        app.setVisible(true);
-        this.dispose();
+        welcome.setText("Welcome, " + sess.getFirstName() + "!");
 
-
-    }//GEN-LAST:event_bookAppointmentMouseClicked
-
-    private void bookAppointmentMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMouseEntered
-        bookAppointment.setBackground(hoverColor);
-    }//GEN-LAST:event_bookAppointmentMouseEntered
-
-    private void bookAppointmentMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMouseExited
-        bookAppointment.setBackground(mainColor);
-    }//GEN-LAST:event_bookAppointmentMouseExited
+    }
 
     private void loadOpenSans() {
         try {

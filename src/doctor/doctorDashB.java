@@ -12,10 +12,25 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.swing.JOptionPane;
 import patient.patientProfileMenu;
+import config.connectDB;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -29,10 +44,16 @@ public class doctorDashB extends javax.swing.JFrame {
     Color logoutColor = new Color(100, 188, 234);
     Color hoverlogoutColor = new Color(250, 249, 246);
 
+    boolean hasAppointmentsToday = false;
+    boolean hasAppointmentsTomorrow = false;
+
     public doctorDashB() {
         initComponents();
         loadOpenSans();
-        
+        showAppointmentsTomorrow();
+        showAppointmentsToday();
+        noAppointments();
+        welcomeText();
 
     }
 
@@ -45,18 +66,39 @@ public class doctorDashB extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator2 = new javax.swing.JSeparator();
         mainbg = new javax.swing.JPanel();
         dboard = new javax.swing.JPanel();
         dboardHeader = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         dboardBG = new RoundedPanel(15);
         welcome = new javax.swing.JLabel();
+        schedTomorrow = new javax.swing.JPanel();
+        patientPfp1 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        schedTime1 = new javax.swing.JLabel();
+        schedDate1 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        upc2 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        noTomorrow = new javax.swing.JLabel();
+        schedToday = new javax.swing.JPanel();
+        patientPfp = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        schedTime = new javax.swing.JLabel();
+        schedDate = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         upc = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        noToday = new javax.swing.JLabel();
         noAppPanel = new javax.swing.JPanel();
         noApp = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         upc1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new RoundedPanel(5);
         dashboardPanel = new RoundedPanel(50);
         jLabel1 = new javax.swing.JLabel();
@@ -96,10 +138,105 @@ public class doctorDashB extends javax.swing.JFrame {
         dboardBG.add(welcome);
         welcome.setBounds(20, 20, 390, 50);
 
+        schedTomorrow.setBackground(new java.awt.Color(250, 249, 246));
+        schedTomorrow.setLayout(null);
+        schedTomorrow.add(patientPfp1);
+        patientPfp1.setBounds(20, 40, 80, 70);
+
+        jLabel13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel13.setText("Patient Name");
+        schedTomorrow.add(jLabel13);
+        jLabel13.setBounds(110, 70, 210, 40);
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/date.png"))); // NOI18N
+        schedTomorrow.add(jLabel14);
+        jLabel14.setBounds(510, 90, 30, 30);
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/time.png"))); // NOI18N
+        schedTomorrow.add(jLabel15);
+        jLabel15.setBounds(510, 50, 30, 30);
+
+        schedTime1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        schedTime1.setText("Scheduled Time");
+        schedTomorrow.add(schedTime1);
+        schedTime1.setBounds(540, 50, 150, 30);
+
+        schedDate1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        schedDate1.setText("Schedule Date");
+        schedTomorrow.add(schedDate1);
+        schedDate1.setBounds(540, 90, 170, 30);
+
+        jLabel17.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel17.setText("Patient Name");
+        schedTomorrow.add(jLabel17);
+        jLabel17.setBounds(110, 40, 140, 20);
+
+        upc2.setFont(new java.awt.Font("Trebuchet MS", 1, 16)); // NOI18N
+        upc2.setText("Tomorrow");
+        schedTomorrow.add(upc2);
+        upc2.setBounds(10, 0, 120, 50);
+        schedTomorrow.add(jSeparator3);
+        jSeparator3.setBounds(0, 0, 770, 160);
+
+        noTomorrow.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        noTomorrow.setForeground(new java.awt.Color(102, 102, 102));
+        noTomorrow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        noTomorrow.setText("No Appointments Today");
+        schedTomorrow.add(noTomorrow);
+        noTomorrow.setBounds(240, 70, 270, 40);
+
+        dboardBG.add(schedTomorrow);
+        schedTomorrow.setBounds(50, 340, 770, 160);
+
+        schedToday.setBackground(new java.awt.Color(250, 249, 246));
+        schedToday.setLayout(null);
+        schedToday.add(patientPfp);
+        patientPfp.setBounds(20, 40, 80, 70);
+
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel9.setText("Patient Name");
+        schedToday.add(jLabel9);
+        jLabel9.setBounds(110, 70, 210, 40);
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/date.png"))); // NOI18N
+        schedToday.add(jLabel10);
+        jLabel10.setBounds(510, 80, 30, 30);
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/time.png"))); // NOI18N
+        schedToday.add(jLabel11);
+        jLabel11.setBounds(510, 40, 30, 30);
+
+        schedTime.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        schedTime.setText("Scheduled Time");
+        schedToday.add(schedTime);
+        schedTime.setBounds(540, 40, 150, 30);
+
+        schedDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        schedDate.setText("Schedule Date");
+        schedToday.add(schedDate);
+        schedDate.setBounds(540, 80, 170, 30);
+
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel12.setText("Patient Name");
+        schedToday.add(jLabel12);
+        jLabel12.setBounds(110, 40, 140, 20);
+
         upc.setFont(new java.awt.Font("Trebuchet MS", 1, 16)); // NOI18N
         upc.setText("Today");
-        dboardBG.add(upc);
-        upc.setBounds(50, 140, 120, 50);
+        schedToday.add(upc);
+        upc.setBounds(10, 0, 120, 50);
+        schedToday.add(jSeparator1);
+        jSeparator1.setBounds(0, 0, 770, 160);
+
+        noToday.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        noToday.setForeground(new java.awt.Color(102, 102, 102));
+        noToday.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        noToday.setText("No Appointments Today");
+        schedToday.add(noToday);
+        noToday.setBounds(240, 60, 270, 40);
+
+        dboardBG.add(schedToday);
+        schedToday.setBounds(50, 140, 770, 160);
 
         noAppPanel.setBackground(new java.awt.Color(250, 249, 246));
         noAppPanel.setLayout(null);
@@ -121,11 +258,7 @@ public class doctorDashB extends javax.swing.JFrame {
         upc1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         upc1.setText("Upcoming appointments");
         dboardBG.add(upc1);
-        upc1.setBounds(20, 100, 330, 50);
-
-        jPanel2.setLayout(null);
-        dboardBG.add(jPanel2);
-        jPanel2.setBounds(50, 190, 770, 110);
+        upc1.setBounds(20, 80, 330, 50);
 
         dboard.add(dboardBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 860, 590));
 
@@ -260,6 +393,242 @@ public class doctorDashB extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public String destination = "";
+    File selectedFile;
+    public String oldpath = "";
+    public String path = "";
+
+    /**
+     * Shows appointments for tomorrow in the Tomorrow panel with debug logging
+     */
+    /**
+     * Shows appointments for tomorrow in the Tomorrow panel with proper date
+     * formatting
+     */
+    
+    private void welcomeText() {
+        
+        session sess = session.getInstance();
+        
+        welcome.setText("Welcome, Dr. " + sess.getFirstName() + "!");
+        
+    }
+    
+    
+    private void noAppointments() {
+        if (!hasAppointmentsToday && !hasAppointmentsTomorrow) {
+            noAppPanel.setVisible(false);
+        } else {
+            noAppPanel.setVisible(true);
+        }
+    }
+
+    private void showAppointmentsTomorrow() {
+        try {
+            // Debug log
+            System.out.println("Starting showAppointmentsTomorrow method");
+
+            session sess = session.getInstance();
+            connectDB conn = new connectDB();
+            String doctorName = ("Dr. " + sess.getFirstName() + " " + sess.getLastName());
+
+            // Format tomorrow's date to match your database text format
+            LocalDate tomorrowDate = LocalDate.now().plusDays(1);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String tomorrow = tomorrowDate.format(formatter);
+
+            // Debug log
+            System.out.println("Tomorrow's date (formatted): " + tomorrow);
+            System.out.println("Doctor name: " + doctorName);
+
+            // Query for tomorrow's appointments with exact string comparison
+            String query = "SELECT a.appointment_id, CONCAT(u.u_fname, ' ', u.u_lname) AS patient_name, "
+                    + "a.date, a.time, u.u_pfp, a.appointment_status "
+                    + "FROM appointments a "
+                    + "JOIN user u ON a.patient_id = u.u_id "
+                    + "WHERE a.doctor_id = '" + sess.getU_id() + "' AND a.date = '" + tomorrow + "' AND a.appointment_status = 'Accepted'";
+
+            // Debug log
+            System.out.println("Query: " + query);
+
+            ResultSet rs = conn.getData(query);
+
+            // Debug log
+            System.out.println("ResultSet obtained: " + (rs != null));
+
+            // Count the total appointments and store the first one
+            boolean hasAppointments = false;
+            String firstPatient = "";
+            String firstDate = "";
+            String firstTime = "";
+            String firstPfp = "";
+            int totalAppointments = 0;
+
+            while (rs != null && rs.next()) {
+                totalAppointments++;
+
+                // Debug log for each appointment found
+                System.out.println("Found appointment #" + totalAppointments);
+                System.out.println("Date in DB: " + rs.getString("a.date"));
+
+                // Store the first appointment details
+                if (totalAppointments == 1) {
+                    hasAppointments = true;
+                    firstPatient = rs.getString("patient_name");
+                    firstDate = rs.getString("a.date");
+                    firstTime = rs.getString("a.time");
+                    firstPfp = rs.getString("u.u_pfp");
+
+                    // Debug log
+                    System.out.println("First appointment: " + firstPatient + " on " + firstDate + " at " + firstTime);
+                }
+            }
+
+            // Debug log
+            System.out.println("Total tomorrow appointments: " + totalAppointments);
+            System.out.println("Has appointments: " + hasAppointments);
+
+            // Set panel visibility based on appointments
+            if (hasAppointments) {
+                // Update tomorrow's panel UI with the first appointment
+                jLabel13.setText(firstPatient);
+                schedTime1.setText(firstTime);
+                schedDate1.setText(firstDate);
+
+                // Set the profile picture
+                if (firstPfp == null || firstPfp.trim().isEmpty()) {
+                    String blankPfpPath = "src/img/blankpfp.jpg";
+                    patientPfp1.setIcon(ResizeImage(blankPfpPath, null, patientPfp1));
+                } else {
+                    patientPfp1.setIcon(ResizeImage(firstPfp, null, patientPfp1));
+                }
+
+                schedTomorrow.setVisible(true);
+                noTomorrow.setVisible(false);
+
+            } else {
+
+                schedTomorrow.setVisible(true);
+                jLabel13.setVisible(false);
+                schedTime1.setVisible(false);
+                schedDate1.setVisible(false);
+                patientPfp1.setVisible(false);
+                jLabel14.setVisible(false);
+                jLabel15.setVisible(false);
+                jLabel17.setVisible(false);
+
+            }
+
+            // Force UI refresh
+            schedTomorrow.revalidate();
+            schedTomorrow.repaint();
+            noAppPanel.revalidate();
+            noAppPanel.repaint();
+
+        } catch (SQLException ex) {
+            System.out.println("SQL Exception in showAppointmentsTomorrow: " + ex.getMessage());
+            Logger.getLogger(doctorDashB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            System.out.println("General Exception in showAppointmentsTomorrow: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    private void showAppointmentsToday() {
+        try {
+            session sess = session.getInstance();
+            connectDB conn = new connectDB();
+            String doctorName = ("Dr. " + sess.getFirstName() + " " + sess.getLastName());
+            LocalDate today = LocalDate.now();
+
+            // Query for today's appointments
+            ResultSet rs = conn.getData(
+                    "SELECT a.appointment_id, CONCAT(u.u_fname, ' ', u.u_lname) AS patient_name, "
+                    + "a.date, a.time, u.u_pfp, a.appointment_status "
+                    + "FROM appointments a "
+                    + "JOIN user u ON a.patient_id = u.u_id "
+                    + "WHERE a.doctor_id = '" + sess.getU_id() + "' AND a.date = '" + today + "' AND a.appointment_status = 'Accepted'"
+            );
+
+            // Count the total appointments and store the first one
+            hasAppointmentsToday = false;
+            String firstPatient = "";
+            String firstDate = "";
+            String firstTime = "";
+            String firstPfp = "";
+            int totalAppointments = 0;
+
+            while (rs.next()) {
+                totalAppointments++;
+
+                // Store the first appointment details
+                if (totalAppointments == 1) {
+                    hasAppointmentsToday = true;
+                    firstPatient = rs.getString("patient_name");
+                    firstDate = rs.getString("a.date");
+                    firstTime = rs.getString("a.time");
+                    firstPfp = rs.getString("u.u_pfp");
+                }
+            }
+
+            // Show the appropriate panel based on if appointments exist
+            if (hasAppointmentsToday) {
+                // Update today's panel UI with the first appointment
+                jLabel9.setText(firstPatient);
+                schedTime.setText(firstTime);
+                schedDate.setText(firstDate);
+
+                // Set the profile picture
+                if (firstPfp == null || firstPfp.trim().isEmpty()) {
+                    String blankPfpPath = "src/img/blankpfp.jpg";
+                    patientPfp.setIcon(ResizeImage(blankPfpPath, null, patientPfp));
+                } else {
+                    patientPfp.setIcon(ResizeImage(firstPfp, null, patientPfp));
+                }
+
+                // Show additional appointment indicator if there's more than one
+                schedToday.setVisible(true);
+                noToday.setVisible(false);
+
+            } else {
+                schedToday.setVisible(true);
+                jLabel9.setVisible(false);
+                schedTime.setVisible(false);
+                schedDate.setVisible(false);
+                patientPfp.setVisible(false);
+                jLabel10.setVisible(false);
+                jLabel11.setVisible(false);
+                jLabel12.setVisible(false);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(doctorDashB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
+        try {
+            BufferedImage originalImage;
+            if (ImagePath != null) {
+                originalImage = ImageIO.read(new File(ImagePath));
+            } else {
+                originalImage = ImageIO.read(new ByteArrayInputStream(pic));
+            }
+
+            int diameter = Math.min(label.getWidth(), label.getHeight());
+            BufferedImage masked = new BufferedImage(diameter, diameter, BufferedImage.TYPE_INT_ARGB);
+
+            Graphics2D g2 = masked.createGraphics();
+            g2.setClip(new java.awt.geom.Ellipse2D.Float(0, 0, diameter, diameter));
+            g2.drawImage(originalImage, 0, 0, diameter, diameter, null);
+            g2.dispose();
+
+            return new ImageIcon(masked);
+        } catch (IOException e) {
+            System.out.println("Image Load Error: " + e.getMessage());
+            return null;
+        }
+    }
+
     private void dashboardPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardPanelMouseClicked
 
     }//GEN-LAST:event_dashboardPanelMouseClicked
@@ -304,23 +673,23 @@ public class doctorDashB extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutPanelMouseExited
 
     private void appointmentsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsPanelMouseClicked
-        
+
         doctorAppointment dApp = new doctorAppointment();
-        
+
         dApp.setVisible(true);
         this.dispose();
-        
+
     }//GEN-LAST:event_appointmentsPanelMouseClicked
 
     private void appointmentsPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsPanelMouseEntered
         appointmentsPanel.setBackground(hoverColor);
-        
+
     }//GEN-LAST:event_appointmentsPanelMouseEntered
 
     private void appointmentsPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsPanelMouseExited
-        
+
         appointmentsPanel.setBackground(mainColor);
-        
+
     }//GEN-LAST:event_appointmentsPanelMouseExited
 
     private void jLabel16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseEntered
@@ -329,8 +698,8 @@ public class doctorDashB extends javax.swing.JFrame {
 
     private void profilePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePanelMouseClicked
 
-        patientProfileMenu ppm = new patientProfileMenu();
-        ppm.setVisible(true);
+        doctorProfileMenu dpm = new doctorProfileMenu();
+        dpm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_profilePanelMouseClicked
 
@@ -426,7 +795,14 @@ public class doctorDashB extends javax.swing.JFrame {
     private javax.swing.JPanel dboardBG;
     private javax.swing.JPanel dboardHeader;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -434,17 +810,31 @@ public class doctorDashB extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel logout;
     private javax.swing.JPanel logoutPanel;
     private javax.swing.JPanel mainbg;
     private javax.swing.JLabel noApp;
     private javax.swing.JPanel noAppPanel;
+    private javax.swing.JLabel noToday;
+    private javax.swing.JLabel noTomorrow;
+    private javax.swing.JLabel patientPfp;
+    private javax.swing.JLabel patientPfp1;
     private javax.swing.JLabel profile;
     private javax.swing.JPanel profilePanel;
+    private javax.swing.JLabel schedDate;
+    private javax.swing.JLabel schedDate1;
+    private javax.swing.JLabel schedTime;
+    private javax.swing.JLabel schedTime1;
+    private javax.swing.JPanel schedToday;
+    private javax.swing.JPanel schedTomorrow;
     private javax.swing.JLabel upc;
     private javax.swing.JLabel upc1;
+    private javax.swing.JLabel upc2;
     private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables
 }

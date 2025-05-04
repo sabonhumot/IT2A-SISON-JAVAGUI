@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2025 at 09:48 AM
+-- Generation Time: May 04, 2025 at 07:11 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `appointments` (
   `appointment_id` int(11) NOT NULL,
-  `doctor` text NOT NULL,
+  `doctor_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `time` varchar(10) NOT NULL,
   `notes` text NOT NULL,
@@ -41,8 +41,8 @@ CREATE TABLE `appointments` (
 -- Dumping data for table `appointments`
 --
 
-INSERT INTO `appointments` (`appointment_id`, `doctor`, `date`, `time`, `notes`, `patient_id`, `appointment_status`) VALUES
-(4, 'Dr. Trixie Mae', '2025-05-05', '10:00', 'gimingaw nimo', 19, 'Pending');
+INSERT INTO `appointments` (`appointment_id`, `doctor_id`, `date`, `time`, `notes`, `patient_id`, `appointment_status`) VALUES
+(7, 18, '2025-05-05', '09:30', 'i miss u', 14, 'Accepted');
 
 -- --------------------------------------------------------
 
@@ -88,7 +88,17 @@ INSERT INTO `logs` (`log_id`, `u_id`, `action`, `action_date`, `action_time`) VA
 (8, 18, 'Accepted an appointment', '2025-05-03', '13:53'),
 (9, 1, 'Activated an account', '2025-05-03', '15:39'),
 (10, 1, 'Activated an account', '2025-05-03', '15:41'),
-(11, 23, 'Updated profile photo', '2025-05-03', '15:42:34.458');
+(11, 23, 'Updated profile photo', '2025-05-03', '15:42:34.458'),
+(12, 21, 'Changed password', '2025-05-04', '10:00'),
+(13, 21, 'Made an appointment', '2025-05-04', '10:00'),
+(14, 18, 'Accepted an appointment', '2025-05-04', '10:01'),
+(15, 21, 'Made an appointment', '2025-05-04', '11:06'),
+(16, 18, 'Accepted an appointment', '2025-05-04', '11:13'),
+(17, 14, 'Made an appointment', '2025-05-04', '12:21'),
+(18, 14, 'Made an appointment', '2025-05-04', '12:22'),
+(19, 14, 'Made an appointment', '2025-05-04', '12:24'),
+(20, 14, 'Made an appointment', '2025-05-04', '12:25'),
+(21, 18, 'Accepted an appointment', '2025-05-04', '12:33');
 
 -- --------------------------------------------------------
 
@@ -122,7 +132,8 @@ INSERT INTO `otps` (`u_id`, `otp_code`, `otp_duration`) VALUES
 ('21', '903099', '2025-05-03 05:17:44'),
 ('18', '842259', '2025-05-03 05:21:28'),
 ('22', '437201', '2025-05-03 07:38:43'),
-('22', '904748', '2025-05-03 07:42:53');
+('22', '904748', '2025-05-03 07:42:53'),
+('21', '953844', '2025-05-04 02:04:34');
 
 -- --------------------------------------------------------
 
@@ -156,7 +167,7 @@ INSERT INTO `user` (`u_id`, `u_fname`, `u_lname`, `u_email`, `u_pnum`, `sex`, `a
 (18, 'Trixie', 'Mae', 'raikonnenwhahah@gmail.com', '09875757654', '', '', 'trixielovenorrie', 'n4HRZCTdUMYTsAuYPmd1V1hDnQ5xBb2KhhAHqE3fdbU=', 'Doctor', 'Active', NULL),
 (19, 'Joshua', 'Gwapo', 'joshuagwapo@gmail.com', '09090945124', '', '', 'joshuagwaps', 'goAXAbp531py6wn5mqsFydzuNz5sqLzXnnTJfz0uGQM=', 'Patient', 'Active', NULL),
 (20, 'Norrie', 'Ugly', 'norrie@gmail.com', '09451265845', '', '', 'norrie', 'KecLiTYwylt2E2ESWrV7Ysd7Vgae2DiT36m58r3Sl7w=', 'Patient', 'Active', NULL),
-(21, 'Arl Joshua', 'Sison', 'arljoshua9@gmail.com', '09912191641', '', '', 'goodboyarl', 'pJOYoJF2Eq/a79ip8fbKVkUFsPUfiFnyEsownDZyo+Y=', 'Patient', 'Active', NULL),
+(21, 'Arl Joshua', 'Sison', 'arljoshua9@gmail.com', '09912191641', '', '', 'goodboyarl', 'goAXAbp531py6wn5mqsFydzuNz5sqLzXnnTJfz0uGQM=', 'Patient', 'Active', NULL),
 (22, 'Norrie', 'Pangit', 'jopedregosa1980@gmail.com', '09657654567', 'Female', '20', 'norriepangit', 'KecLiTYwylt2E2ESWrV7Ysd7Vgae2DiT36m58r3Sl7w=', 'Patient', 'Active', NULL),
 (23, 'Abdul', 'Jamal', 'abduljamal@gmail.com', '09456821595', 'Male', '45', 'abduljamal', 'Al2vBYAyDWFhEGr4I78yTL5GDPwuOBEna9QFv7Iv4sE=', 'Doctor', 'Active', 'src/user_img/brainrot squad.jpg');
 
@@ -169,8 +180,8 @@ INSERT INTO `user` (`u_id`, `u_fname`, `u_lname`, `u_email`, `u_pnum`, `sex`, `a
 --
 ALTER TABLE `appointments`
   ADD PRIMARY KEY (`appointment_id`),
-  ADD KEY `doctor_id` (`doctor`(768)),
-  ADD KEY `patient_id` (`patient_id`);
+  ADD KEY `patient_id` (`patient_id`),
+  ADD KEY `doctor_id` (`doctor_id`);
 
 --
 -- Indexes for table `diagnosis`
@@ -199,7 +210,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `diagnosis`
@@ -211,7 +222,7 @@ ALTER TABLE `diagnosis`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -227,7 +238,8 @@ ALTER TABLE `user`
 -- Constraints for table `appointments`
 --
 ALTER TABLE `appointments`
-  ADD CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `user` (`u_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `user` (`u_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `appointments_ibfk_3` FOREIGN KEY (`doctor_id`) REFERENCES `user` (`u_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `logs`

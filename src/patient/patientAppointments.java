@@ -336,14 +336,13 @@ public class patientAppointments extends javax.swing.JFrame {
         session sess = session.getInstance();
 
         try {
-            ResultSet rs = con.getData("SELECT COUNT(*) FROM appointments WHERE patient_id = '"+sess.getU_id()+"'");
-            
-            if(rs.next()){
+            ResultSet rs = con.getData("SELECT COUNT(*) FROM appointments WHERE patient_id = '" + sess.getU_id() + "'");
+
+            if (rs.next()) {
                 int count = rs.getInt(1);
                 appCount.setText(String.valueOf(count));
             }
-            
-            
+
         } catch (SQLException ex) {
             System.out.println("" + ex);
         }
@@ -368,7 +367,11 @@ public class patientAppointments extends javax.swing.JFrame {
             session sess = session.getInstance();
 
             connectDB con = new connectDB();
-            ResultSet rs = con.getData("SELECT appointment_id, doctor, date, time, appointment_status FROM appointments WHERE patient_id = '" + sess.getU_id() + "'");
+            ResultSet rs = con.getData("SELECT a.appointment_id, CONCAT ('Dr. ', u.u_fname, ' ', u.u_lname), "
+                    + "a.date, a.time, a.appointment_status "
+                    + "FROM appointments a "
+                    + "JOIN user u ON a.doctor_id = u.u_id "
+                    + "WHERE a.patient_id = '" + sess.getU_id() + "'");
 
             String[] column = {"Appointment ID", "Doctor", "Scheduled Date", "Scheduled Time", "Appointment Status"};
 
