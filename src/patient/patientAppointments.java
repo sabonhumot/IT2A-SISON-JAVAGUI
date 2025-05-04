@@ -447,7 +447,7 @@ public class patientAppointments extends javax.swing.JFrame {
                     label.setFont(new Font("Open Sans", Font.PLAIN, 12));
 
                     switch (value.toString()) {
-                        case "Done":
+                        case "Accepted":
                             label.setBackground(new Color(144, 238, 144)); // Light Green
                             label.setForeground(Color.BLACK);
                             break;

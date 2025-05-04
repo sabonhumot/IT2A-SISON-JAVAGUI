@@ -143,7 +143,7 @@ public class doctorDashB extends javax.swing.JFrame {
         schedTomorrow.add(patientPfp1);
         patientPfp1.setBounds(20, 40, 80, 70);
 
-        jLabel13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel13.setText("Patient Name");
         schedTomorrow.add(jLabel13);
         jLabel13.setBounds(110, 70, 210, 40);
@@ -156,12 +156,12 @@ public class doctorDashB extends javax.swing.JFrame {
         schedTomorrow.add(jLabel15);
         jLabel15.setBounds(510, 50, 30, 30);
 
-        schedTime1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        schedTime1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         schedTime1.setText("Scheduled Time");
         schedTomorrow.add(schedTime1);
         schedTime1.setBounds(540, 50, 150, 30);
 
-        schedDate1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        schedDate1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         schedDate1.setText("Schedule Date");
         schedTomorrow.add(schedDate1);
         schedDate1.setBounds(540, 90, 170, 30);
@@ -178,7 +178,7 @@ public class doctorDashB extends javax.swing.JFrame {
         schedTomorrow.add(jSeparator3);
         jSeparator3.setBounds(0, 0, 770, 160);
 
-        noTomorrow.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        noTomorrow.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         noTomorrow.setForeground(new java.awt.Color(102, 102, 102));
         noTomorrow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         noTomorrow.setText("No Appointments Today");
@@ -193,7 +193,7 @@ public class doctorDashB extends javax.swing.JFrame {
         schedToday.add(patientPfp);
         patientPfp.setBounds(20, 40, 80, 70);
 
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel9.setText("Patient Name");
         schedToday.add(jLabel9);
         jLabel9.setBounds(110, 70, 210, 40);
@@ -206,12 +206,12 @@ public class doctorDashB extends javax.swing.JFrame {
         schedToday.add(jLabel11);
         jLabel11.setBounds(510, 40, 30, 30);
 
-        schedTime.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        schedTime.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         schedTime.setText("Scheduled Time");
         schedToday.add(schedTime);
         schedTime.setBounds(540, 40, 150, 30);
 
-        schedDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        schedDate.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         schedDate.setText("Schedule Date");
         schedToday.add(schedDate);
         schedDate.setBounds(540, 80, 170, 30);
@@ -228,7 +228,7 @@ public class doctorDashB extends javax.swing.JFrame {
         schedToday.add(jSeparator1);
         jSeparator1.setBounds(0, 0, 770, 160);
 
-        noToday.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        noToday.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         noToday.setForeground(new java.awt.Color(102, 102, 102));
         noToday.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         noToday.setText("No Appointments Today");
